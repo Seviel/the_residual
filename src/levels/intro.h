@@ -8,23 +8,27 @@
  **********************************************************************/
 
 #include "core/include/application.h"
-#include "core/include/screen.h"
 #include "core/include/sprite.h"
 #include "core/include/texture.h"
-#include "util/include/vector2.h"
-#include "core/include/rinvid_gfx.h"
-
-#include "levels/intro.h"
+#include "core/include/screen.h"
 
 using namespace rinvid;
 
-int main()
+class IntroScreen : public Screen
 {
-    Application main_app{800, 600, "TR", false};
-    IntroScreen intro_screen{};
-    main_app.set_screen(&intro_screen);
-    main_app.set_fps(60);
-    main_app.run();
+public:
+    IntroScreen() {}
+    virtual ~IntroScreen() {}
+    void create() override;
+    void destroy() override;
 
-    return 0;
-}
+private:
+    void update(double delta_time) override;
+
+    Texture background_texture{"resources/intro.png"};
+    Sprite background_sprite{&background_texture, 800, 600, Vector2f{0.0F, 0.0F},
+                             Vector2f{0.0F, 0.0F}};
+
+    const float intro_duration_ = 2.0F;
+    float intro_time_ = 0.0F;
+};
