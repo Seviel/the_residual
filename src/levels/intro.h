@@ -29,7 +29,7 @@ class IntroScreen : public Screen
   private:
     void update(double delta_time) override;
 
-    Texture background_texture{"resources/intro.png"};
+    Texture background_texture{"resources/gfx/intro.png"};
     Sprite background_sprite{&background_texture, 800, 600, Vector2f{0.0F, 0.0F},
                              Vector2f{0.0F, 0.0F}};
 

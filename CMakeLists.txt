@@ -30,3 +30,11 @@ else()
   target_link_libraries(${PROJECT_NAME} PRIVATE rinvid GL sfml-window
                                                 sfml-system)
 endif()
+
+# Copy resources to build directory so the executable can find them
+set(EXAMPLE_RESOURCES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resources)
+add_custom_command(
+  TARGET TheResidual
+  POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_directory ${EXAMPLE_RESOURCES_DIR}
+          $<TARGET_FILE_DIR:TheResidual>/resources)
