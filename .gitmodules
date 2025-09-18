@@ -1,0 +1,3 @@
+[submodule "Rinvid"]
+	path = Rinvid
+	url = git@github.com:Seviel/Rinvid.git
