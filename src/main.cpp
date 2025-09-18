@@ -8,11 +8,11 @@
  **********************************************************************/
 
 #include "core/include/application.h"
+#include "core/include/rinvid_gfx.h"
 #include "core/include/screen.h"
 #include "core/include/sprite.h"
 #include "core/include/texture.h"
 #include "util/include/vector2.h"
-#include "core/include/rinvid_gfx.h"
 
 #include "levels/intro.h"
 

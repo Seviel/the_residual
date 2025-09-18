@@ -8,21 +8,25 @@
  **********************************************************************/
 
 #include "core/include/application.h"
+#include "core/include/screen.h"
 #include "core/include/sprite.h"
 #include "core/include/texture.h"
-#include "core/include/screen.h"
 
 using namespace rinvid;
 
 class IntroScreen : public Screen
 {
-public:
-    IntroScreen() {}
-    virtual ~IntroScreen() {}
+  public:
+    IntroScreen()
+    {
+    }
+    virtual ~IntroScreen()
+    {
+    }
     void create() override;
     void destroy() override;
 
-private:
+  private:
     void update(double delta_time) override;
 
     Texture background_texture{"resources/intro.png"};
