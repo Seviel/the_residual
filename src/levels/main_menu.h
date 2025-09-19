@@ -11,17 +11,17 @@
 #include "core/include/screen.h"
 #include "core/include/sprite.h"
 #include "core/include/texture.h"
+#include "gui/include/button.h"
 
 using namespace rinvid;
 
-class IntroScreen : public Screen
+class MainMenu : public Screen
 {
   public:
-    IntroScreen(Screen* next_screen)
+    MainMenu()
     {
-        next_screen_ = next_screen;
     }
-    virtual ~IntroScreen()
+    virtual ~MainMenu()
     {
     }
     void create() override;
@@ -30,11 +30,9 @@ class IntroScreen : public Screen
   private:
     void update(double delta_time) override;
 
-    Texture background_texture{"resources/gfx/intro.png"};
+    Texture background_texture{"resources/gfx/main_menu.png"};
     Sprite background_sprite{&background_texture, 800, 600, Vector2f{0.0F, 0.0F},
                              Vector2f{0.0F, 0.0F}};
-
-    const float intro_duration_ = 2.0F;
-    float intro_time_ = 0.0F;
-    Screen* next_screen_ = nullptr;
+    Texture button_play_texture{"resources/gfx/gui/btn_play.png"};
+    rinvid::gui::Button button_play{};
 };

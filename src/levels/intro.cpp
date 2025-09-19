@@ -22,7 +22,7 @@ void IntroScreen::update(double delta_time)
 
     if (intro_time_ > intro_duration_)
     {
-        this->get_application()->exit();
+        this->get_application()->set_screen(next_screen_);
     }
 }
 

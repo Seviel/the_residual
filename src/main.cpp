@@ -15,13 +15,15 @@
 #include "util/include/vector2.h"
 
 #include "levels/intro.h"
+#include "levels/main_menu.h"
 
 using namespace rinvid;
 
 int main()
 {
     Application main_app{800, 600, "TR", false};
-    IntroScreen intro_screen{};
+    MainMenu main_menu{};
+    IntroScreen intro_screen{&main_menu};
     main_app.set_screen(&intro_screen);
     main_app.set_fps(60);
     main_app.run();
