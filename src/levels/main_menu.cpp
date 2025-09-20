@@ -13,12 +13,12 @@
 
 void MainMenu::create()
 {
-    button_play.setup(&button_play_texture, 100, 30, rinvid::Vector2f{225.0F, 120.0F});
-    auto button_play_regions = button_play.get_animation().split_animation_frames(120, 40, 3, 1);
+    button_play_.setup(&button_play_texture_, 100, 30, rinvid::Vector2f{225.0F, 120.0F});
+    auto button_play_regions = button_play_.get_animation().split_animation_frames(120, 40, 3, 1);
 
-    button_play.set_idle({button_play_regions.at(0)});
-    button_play.set_mouse_hovering({button_play_regions.at(1)});
-    button_play.set_clicked({button_play_regions.at(2)});
+    button_play_.set_idle({button_play_regions.at(0)});
+    button_play_.set_mouse_hovering({button_play_regions.at(1)});
+    button_play_.set_clicked({button_play_regions.at(2)});
 }
 
 void MainMenu::update(double delta_time)
@@ -26,11 +26,11 @@ void MainMenu::update(double delta_time)
     (void)delta_time;
 
     rinvid::RinvidGfx::clear_screen(0.0F, 0.0F, 0.0F, 1.0F);
-    background_sprite.draw();
-    button_play.update(rinvid::system::Mouse::get_mouse_pos(get_application()));
-    button_play.draw();
+    background_sprite_.draw();
+    button_play_.update(rinvid::system::Mouse::get_mouse_pos(get_application()));
+    button_play_.draw();
 
-    if (button_play.just_clicked())
+    if (button_play_.just_clicked())
     {
         this->get_application()->set_screen(first_level_);
     }

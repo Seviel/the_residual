@@ -18,7 +18,7 @@ void IntroScreen::update(double delta_time)
     intro_time_ += delta_time;
 
     rinvid::RinvidGfx::clear_screen(0.0F, 0.0F, 0.0F, 1.0F);
-    background_sprite.draw();
+    background_sprite_.draw();
 
     if (intro_time_ > intro_duration_)
     {

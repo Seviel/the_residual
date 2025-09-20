@@ -31,10 +31,10 @@ class MainMenu : public Screen
   private:
     void update(double delta_time) override;
 
-    Texture background_texture{"resources/gfx/main_menu.png"};
-    Sprite background_sprite{&background_texture, 800, 600, Vector2f{0.0F, 0.0F},
-                             Vector2f{0.0F, 0.0F}};
-    Texture button_play_texture{"resources/gfx/gui/btn_play.png"};
-    rinvid::gui::Button button_play{};
+    Texture background_texture_{"resources/gfx/main_menu.png"};
+    Sprite background_sprite_{&background_texture_, 800, 600, Vector2f{0.0F, 0.0F},
+                              Vector2f{0.0F, 0.0F}};
+    Texture button_play_texture_{"resources/gfx/gui/btn_play.png"};
+    rinvid::gui::Button button_play_{};
     Screen* first_level_;
 };

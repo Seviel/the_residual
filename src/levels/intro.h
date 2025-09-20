@@ -30,9 +30,9 @@ class IntroScreen : public Screen
   private:
     void update(double delta_time) override;
 
-    Texture background_texture{"resources/gfx/intro.png"};
-    Sprite background_sprite{&background_texture, 800, 600, Vector2f{0.0F, 0.0F},
-                             Vector2f{0.0F, 0.0F}};
+    Texture background_texture_{"resources/gfx/intro.png"};
+    Sprite background_sprite_{&background_texture_, 800, 600, Vector2f{0.0F, 0.0F},
+                              Vector2f{0.0F, 0.0F}};
 
     const float intro_duration_ = 2.0F;
     float intro_time_ = 0.0F;
