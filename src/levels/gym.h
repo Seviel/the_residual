@@ -7,28 +7,28 @@
  * repository for more details.
  **********************************************************************/
 
-#include "core/include/application.h"
-#include "core/include/rinvid_gfx.h"
 #include "core/include/screen.h"
 #include "core/include/sprite.h"
 #include "core/include/texture.h"
-#include "util/include/vector2.h"
-
-#include "levels/gym.h"
-#include "levels/intro.h"
-#include "levels/main_menu.h"
 
 using namespace rinvid;
 
-int main()
+class GymScreen : public Screen
 {
-    Application main_app{800, 600, "TR", false};
-    GymScreen gym{};
-    MainMenu main_menu{&gym};
-    IntroScreen intro_screen{&main_menu};
-    main_app.set_screen(&intro_screen);
-    main_app.set_fps(60);
-    main_app.run();
+  public:
+    GymScreen()
+    {
+    }
+    virtual ~GymScreen()
+    {
+    }
+    void create() override;
+    void destroy() override;
 
-    return 0;
-}
+  private:
+    void update(double delta_time) override;
+
+    Texture background_texture_{"resources/gfx/main_menu.png"};
+    Sprite background_sprite_{&background_texture_, 800, 600, Vector2f{0.0F, 0.0F},
+                              Vector2f{0.0F, 0.0F}};
+};

@@ -29,6 +29,11 @@ void MainMenu::update(double delta_time)
     background_sprite.draw();
     button_play.update(rinvid::system::Mouse::get_mouse_pos(get_application()));
     button_play.draw();
+
+    if (button_play.just_clicked())
+    {
+        this->get_application()->set_screen(first_level_);
+    }
 }
 
 void MainMenu::destroy()

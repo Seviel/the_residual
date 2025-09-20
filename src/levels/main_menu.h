@@ -18,8 +18,9 @@ using namespace rinvid;
 class MainMenu : public Screen
 {
   public:
-    MainMenu()
+    MainMenu(Screen* screen)
     {
+        first_level_ = screen;
     }
     virtual ~MainMenu()
     {
@@ -35,4 +36,5 @@ class MainMenu : public Screen
                              Vector2f{0.0F, 0.0F}};
     Texture button_play_texture{"resources/gfx/gui/btn_play.png"};
     rinvid::gui::Button button_play{};
+    Screen* first_level_;
 };
