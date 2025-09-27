@@ -12,6 +12,7 @@
 #include "core/include/screen.h"
 #include "core/include/sprite.h"
 #include "core/include/texture.h"
+#include "platformers/include/world.h"
 #include "util/include/vector2.h"
 
 #include "levels/gym.h"
@@ -22,6 +23,7 @@ using namespace rinvid;
 
 int main()
 {
+    World::gravity = 2400.0F;
     Application main_app{800, 600, "TR", false};
     GymScreen gym{};
     MainMenu main_menu{&gym};

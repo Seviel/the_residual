@@ -7,9 +7,12 @@
  * repository for more details.
  **********************************************************************/
 
+#include "core/include/object.h"
 #include "core/include/screen.h"
 #include "core/include/sprite.h"
 #include "core/include/texture.h"
+
+#include "src/player.h"
 
 using namespace rinvid;
 
@@ -31,4 +34,13 @@ class GymScreen : public Screen
     Texture background_texture_{"resources/gfx/main_menu.png"};
     Sprite background_sprite_{&background_texture_, 800, 600, Vector2f{0.0F, 0.0F},
                               Vector2f{0.0F, 0.0F}};
+
+    Texture player_texture_{"resources/gfx/man_animated.png"};
+    Player player_{};
+    Object floor_1_{};
+    Object floor_2_{};
+    Object floor_3_{};
+    Object wall_1_{};
+    Object wall_2_{};
+    Object platform_1_{};
 };
