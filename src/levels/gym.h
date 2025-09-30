@@ -7,6 +7,7 @@
  * repository for more details.
  **********************************************************************/
 
+#include "core/include/camera.h"
 #include "core/include/object.h"
 #include "core/include/screen.h"
 #include "core/include/sprite.h"
@@ -43,4 +44,5 @@ class GymScreen : public Screen
     Object wall_1_{};
     Object wall_2_{};
     Object platform_1_{};
+    Camera camera_{};
 };
