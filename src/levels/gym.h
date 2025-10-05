@@ -36,6 +36,9 @@ class GymScreen : public Screen
     Sprite background_sprite_{&background_texture_, 800, 600, Vector2f{0.0F, 0.0F},
                               Vector2f{0.0F, 0.0F}};
 
+    Texture text_box_tex_{"resources/gfx/text_box.png"};
+    Sprite text_box_{&text_box_tex_, 724, 124, Vector2f{0.0F, 0.0F}, Vector2f{0.0F, 0.0F}};
+
     Texture player_texture_{"resources/gfx/man_animated.png"};
     Player player_{};
     Object floor_1_{};

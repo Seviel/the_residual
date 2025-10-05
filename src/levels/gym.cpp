@@ -66,14 +66,18 @@ void GymScreen::update(double delta_time)
     rinvid::World::collide(player_, wall_2_);
     rinvid::World::collide(player_, platform_1_);
 
+    auto camera_pos = camera_.get_pos();
+    text_box_.set_position({camera_pos.x + 38, camera_pos.y + 20});
+
     camera_.update();
-    auto camera_pos = player_.get_position();
+    camera_pos = player_.get_position();
     camera_pos.x -= RinvidGfx::get_width() / 2;
     camera_pos.y -= RinvidGfx::get_height() / 2;
     camera_.set_position(camera_pos);
 
     background_sprite_.draw();
     player_.draw(delta_time);
+    text_box_.draw();
 }
 
 void GymScreen::destroy()
