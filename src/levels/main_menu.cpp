@@ -27,7 +27,7 @@ void MainMenu::update(double delta_time)
 
     rinvid::RinvidGfx::clear_screen(0.0F, 0.0F, 0.0F, 1.0F);
     background_sprite_.draw();
-    button_play_.update();
+    button_play_.update_state();
     button_play_.draw();
 
     if (button_play_.just_clicked())
