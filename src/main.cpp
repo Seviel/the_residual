@@ -17,6 +17,7 @@
 
 #include "levels/gym.h"
 #include "levels/intro.h"
+#include "levels/level_1.h"
 #include "levels/main_menu.h"
 
 using namespace rinvid;
@@ -25,8 +26,10 @@ int main()
 {
     World::gravity = 2400.0F;
     Application main_app{800, 600, "TR", false};
-    GymScreen gym{};
-    MainMenu main_menu{&gym};
+    // Use for testing as needed
+    // GymScreen gym{};
+    Level_1 level_1{};
+    MainMenu main_menu{&level_1};
     IntroScreen intro_screen{&main_menu};
     main_app.set_screen(&intro_screen);
     main_app.set_fps(60);
