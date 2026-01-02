@@ -27,9 +27,9 @@ int main()
     World::gravity = 2400.0F;
     Application main_app{800, 600, "TR", false};
     // Use for testing as needed
-    // GymScreen gym{};
-    Level_1 level_1{};
-    MainMenu main_menu{&level_1};
+    GymScreen gym{};
+    // Level_1 level_1{};
+    MainMenu main_menu{&gym};
     IntroScreen intro_screen{&main_menu};
     main_app.set_screen(&intro_screen);
     main_app.set_fps(60);

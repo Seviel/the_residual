@@ -45,6 +45,8 @@ void GymScreen::create()
     platform_1_.set_movable(false);
     platform_1_.set_gravity_scale(0.0F);
     platform_1_.set_allowed_collisions(UP);
+
+    camera_.set_borders({0.0F, -100.0F}, {100.0F, 0.0F});
 }
 
 void GymScreen::update(double delta_time)
