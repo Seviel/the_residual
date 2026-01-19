@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (c) 2025, Filip Vasiljevic
+ * Copyright (c) 2025 - 2026, Filip Vasiljevic
  * All rights reserved.
  *
  * This file is subject to the terms and conditions of the BSD 2-Clause
@@ -69,7 +69,7 @@ void GymScreen::update(double delta_time)
     rinvid::World::collide(player_, platform_1_);
 
     auto camera_pos = camera_.get_pos();
-    text_box_.set_position({camera_pos.x + 38, camera_pos.y + 20});
+    com_box_.update(delta_time);
 
     camera_.update();
     camera_pos = player_.get_position();
@@ -79,7 +79,7 @@ void GymScreen::update(double delta_time)
 
     background_sprite_.draw();
     player_.draw(delta_time);
-    text_box_.draw();
+    com_box_.draw();
 }
 
 void GymScreen::destroy()
