@@ -21,11 +21,14 @@ constexpr float BOX_Y_OFFSET = 20.0F;
 constexpr float TEXT_X_OFFSET = 60.0F;
 constexpr float TEXT_Y_OFFSET = 60.0F;
 
+constexpr float TEXT_MAX_WIDTH = 675.0F;
+
 ComBox::ComBox()
-    : tex_{"resources/gfx/text_box.png"}, text_{"Well hello there!", "resources/ttf/aquifer.ttf",
-                                                Vector2f{0.0F, 0.0F}, Color{0x5DD3B6FF}, 24},
+    : tex_{"resources/gfx/text_box.png"},
+      text_{"", "resources/ttf/aquifer.ttf", Vector2f{0.0F, 0.0F}, Color{0x5DD3B6FF}, 24},
       content_{}
 {
+    text_.set_max_width(TEXT_MAX_WIDTH);
     setup(&tex_, BOX_WIDTH, BOX_HEIGHT, Vector2f{0.0F, 0.0F});
 }
 

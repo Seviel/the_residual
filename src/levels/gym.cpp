@@ -47,6 +47,8 @@ void GymScreen::create()
     platform_1_.set_allowed_collisions(UP);
 
     camera_.set_borders({0.0F, -100.0F}, {100.0F, 0.0F});
+
+    com_box_.set_text("Well hello there!");
 }
 
 void GymScreen::update(double delta_time)
