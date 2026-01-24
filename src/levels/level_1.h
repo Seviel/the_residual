@@ -15,6 +15,7 @@
 
 #include "src/platform.h"
 #include "src/player.h"
+#include "src/runtime_ctx.h"
 
 using namespace rinvid;
 
@@ -33,11 +34,8 @@ class Level_1 : public Screen
   private:
     void update(double delta_time) override;
 
-    Texture text_box_tex_{"resources/gfx/text_box.png"};
-    Sprite text_box_{&text_box_tex_, 724, 124, Vector2f{0.0F, 0.0F}, Vector2f{0.0F, 0.0F}};
-
     Texture player_texture_{"resources/gfx/man_animated.png"};
     Player player_{};
     Platform floor{{0.0F, 700.0F}, 800.0F, 100.0F};
-    Camera camera_{};
+    Camera& camera_ = RuntimeCtx::camera_;
 };

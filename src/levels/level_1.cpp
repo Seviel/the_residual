@@ -10,6 +10,7 @@
 #include "platformers/include/world.h"
 
 #include "level_1.h"
+#include "src/runtime_ctx.h"
 
 void Level_1::create()
 {
@@ -31,7 +32,7 @@ void Level_1::update(double delta_time)
     rinvid::World::collide(player_, floor);
 
     auto camera_pos = camera_.get_pos();
-    text_box_.set_position({camera_pos.x + 38, camera_pos.y + 20});
+    RuntimeCtx::com_box()->update(delta_time);
 
     camera_.update();
     camera_pos = player_.get_position();
@@ -40,7 +41,7 @@ void Level_1::update(double delta_time)
     camera_.set_position(camera_pos);
 
     player_.draw(delta_time);
-    text_box_.draw();
+    RuntimeCtx::com_box()->draw();
     floor.draw();
 }
 
