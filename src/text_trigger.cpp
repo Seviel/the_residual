@@ -43,3 +43,41 @@ void TextTrigger::reactivate()
         RuntimeCtx::com_box()->set_text(text_);
     }
 }
+
+bool TextTrigger::activate_on_collision(Object& object_1, Object& object_2)
+{
+    TextTrigger* trigger = nullptr;
+    trigger = dynamic_cast<TextTrigger*>(&object_1);
+    if (!trigger)
+    {
+        trigger = dynamic_cast<TextTrigger*>(&object_2);
+    }
+
+    if (!trigger)
+    {
+        return false;
+    }
+
+    trigger->activate();
+
+    return true;
+}
+
+bool TextTrigger::reactivate_on_collision(Object& object_1, Object& object_2)
+{
+    TextTrigger* trigger = nullptr;
+    trigger = dynamic_cast<TextTrigger*>(&object_1);
+    if (!trigger)
+    {
+        trigger = dynamic_cast<TextTrigger*>(&object_2);
+    }
+
+    if (!trigger)
+    {
+        return false;
+    }
+
+    trigger->reactivate();
+
+    return true;
+}

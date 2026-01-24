@@ -69,16 +69,8 @@ void GymScreen::update(double delta_time)
     rinvid::World::collide(player_, wall_1_);
     rinvid::World::collide(player_, wall_2_);
     rinvid::World::collide(player_, platform_1_);
-
-    if (intersects(player_.bounding_rect(), trigger_1_.bounding_rect()))
-    {
-        trigger_1_.reactivate();
-    }
-
-    if (intersects(player_.bounding_rect(), trigger_2_.bounding_rect()))
-    {
-        trigger_2_.activate();
-    }
+    rinvid::World::collide(player_, trigger_1_, TextTrigger::reactivate_on_collision);
+    rinvid::World::collide(player_, trigger_2_, TextTrigger::activate_on_collision);
 
     auto camera_pos = camera_.get_pos();
     RuntimeCtx::com_box()->update(delta_time);

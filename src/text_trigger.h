@@ -27,8 +27,14 @@ class TextTrigger : public rinvid::Object
 
     void update(double delta_time) override;
 
+    // Activates text only the first time it's callled.
     void activate();
+
+    // Activates text every time it's called.
     void reactivate();
+
+    static bool activate_on_collision(Object& object_1, Object& object_2);
+    static bool reactivate_on_collision(Object& object_1, Object& object_2);
 
   private:
     std::string text_;
