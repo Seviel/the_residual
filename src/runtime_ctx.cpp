@@ -10,3 +10,14 @@
 #include "runtime_ctx.h"
 
 Camera RuntimeCtx::camera_{};
+ComBox* RuntimeCtx::com_box_{nullptr};
+
+ComBox* RuntimeCtx::com_box()
+{
+    if (com_box_ == nullptr)
+    {
+        com_box_ = new ComBox();
+    }
+
+    return com_box_;
+}

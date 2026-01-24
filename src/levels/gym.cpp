@@ -7,6 +7,8 @@
  * repository for more details.
  **********************************************************************/
 
+#include "util/include/collision_detection.h"
+
 #include "platformers/include/world.h"
 
 #include "gym.h"
@@ -47,8 +49,6 @@ void GymScreen::create()
     platform_1_.set_allowed_collisions(UP);
 
     camera_.set_borders({0.0F, -100.0F}, {100.0F, 0.0F});
-
-    com_box_.set_text("Well hello there!");
 }
 
 void GymScreen::update(double delta_time)
@@ -70,8 +70,18 @@ void GymScreen::update(double delta_time)
     rinvid::World::collide(player_, wall_2_);
     rinvid::World::collide(player_, platform_1_);
 
+    if (intersects(player_.bounding_rect(), trigger_1_.bounding_rect()))
+    {
+        trigger_1_.reactivate();
+    }
+
+    if (intersects(player_.bounding_rect(), trigger_2_.bounding_rect()))
+    {
+        trigger_2_.activate();
+    }
+
     auto camera_pos = camera_.get_pos();
-    com_box_.update(delta_time);
+    RuntimeCtx::com_box()->update(delta_time);
 
     camera_.update();
     camera_pos = player_.get_position();
@@ -81,7 +91,7 @@ void GymScreen::update(double delta_time)
 
     background_sprite_.draw();
     player_.draw(delta_time);
-    com_box_.draw();
+    RuntimeCtx::com_box()->draw();
 }
 
 void GymScreen::destroy()

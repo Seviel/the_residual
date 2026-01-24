@@ -16,6 +16,7 @@
 #include "src/com_box.h"
 #include "src/player.h"
 #include "src/runtime_ctx.h"
+#include "src/text_trigger.h"
 
 using namespace rinvid;
 
@@ -48,5 +49,7 @@ class GymScreen : public Screen
     Object wall_1_{};
     Object wall_2_{};
     Object platform_1_{};
+    TextTrigger trigger_1_{"Nice jump!", Vector2f{50.0F, 200.0F}};
+    TextTrigger trigger_2_{"Single trigger", Vector2f{700.0F, 500.0F}};
     Camera& camera_ = RuntimeCtx::camera_;
 };
