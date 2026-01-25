@@ -48,6 +48,13 @@ void GymScreen::create()
     platform_1_.set_gravity_scale(0.0F);
     platform_1_.set_allowed_collisions(UP);
 
+    platforms_.push_back(&floor_1_);
+    platforms_.push_back(&floor_2_);
+    platforms_.push_back(&floor_3_);
+    platforms_.push_back(&wall_1_);
+    platforms_.push_back(&wall_2_);
+    platforms_.push_back(&platform_1_);
+
     camera_.set_borders({0.0F, -100.0F}, {100.0F, 0.0F});
 }
 
@@ -63,12 +70,7 @@ void GymScreen::update(double delta_time)
     wall_2_.update(delta_time);
     platform_1_.update(delta_time);
 
-    rinvid::World::collide(player_, floor_1_);
-    rinvid::World::collide(player_, floor_2_);
-    rinvid::World::collide(player_, floor_3_);
-    rinvid::World::collide(player_, wall_1_);
-    rinvid::World::collide(player_, wall_2_);
-    rinvid::World::collide(player_, platform_1_);
+    rinvid::World::collide(player_, platforms_);
     rinvid::World::collide(player_, trigger_1_, TextTrigger::reactivate_on_collision);
     rinvid::World::collide(player_, trigger_2_, TextTrigger::activate_on_collision);
 
