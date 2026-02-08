@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (c) 2025, Filip Vasiljevic
+ * Copyright (c) 2025 - 2026, Filip Vasiljevic
  * All rights reserved.
  *
  * This file is subject to the terms and conditions of the BSD 2-Clause
@@ -10,9 +10,9 @@
 #ifndef SRC_PLAYER_H
 #define SRC_PLAYER_H
 
-#include "core/include/sprite.h"
+#include "core/include/sprite_object.h"
 
-class Player : public rinvid::Sprite
+class Player : public rinvid::SpriteObject
 {
 
   public:

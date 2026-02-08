@@ -25,7 +25,7 @@ class ComBox final : public rinvid::Sprite
      *************************************************************************************************/
     ComBox();
 
-    virtual void update(double delta_time) override;
+    virtual void update(double delta_time);
     virtual void draw() override;
 
     void set_text(std::string text);
