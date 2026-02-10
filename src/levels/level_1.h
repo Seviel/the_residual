@@ -7,6 +7,9 @@
  * repository for more details.
  **********************************************************************/
 
+#ifndef SRC_LEVELS_LEVEL_1_H
+#define SRC_LEVELS_LEVEL_1_H
+
 #include "core/include/camera.h"
 #include "core/include/object.h"
 #include "core/include/screen.h"
@@ -39,3 +42,5 @@ class Level_1 : public Screen
     Platform floor{{0.0F, 700.0F}, 800.0F, 100.0F};
     Camera& camera_ = RuntimeCtx::camera_;
 };
+
+#endif // SRC_LEVELS_LEVEL_1_H

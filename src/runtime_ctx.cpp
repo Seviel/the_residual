@@ -11,6 +11,7 @@
 
 Camera RuntimeCtx::camera_{};
 ComBox* RuntimeCtx::com_box_{nullptr};
+Application* RuntimeCtx::app_{nullptr};
 
 ComBox* RuntimeCtx::com_box()
 {

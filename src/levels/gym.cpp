@@ -73,6 +73,7 @@ void GymScreen::update(double delta_time)
     rinvid::World::collide(player_, platforms_);
     rinvid::World::collide(player_, trigger_1_, TextTrigger::reactivate_on_collision);
     rinvid::World::collide(player_, trigger_2_, TextTrigger::activate_on_collision);
+    rinvid::World::collide(player_, portal_, &portal_.player_entered);
 
     auto camera_pos = camera_.get_pos();
     RuntimeCtx::com_box()->update(delta_time);
@@ -85,6 +86,7 @@ void GymScreen::update(double delta_time)
 
     background_sprite_.draw();
     player_.draw(delta_time);
+    portal_.draw();
     RuntimeCtx::com_box()->draw();
 }
 

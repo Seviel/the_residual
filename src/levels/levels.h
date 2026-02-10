@@ -7,28 +7,23 @@
  * repository for more details.
  **********************************************************************/
 
-#ifndef SRC_RUNTIME_CTX_H
-#define SRC_RUNTIME_CTX_H
+#ifndef SRC_LEVELS_LEVELS_H
+#define SRC_LEVELS_LEVELS_H
 
-#include "core/include/application.h"
-#include "core/include/camera.h"
-
-#include "src/com_box.h"
+#include "src/levels/level_1.h"
 
 using namespace rinvid;
 
-class RuntimeCtx final
+class Levels final
 {
   public:
-    RuntimeCtx()
+    Levels()
     {
     }
 
-    static ComBox* com_box();
+    static Level_1* level_1();
 
-    static Camera camera_;
-    static ComBox* com_box_;
-    static Application* app_;
+    static Level_1* level_1_;
 };
 
-#endif // SRC_RUNTIME_CTX_H
+#endif // SRC_LEVELS_LEVELS_H

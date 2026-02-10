@@ -7,28 +7,24 @@
  * repository for more details.
  **********************************************************************/
 
-#ifndef SRC_RUNTIME_CTX_H
-#define SRC_RUNTIME_CTX_H
+#ifndef SRC_PORTAL_H
+#define SRC_PORTAL_H
 
-#include "core/include/application.h"
-#include "core/include/camera.h"
-
-#include "src/com_box.h"
+#include "core/include/sprite_object.h"
 
 using namespace rinvid;
 
-class RuntimeCtx final
+class Portal final : public rinvid::SpriteObject
 {
+
   public:
-    RuntimeCtx()
-    {
-    }
+    Portal(Vector2f position, Screen* level);
 
-    static ComBox* com_box();
+    static bool player_entered(Object& object_1, Object& object_2);
 
-    static Camera camera_;
-    static ComBox* com_box_;
-    static Application* app_;
+  private:
+    Texture tex_;
+    Screen* level_;
 };
 
-#endif // SRC_RUNTIME_CTX_H
+#endif // SRC_PORTAL_H

@@ -20,6 +20,9 @@ void Level_1::create()
     floor.resize(800, 100);
     floor.set_movable(false);
     floor.set_gravity_scale(0.0F);
+
+    RuntimeCtx::com_box()->set_text("");
+    camera_.set_borders({-10000.0F, -10000.0F}, {10000.0F, 10000.0F});
 }
 
 void Level_1::update(double delta_time)

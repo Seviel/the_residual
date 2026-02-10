@@ -16,7 +16,9 @@
 #include "core/include/texture.h"
 
 #include "src/com_box.h"
+#include "src/levels/levels.h"
 #include "src/player.h"
+#include "src/portal.h"
 #include "src/runtime_ctx.h"
 #include "src/text_trigger.h"
 
@@ -54,5 +56,6 @@ class GymScreen : public Screen
     std::vector<Object*> platforms_{};
     TextTrigger trigger_1_{"Nice jump!", Vector2f{50.0F, 200.0F}};
     TextTrigger trigger_2_{"Single trigger", Vector2f{700.0F, 500.0F}};
+    Portal portal_{Vector2f{635.0F, 175.0F}, Levels::level_1()};
     Camera& camera_ = RuntimeCtx::camera_;
 };
