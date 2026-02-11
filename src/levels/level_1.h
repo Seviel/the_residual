@@ -39,7 +39,7 @@ class Level_1 : public Screen
 
     Texture player_texture_{"resources/gfx/man_animated.png"};
     Player player_{};
-    Platform floor{{0.0F, 700.0F}, 800.0F, 100.0F};
+    Platform floor_{{0.0F, 700.0F}, 1600.0F, 100.0F};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 
