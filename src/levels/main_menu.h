@@ -1,11 +1,14 @@
 /**********************************************************************
- * Copyright (c) 2025, Filip Vasiljevic
+ * Copyright (c) 2025 - 2026, Filip Vasiljevic
  * All rights reserved.
  *
  * This file is subject to the terms and conditions of the BSD 2-Clause
  * License.  See the file LICENSE in the root directory of the Rinvid
  * repository for more details.
  **********************************************************************/
+
+#ifndef SRC_LEVELS_MAIN_MENU_H
+#define SRC_LEVELS_MAIN_MENU_H
 
 #include "core/include/application.h"
 #include "core/include/screen.h"
@@ -38,3 +41,5 @@ class MainMenu : public Screen
     rinvid::gui::Button button_play_{};
     Screen* first_level_;
 };
+
+#endif // SRC_LEVELS_MAIN_MENU_H

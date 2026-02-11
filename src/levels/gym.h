@@ -7,6 +7,9 @@
  * repository for more details.
  **********************************************************************/
 
+#ifndef SRC_LEVELS_GYM_H
+#define SRC_LEVELS_GYM_H
+
 #include <vector>
 
 #include "core/include/camera.h"
@@ -59,3 +62,5 @@ class GymScreen : public Screen
     Portal portal_{Vector2f{635.0F, 175.0F}, Levels::level_1()};
     Camera& camera_ = RuntimeCtx::camera_;
 };
+
+#endif // SRC_LEVELS_GYM_H
