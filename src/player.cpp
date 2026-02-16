@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (c) 2025, Filip Vasiljevic
+ * Copyright (c) 2025 - 2026, Filip Vasiljevic
  * All rights reserved.
  *
  * This file is subject to the terms and conditions of the BSD 2-Clause
@@ -90,7 +90,7 @@ void Player::update_internal(double delta_time)
             get_animation().play("idle_left");
         }
     }
-    if (velocity_.y != 0.0F)
+    if (velocity_.y != 0.0F && !(touching_ & DOWN))
     {
         if (facing_right_)
         {
