@@ -29,8 +29,14 @@ void Level_1::update(double delta_time)
 
     player_.update(delta_time);
     floor_.update(delta_time);
+    box_.update(delta_time);
 
     rinvid::World::collide(player_, floor_);
+    /// @todo Check if this can be fixed in Rinvid
+    rinvid::World::collide(player_, box_);
+    rinvid::World::collide(box_, floor_);
+    rinvid::World::collide(player_, box_);
+    rinvid::World::collide(box_, floor_);
 
     auto camera_pos = camera_.get_pos();
     RuntimeCtx::com_box()->update(delta_time);
@@ -43,6 +49,7 @@ void Level_1::update(double delta_time)
 
     player_.draw(delta_time);
     floor_.draw();
+    box_.draw();
     RuntimeCtx::com_box()->draw();
 }
 
