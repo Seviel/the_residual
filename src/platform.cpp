@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (c) 2025, Filip Vasiljevic
+ * Copyright (c) 2025 - 2026, Filip Vasiljevic
  * All rights reserved.
  *
  * This file is subject to the terms and conditions of the BSD 2-Clause
@@ -11,11 +11,12 @@
 
 using namespace rinvid;
 
-Platform::Platform(Vector2f position, float width, float height) : rect{position, width, height}
+Platform::Platform(Vector2f position, float width, float height, bool movable)
+    : rect{position, width, height}
 {
     reset(position);
     resize(width, height);
-    set_movable(false);
+    set_movable(movable);
     set_gravity_scale(0.0F);
 
     rect.set_color(0x888888FF);

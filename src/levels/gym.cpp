@@ -54,6 +54,9 @@ void GymScreen::create()
     platforms_.push_back(&wall_1_);
     platforms_.push_back(&wall_2_);
     platforms_.push_back(&platform_1_);
+    platforms_.push_back(&plat_);
+
+    plat_.set_y_velocity(-30.0F);
 
     camera_.set_borders({0.0F, -100.0F}, {100.0F, 0.0F});
 }
@@ -62,10 +65,13 @@ void GymScreen::update(double delta_time)
 {
     rinvid::RinvidGfx::clear_screen(0.0F, 0.0F, 0.0F, 1.0F);
 
+    plat_.set_y_velocity(-30.0F);
+
     player_.update(delta_time);
     floor_1_.update(delta_time);
     floor_2_.update(delta_time);
     floor_3_.update(delta_time);
+    plat_.update(delta_time);
     wall_1_.update(delta_time);
     wall_2_.update(delta_time);
     platform_1_.update(delta_time);
@@ -87,6 +93,7 @@ void GymScreen::update(double delta_time)
     background_sprite_.draw();
     player_.draw(delta_time);
     portal_.draw();
+    plat_.draw();
     RuntimeCtx::com_box()->draw();
 }
 

@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (c) 2025, Filip Vasiljevic
+ * Copyright (c) 2025 - 2026, Filip Vasiljevic
  * All rights reserved.
  *
  * This file is subject to the terms and conditions of the BSD 2-Clause
@@ -25,7 +25,7 @@ class Platform : public rinvid::Object
      *
      *************************************************************************************************/
 
-    Platform(Vector2f position, float width, float height);
+    Platform(Vector2f position, float width, float height, bool movable = false);
 
     void update(double delta_time) override;
     void draw();
