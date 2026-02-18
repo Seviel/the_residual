@@ -25,7 +25,7 @@ using namespace rinvid;
 
 int main()
 {
-    World::gravity = 2400.0F;
+    World::set_gravity(2400.0F);
     Application main_app{800, 600, "TR", false};
     GymScreen gym{};
     MainMenu main_menu{&gym};

@@ -25,7 +25,7 @@ class Platform : public rinvid::Object
      *
      *************************************************************************************************/
 
-    Platform(Vector2f position, float width, float height, bool movable = false);
+    Platform(Vector2f position, float width, float height, std::uint8_t movable = NOT);
 
     void update(double delta_time) override;
     void draw();

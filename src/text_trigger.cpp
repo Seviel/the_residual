@@ -18,7 +18,7 @@ TextTrigger::TextTrigger(std::string text, Vector2f position, std::int32_t width
 {
     reset(position);
     resize(width, height);
-    set_movable(false);
+    set_movable(NOT);
     set_gravity_scale(0.0F);
 }
 

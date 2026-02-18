@@ -11,8 +11,8 @@
 
 using namespace rinvid;
 
-Platform::Platform(Vector2f position, float width, float height, bool movable)
-    : rect{position, width, height}
+Platform::Platform(Vector2f position, float width, float height, std::uint8_t movable)
+    : Object(true /* kinematic */), rect{position, width, height}
 {
     reset(position);
     resize(width, height);
