@@ -8,9 +8,11 @@
  **********************************************************************/
 
 #include "core/include/object.h"
+#include "platformers/include/world.h"
 #include "system/include/keyboard.h"
 
-#include "player.h"
+#include "src/platform.h"
+#include "src/player.h"
 
 using namespace rinvid;
 using namespace rinvid::system;
@@ -56,31 +58,33 @@ void Player::update_internal(double delta_time)
 {
     (void)delta_time;
 
+    internal_velocity_ = velocity_;
+
     if (Keyboard::is_key_pressed(system::Keyboard::Key::Up) ||
         Keyboard::is_key_pressed(system::Keyboard::Key::W))
     {
         if (is_touching(DOWN))
         {
-            set_y_velocity(-1000.0F);
+            internal_velocity_.y = -1000.0F;
         }
     }
     if (Keyboard::is_key_pressed(system::Keyboard::Key::Right) ||
         Keyboard::is_key_pressed(system::Keyboard::Key::D))
     {
-        set_x_velocity(600.0F);
+        internal_velocity_.x = 600.0F;
         get_animation().play("walking_right");
         facing_right_ = true;
     }
     else if (Keyboard::is_key_pressed(system::Keyboard::Key::Left) ||
              Keyboard::is_key_pressed(system::Keyboard::Key::A))
     {
-        set_x_velocity(-600.0F);
+        internal_velocity_.x = -600.0F;
         get_animation().play("walking_left");
         facing_right_ = false;
     }
     else
     {
-        set_x_velocity(0.0F);
+        internal_velocity_.x = 0.0F;
         if (facing_right_)
         {
             get_animation().play("idle_right");
@@ -101,4 +105,37 @@ void Player::update_internal(double delta_time)
             get_animation().play("air_left");
         }
     }
+
+    set_x_velocity(internal_velocity_.x + external_velocity_.x);
+    set_y_velocity(internal_velocity_.y + external_velocity_.y);
+
+    is_riding_ = false;
+    external_velocity_.x = 0.0F;
+    external_velocity_.y = 0.0F;
+}
+
+bool Player::separate_moving_plat(Object& object_1, Object& object_2)
+{
+    Player* player = nullptr;
+    Platform* platform = nullptr;
+
+    player = dynamic_cast<Player*>(&object_1);
+    platform = dynamic_cast<Platform*>(&object_2);
+    if (!player)
+    {
+        player = dynamic_cast<Player*>(&object_2);
+        platform = dynamic_cast<Platform*>(&object_1);
+    }
+
+    if (!player || !platform)
+    {
+        return false;
+    }
+
+    player->is_riding_ = true;
+    player->external_velocity_ = platform->get_velocity();
+    player->external_velocity_.x *= 2.0F;
+    player->external_velocity_.y *= 2.0F;
+
+    return World::separate(object_1, object_2);
 }

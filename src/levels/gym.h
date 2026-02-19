@@ -57,7 +57,7 @@ class GymScreen : public Screen
     Object wall_1_{};
     Object wall_2_{};
     Object platform_1_{};
-    Platform plat_{{325.0F, 400.0F}, 100.0F, 40.0F, VERTICALLY};
+    Platform plat_{{325.0F, 200.0F}, 100.0F, 40.0F, YES};
     std::vector<Object*> platforms_{};
     TextTrigger trigger_1_{"Nice jump!", Vector2f{50.0F, 200.0F}};
     TextTrigger trigger_2_{"Single trigger", Vector2f{700.0F, 500.0F}};

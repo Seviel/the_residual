@@ -19,6 +19,9 @@ Platform::Platform(Vector2f position, float width, float height, std::uint8_t mo
     set_movable(movable);
     set_gravity_scale(0.0F);
 
+    drag_.x = 0.0F;
+    drag_.y = 0.0F;
+
     rect.set_color(0x888888FF);
 }
 
