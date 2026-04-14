@@ -27,10 +27,17 @@ class Player : public rinvid::SpriteObject
 
     void update(double delta_time) override;
 
+    void set_position(const Vector2f vector) override;
+    void reset(Vector2f position) override;
+    void move(const Vector2f move_vector) override;
+
+    static bool separate_collision_boxes(Object& object_1, Object& object_2);
     static bool separate_moving_plat(Object& object_1, Object& object_2);
 
   private:
     void update_internal(double delta_time);
+    void update_collision_boxes(double delta_time);
+    void sync_from_collision_boxes();
     // Final velocity is internal_velocity_ + external_velocity_
     // Set for example by moving player with keys
     Vector2f internal_velocity_{};
@@ -38,6 +45,9 @@ class Player : public rinvid::SpriteObject
     Vector2f external_velocity_{};
     bool facing_right_{true};
     bool is_riding_{false};
+
+    Object x_collision_box_{};
+    Object y_collision_box_{};
 };
 
 #endif // SRC_PLAYER_H

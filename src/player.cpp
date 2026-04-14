@@ -46,12 +46,68 @@ Player::Player()
     get_animation().add_animation("air_left", air_left_animation);
 
     get_animation().play("idle_right");
+
+    x_collision_box_.set_allowed_collisions(WALL);
+    x_collision_box_.resize(52, 98);
+    x_collision_box_.reset(position_);
+
+    y_collision_box_.set_allowed_collisions(UP | DOWN);
+    y_collision_box_.resize(50, 100);
+    y_collision_box_.reset(position_);
 }
 
 void Player::update(double delta_time)
 {
     update_internal(delta_time);
-    Object::update(delta_time);
+    update_collision_boxes(delta_time);
+    sync_from_collision_boxes();
+}
+
+void Player::update_collision_boxes(double delta_time)
+{
+    x_collision_box_.reset({position_.x, position_.y + 1.0F});
+    x_collision_box_.set_velocity({velocity_.x, 0.0F});
+    x_collision_box_.set_acceleration({acceleration_.x, 0.0F});
+    x_collision_box_.set_drag({drag_.x, 0.0F});
+    x_collision_box_.set_max_velocity(max_velocity_);
+    x_collision_box_.update(delta_time);
+
+    y_collision_box_.reset({position_.x + 1.0F, position_.y});
+    y_collision_box_.set_velocity({0.0F, velocity_.y});
+    y_collision_box_.set_acceleration({0.0F, acceleration_.y});
+    y_collision_box_.set_drag({0.0F, drag_.y});
+    y_collision_box_.set_max_velocity(max_velocity_);
+    y_collision_box_.set_gravity_scale(gravity_scale_);
+    y_collision_box_.update(delta_time);
+}
+
+void Player::sync_from_collision_boxes()
+{
+    previous_position_ = position_;
+    position_.x = x_collision_box_.get_position().x;
+    position_.y = y_collision_box_.get_position().y;
+    velocity_.x = x_collision_box_.get_x_velocity();
+    velocity_.y = y_collision_box_.get_y_velocity();
+
+    touching_ = NONE;
+    if (x_collision_box_.is_touching(LEFT))
+    {
+        touching_ |= LEFT;
+    }
+    if (x_collision_box_.is_touching(RIGHT))
+    {
+        touching_ |= RIGHT;
+    }
+    if (y_collision_box_.is_touching(UP))
+    {
+        touching_ |= UP;
+    }
+    if (y_collision_box_.is_touching(DOWN))
+    {
+        touching_ |= DOWN;
+    }
+
+    Sprite::set_position(position_);
 }
 
 void Player::update_internal(double delta_time)
@@ -114,6 +170,27 @@ void Player::update_internal(double delta_time)
     external_velocity_.y = 0.0F;
 }
 
+void Player::set_position(const Vector2f vector)
+{
+    Sprite::set_position(vector);
+    x_collision_box_.reset(Vector2f{vector.x, vector.y + 1.0F});
+    y_collision_box_.reset(Vector2f{vector.x + 1.0F, vector.y});
+}
+
+void Player::reset(Vector2f position)
+{
+    Object::reset(position);
+    x_collision_box_.reset(Vector2f{position.x, position.y + 1.0F});
+    y_collision_box_.reset(Vector2f{position.x + 1.0F, position.y});
+}
+
+void Player::move(const Vector2f move_vector)
+{
+    (void)move_vector;
+    /// @todo Handle this properly
+    throw "Can't use move function with player";
+}
+
 bool Player::separate_moving_plat(Object& object_1, Object& object_2)
 {
     Player* player = nullptr;
@@ -137,5 +214,29 @@ bool Player::separate_moving_plat(Object& object_1, Object& object_2)
     player->external_velocity_.x *= 2.0F;
     player->external_velocity_.y *= 2.0F;
 
-    return World::separate(object_1, object_2);
+    return separate_collision_boxes(object_1, object_2);
+}
+
+bool Player::separate_collision_boxes(Object& object_1, Object& object_2)
+{
+    Player* player = dynamic_cast<Player*>(&object_1);
+    Object* other = &object_2;
+
+    if (!player)
+    {
+        player = dynamic_cast<Player*>(&object_2);
+        other = &object_1;
+    }
+
+    if (!player)
+    {
+        return false;
+    }
+
+    bool x_separated = World::collide(player->x_collision_box_, *other);
+    bool y_separated = World::collide(player->y_collision_box_, *other);
+
+    player->sync_from_collision_boxes();
+
+    return x_separated || y_separated;
 }

@@ -73,7 +73,7 @@ void GymScreen::update(double delta_time)
     wall_2_.update(delta_time);
     platform_1_.update(delta_time);
 
-    rinvid::World::collide(player_, platforms_);
+    rinvid::World::collide(player_, platforms_, Player::separate_collision_boxes);
     rinvid::World::collide(player_, plat_, Player::separate_moving_plat);
     rinvid::World::collide(player_, trigger_1_, TextTrigger::reactivate_on_collision);
     rinvid::World::collide(player_, trigger_2_, TextTrigger::activate_on_collision);
