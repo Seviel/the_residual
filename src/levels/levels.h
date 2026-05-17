@@ -23,7 +23,12 @@ class Levels final
     {
     }
 
+    static std::unique_ptr<rinvid::Screen> gym();
     static std::unique_ptr<rinvid::Screen> level_1();
+    static std::unique_ptr<rinvid::Screen> level_2();
+    static std::unique_ptr<rinvid::Screen> level_3();
+    static std::unique_ptr<rinvid::Screen> level_4();
+    static std::unique_ptr<rinvid::Screen> level_5();
 };
 
 #endif // SRC_LEVELS_LEVELS_H

@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (c) 2025 - 2026, Filip Vasiljevic
+ * Copyright (c) 2026, Filip Vasiljevic
  * All rights reserved.
  *
  * This file is subject to the terms and conditions of the BSD 2-Clause
@@ -7,14 +7,14 @@
  * repository for more details.
  **********************************************************************/
 
-#include "level_1.h"
+#include "level_4.h"
 
 #include <rinvid/core/render_context.h>
 #include <rinvid/platformers/world.h>
 
 #include "src/runtime_ctx.h"
 
-void Level_1::create()
+void Level_4::create()
 {
     player_.setup(&player_texture_, 52, 100, Vector2f{100.0F, 100.0F}, Vector2f{0.0F, 0.0F});
 
@@ -25,7 +25,7 @@ void Level_1::create()
     camera_.set_borders({-2000.0F, -2000.0F}, {2000.0F, 2000.0F});
 }
 
-void Level_1::update(double delta_time)
+void Level_4::update(double delta_time)
 {
     get_render_context().clear_screen(0.0F, 0.0F, 0.0F, 1.0F);
 
@@ -35,7 +35,6 @@ void Level_1::update(double delta_time)
     level_name_trigger_.update(delta_time);
 
     rinvid::World::collide(player_, floor_, Player::separate_collision_boxes);
-    /// @todo Check if this can be fixed in Rinvid
     rinvid::World::collide(player_, box_, Player::separate_collision_boxes);
     rinvid::World::collide(box_, floor_);
     rinvid::World::collide(player_, box_, Player::separate_collision_boxes);
@@ -59,6 +58,6 @@ void Level_1::update(double delta_time)
     RuntimeCtx::com_box()->draw();
 }
 
-void Level_1::destroy()
+void Level_4::destroy()
 {
 }
