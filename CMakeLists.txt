@@ -18,6 +18,7 @@ set(RINVID_BUILD_BENCHMARKS OFF CACHE BOOL "Build Rinvid benchmarks")
 add_subdirectory(Rinvid)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE rinvid)
+rinvid_copy_runtime_dependencies(${PROJECT_NAME})
 
 # Copy resources to build directory so the executable can find them
 set(EXAMPLE_RESOURCES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resources)
