@@ -10,8 +10,10 @@
 #ifndef SRC_COM_BOX_H
 #define SRC_COM_BOX_H
 
-#include "core/include/sprite.h"
-#include "core/include/text.h"
+#include <string>
+
+#include <rinvid/core/sprite.h>
+#include <rinvid/core/text.h>
 
 using namespace rinvid;
 

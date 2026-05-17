@@ -10,21 +10,17 @@
 #ifndef SRC_LEVELS_MAIN_MENU_H
 #define SRC_LEVELS_MAIN_MENU_H
 
-#include "core/include/application.h"
-#include "core/include/screen.h"
-#include "core/include/sprite.h"
-#include "core/include/texture.h"
-#include "gui/include/button.h"
+#include <rinvid/core/sprite.h>
+#include <rinvid/core/texture.h>
+#include <rinvid/gui/button.h>
+#include <rinvid/system/screen.h>
 
 using namespace rinvid;
 
 class MainMenu : public Screen
 {
   public:
-    MainMenu(Screen* screen)
-    {
-        first_level_ = screen;
-    }
+    MainMenu() = default;
     virtual ~MainMenu()
     {
     }
@@ -39,7 +35,6 @@ class MainMenu : public Screen
                               Vector2f{0.0F, 0.0F}};
     Texture button_play_texture_{"resources/gfx/gui/btn_play.png"};
     rinvid::gui::Button button_play_{};
-    Screen* first_level_;
 };
 
 #endif // SRC_LEVELS_MAIN_MENU_H

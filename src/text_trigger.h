@@ -12,9 +12,9 @@
 
 #include <string>
 
-#include "core/include/object.h"
-#include "util/include/rect.h"
-#include "util/include/vector2.h"
+#include <rinvid/platformers/object.h>
+#include <rinvid/util/rect.h>
+#include <rinvid/util/vector2.h>
 
 using namespace rinvid;
 

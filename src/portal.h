@@ -10,7 +10,10 @@
 #ifndef SRC_PORTAL_H
 #define SRC_PORTAL_H
 
-#include "core/include/sprite_object.h"
+#include <memory>
+
+#include <rinvid/platformers/sprite_object.h>
+#include <rinvid/system/screen.h>
 
 using namespace rinvid;
 
@@ -18,13 +21,15 @@ class Portal final : public rinvid::SpriteObject
 {
 
   public:
-    Portal(Vector2f position, Screen* level);
+    using LevelFactory = std::unique_ptr<rinvid::Screen> (*)();
+
+    Portal(Vector2f position, LevelFactory level_factory);
 
     static bool player_entered(Object& object_1, Object& object_2);
 
   private:
     Texture tex_;
-    Screen* level_;
+    LevelFactory level_factory_;
 };
 
 #endif // SRC_PORTAL_H

@@ -7,9 +7,9 @@
  * repository for more details.
  **********************************************************************/
 
-#include "core/include/object.h"
-#include "platformers/include/world.h"
-#include "system/include/keyboard.h"
+#include <rinvid/platformers/object.h>
+#include <rinvid/platformers/world.h>
+#include <rinvid/system/keyboard.h>
 
 #include "src/platform.h"
 #include "src/player.h"

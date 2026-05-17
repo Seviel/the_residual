@@ -7,11 +7,10 @@
  * repository for more details.
  **********************************************************************/
 
-#include "util/include/collision_detection.h"
-
-#include "platformers/include/world.h"
-
 #include "gym.h"
+
+#include <rinvid/core/render_context.h>
+#include <rinvid/platformers/world.h>
 
 void GymScreen::create()
 {
@@ -62,7 +61,7 @@ void GymScreen::create()
 
 void GymScreen::update(double delta_time)
 {
-    rinvid::RinvidGfx::clear_screen(0.0F, 0.0F, 0.0F, 1.0F);
+    get_render_context().clear_screen(0.0F, 0.0F, 0.0F, 1.0F);
 
     player_.update(delta_time);
     floor_1_.update(delta_time);
@@ -84,8 +83,8 @@ void GymScreen::update(double delta_time)
 
     camera_.update();
     camera_pos = player_.get_position();
-    camera_pos.x -= RinvidGfx::get_width() / 2;
-    camera_pos.y -= RinvidGfx::get_height() / 2;
+    camera_pos.x -= get_render_context().get_width() / 2.0F;
+    camera_pos.y -= get_render_context().get_height() / 2.0F;
     camera_.set_position(camera_pos);
 
     background_sprite_.draw();

@@ -9,14 +9,11 @@
 
 #include "src/levels/levels.h"
 
-Level_1* Levels::level_1_{nullptr};
+#include <memory>
 
-Level_1* Levels::level_1()
+#include "src/levels/level_1.h"
+
+std::unique_ptr<rinvid::Screen> Levels::level_1()
 {
-    if (level_1_ == nullptr)
-    {
-        level_1_ = new Level_1();
-    }
-
-    return level_1_;
+    return std::make_unique<Level_1>();
 }

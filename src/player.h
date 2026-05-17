@@ -10,7 +10,7 @@
 #ifndef SRC_PLAYER_H
 #define SRC_PLAYER_H
 
-#include "core/include/sprite_object.h"
+#include <rinvid/platformers/sprite_object.h>
 
 using namespace rinvid;
 

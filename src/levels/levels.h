@@ -10,7 +10,9 @@
 #ifndef SRC_LEVELS_LEVELS_H
 #define SRC_LEVELS_LEVELS_H
 
-#include "src/levels/level_1.h"
+#include <memory>
+
+#include <rinvid/system/screen.h>
 
 using namespace rinvid;
 
@@ -21,9 +23,7 @@ class Levels final
     {
     }
 
-    static Level_1* level_1();
-
-    static Level_1* level_1_;
+    static std::unique_ptr<rinvid::Screen> level_1();
 };
 
 #endif // SRC_LEVELS_LEVELS_H

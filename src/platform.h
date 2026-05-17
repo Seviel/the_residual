@@ -10,9 +10,11 @@
 #ifndef SRC_PLATFORM_H
 #define SRC_PLATFORM_H
 
-#include "core/include/object.h"
-#include "core/include/rectangle_shape.h"
-#include "util/include/vector2.h"
+#include <cstdint>
+
+#include <rinvid/core/rectangle_shape.h>
+#include <rinvid/platformers/object.h>
+#include <rinvid/util/vector2.h>
 
 using namespace rinvid;
 

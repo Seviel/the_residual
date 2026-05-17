@@ -7,18 +7,12 @@
  * repository for more details.
  **********************************************************************/
 
-#include "core/include/application.h"
-#include "core/include/rinvid_gfx.h"
-#include "core/include/screen.h"
-#include "core/include/sprite.h"
-#include "core/include/texture.h"
-#include "platformers/include/world.h"
-#include "util/include/vector2.h"
+#include <memory>
 
-#include "levels/gym.h"
+#include <rinvid/platformers/world.h>
+#include <rinvid/system/application.h>
+
 #include "levels/intro.h"
-#include "levels/level_1.h"
-#include "levels/main_menu.h"
 #include "src/runtime_ctx.h"
 
 using namespace rinvid;
@@ -27,10 +21,7 @@ int main()
 {
     World::set_gravity(2400.0F);
     Application main_app{800, 600, "TR", false};
-    GymScreen gym{};
-    MainMenu main_menu{&gym};
-    IntroScreen intro_screen{&main_menu};
-    main_app.set_screen(&intro_screen);
+    main_app.set_screen(std::make_unique<IntroScreen>());
     main_app.set_fps(60);
     RuntimeCtx::app_ = &main_app;
     main_app.run();

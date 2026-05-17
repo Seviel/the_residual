@@ -10,13 +10,15 @@
 #include "src/portal.h"
 #include "src/runtime_ctx.h"
 
+#include <cstdint>
+
 using namespace rinvid;
 
 constexpr int32_t PORTAL_WIDTH = 150;
 constexpr int32_t PORTAL_HEIGHT = 153;
 
-Portal::Portal(Vector2f position, Screen* level)
-    : tex_{"resources/gfx/portal_small.png"}, level_{level}
+Portal::Portal(Vector2f position, LevelFactory level_factory)
+    : tex_{"resources/gfx/portal_small.png"}, level_factory_{level_factory}
 {
     setup(&tex_, PORTAL_WIDTH, PORTAL_HEIGHT, position);
     gravity_scale_ = 0.0F;
@@ -37,7 +39,7 @@ bool Portal::player_entered(Object& object_1, Object& object_2)
         return false;
     }
 
-    RuntimeCtx::app_->set_screen(portal->level_);
+    RuntimeCtx::app_->set_screen(portal->level_factory_());
 
     return true;
 }

@@ -10,20 +10,16 @@
 #ifndef SRC_LEVELS_INTRO_H
 #define SRC_LEVELS_INTRO_H
 
-#include "core/include/application.h"
-#include "core/include/screen.h"
-#include "core/include/sprite.h"
-#include "core/include/texture.h"
+#include <rinvid/core/sprite.h>
+#include <rinvid/core/texture.h>
+#include <rinvid/system/screen.h>
 
 using namespace rinvid;
 
 class IntroScreen : public Screen
 {
   public:
-    IntroScreen(Screen* next_screen)
-    {
-        next_screen_ = next_screen;
-    }
+    IntroScreen() = default;
     virtual ~IntroScreen()
     {
     }
@@ -39,7 +35,6 @@ class IntroScreen : public Screen
 
     const float intro_duration_ = 2.0F;
     float intro_time_ = 0.0F;
-    Screen* next_screen_ = nullptr;
 };
 
 #endif // SRC_LEVELS_INTRO_H

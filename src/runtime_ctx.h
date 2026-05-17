@@ -10,8 +10,8 @@
 #ifndef SRC_RUNTIME_CTX_H
 #define SRC_RUNTIME_CTX_H
 
-#include "core/include/application.h"
-#include "core/include/camera.h"
+#include <rinvid/core/camera.h>
+#include <rinvid/system/application.h>
 
 #include "src/com_box.h"
 

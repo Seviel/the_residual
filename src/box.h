@@ -10,9 +10,9 @@
 #ifndef SRC_BOX_H
 #define SRC_BOX_H
 
-#include "core/include/sprite_object.h"
-#include "core/include/texture.h"
-#include "util/include/vector2.h"
+#include <rinvid/core/texture.h>
+#include <rinvid/platformers/sprite_object.h>
+#include <rinvid/util/vector2.h>
 
 using namespace rinvid;
 

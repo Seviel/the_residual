@@ -10,11 +10,9 @@
 #ifndef SRC_LEVELS_LEVEL_1_H
 #define SRC_LEVELS_LEVEL_1_H
 
-#include "core/include/camera.h"
-#include "core/include/object.h"
-#include "core/include/screen.h"
-#include "core/include/sprite.h"
-#include "core/include/texture.h"
+#include <rinvid/core/camera.h>
+#include <rinvid/core/texture.h>
+#include <rinvid/system/screen.h>
 
 #include "src/box.h"
 #include "src/platform.h"
