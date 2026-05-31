@@ -12,10 +12,10 @@
 
 #include <rinvid/core/camera.h>
 #include <rinvid/core/texture.h>
-#include <rinvid/system/screen.h>
 
 #include "src/box.h"
 #include "src/levels/levels.h"
+#include "src/levels/playable_level.h"
 #include "src/platform.h"
 #include "src/player.h"
 #include "src/portal.h"
@@ -24,7 +24,7 @@
 
 using namespace rinvid;
 
-class Level_4 : public Screen
+class Level_4 : public PlayableLevel
 {
   public:
     Level_4()
@@ -33,11 +33,12 @@ class Level_4 : public Screen
     virtual ~Level_4()
     {
     }
-    void create() override;
-    void destroy() override;
 
   private:
-    void update(double delta_time) override;
+    void create_level() override;
+    void update_level(double delta_time) override;
+    void draw_level(double delta_time) override;
+    std::unique_ptr<rinvid::Screen> restart_level() const override;
 
     Texture player_texture_{"resources/gfx/man_animated.png"};
     Player player_{};

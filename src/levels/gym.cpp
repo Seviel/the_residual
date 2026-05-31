@@ -12,7 +12,7 @@
 #include <rinvid/core/render_context.h>
 #include <rinvid/platformers/world.h>
 
-void GymScreen::create()
+void GymScreen::create_level()
 {
     player_.setup(&player_texture_, 52, 100, Vector2f{100.0F, 100.0F}, Vector2f{0.0F, 0.0F});
 
@@ -59,10 +59,8 @@ void GymScreen::create()
     camera_.set_borders({0.0F, -100.0F}, {100.0F, 0.0F});
 }
 
-void GymScreen::update(double delta_time)
+void GymScreen::update_level(double delta_time)
 {
-    get_render_context().clear_screen(0.0F, 0.0F, 0.0F, 1.0F);
-
     player_.update(delta_time);
     floor_1_.update(delta_time);
     floor_2_.update(delta_time);
@@ -86,7 +84,10 @@ void GymScreen::update(double delta_time)
     camera_pos.x -= get_render_context().get_width() / 2.0F;
     camera_pos.y -= get_render_context().get_height() / 2.0F;
     camera_.set_position(camera_pos);
+}
 
+void GymScreen::draw_level(double delta_time)
+{
     background_sprite_.draw();
     player_.draw(delta_time);
     portal_.draw();
@@ -94,6 +95,7 @@ void GymScreen::update(double delta_time)
     RuntimeCtx::com_box()->draw();
 }
 
-void GymScreen::destroy()
+std::unique_ptr<rinvid::Screen> GymScreen::restart_level() const
 {
+    return Levels::gym();
 }

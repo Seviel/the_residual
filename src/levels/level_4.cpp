@@ -14,7 +14,7 @@
 
 #include "src/runtime_ctx.h"
 
-void Level_4::create()
+void Level_4::create_level()
 {
     player_.setup(&player_texture_, 52, 100, Vector2f{100.0F, 100.0F}, Vector2f{0.0F, 0.0F});
 
@@ -25,10 +25,8 @@ void Level_4::create()
     camera_.set_borders({-2000.0F, -2000.0F}, {2000.0F, 2000.0F});
 }
 
-void Level_4::update(double delta_time)
+void Level_4::update_level(double delta_time)
 {
-    get_render_context().clear_screen(0.0F, 0.0F, 0.0F, 1.0F);
-
     player_.update(delta_time);
     floor_.update(delta_time);
     box_.update(delta_time);
@@ -50,7 +48,10 @@ void Level_4::update(double delta_time)
     camera_pos.x -= get_render_context().get_width() / 2.0F;
     camera_pos.y -= get_render_context().get_height() / 2.0F;
     camera_.set_position(camera_pos);
+}
 
+void Level_4::draw_level(double delta_time)
+{
     player_.draw(delta_time);
     floor_.draw();
     box_.draw();
@@ -58,6 +59,7 @@ void Level_4::update(double delta_time)
     RuntimeCtx::com_box()->draw();
 }
 
-void Level_4::destroy()
+std::unique_ptr<rinvid::Screen> Level_4::restart_level() const
 {
+    return Levels::level_4();
 }

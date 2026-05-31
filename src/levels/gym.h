@@ -16,10 +16,10 @@
 #include <rinvid/core/sprite.h>
 #include <rinvid/core/texture.h>
 #include <rinvid/platformers/object.h>
-#include <rinvid/system/screen.h>
 
 #include "src/com_box.h"
 #include "src/levels/levels.h"
+#include "src/levels/playable_level.h"
 #include "src/platform.h"
 #include "src/player.h"
 #include "src/portal.h"
@@ -28,7 +28,7 @@
 
 using namespace rinvid;
 
-class GymScreen : public Screen
+class GymScreen : public PlayableLevel
 {
   public:
     GymScreen()
@@ -37,13 +37,14 @@ class GymScreen : public Screen
     virtual ~GymScreen()
     {
     }
-    void create() override;
-    void destroy() override;
 
   private:
-    void update(double delta_time) override;
+    void create_level() override;
+    void update_level(double delta_time) override;
+    void draw_level(double delta_time) override;
+    std::unique_ptr<rinvid::Screen> restart_level() const override;
 
-    Texture background_texture_{"resources/gfx/main_menu.png"};
+    Texture background_texture_{"resources/gfx/gym.png"};
     Sprite background_sprite_{&background_texture_, 800, 600, Vector2f{0.0F, 0.0F},
                               Vector2f{0.0F, 0.0F}};
 
