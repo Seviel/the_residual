@@ -22,7 +22,7 @@ void Level_1::create_level()
     floor_.set_gravity_scale(0.0F);
 
     RuntimeCtx::com_box()->set_text("");
-    camera_.set_borders({-2000.0F, -2000.0F}, {2000.0F, 2000.0F});
+    camera_.set_borders({-100.0F, 0.0F}, {900.0F, 300.0F});
 }
 
 void Level_1::update_level(double delta_time)
@@ -53,8 +53,8 @@ void Level_1::update_level(double delta_time)
 
 void Level_1::draw_level(double delta_time)
 {
+    background_sprite_.draw();
     player_.draw(delta_time);
-    floor_.draw();
     box_.draw();
     portal_.draw(delta_time);
     RuntimeCtx::com_box()->draw();
