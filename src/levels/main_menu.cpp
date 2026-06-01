@@ -15,9 +15,14 @@
 #include <rinvid/system/application.h>
 
 #include "src/levels/gym.h"
+#include "src/runtime_ctx.h"
 
 void MainMenu::create()
 {
+    RuntimeCtx::camera_.set_borders({-2000.0F, -2000.0F}, {2000.0F, 2000.0F});
+    RuntimeCtx::camera_.set_position({0.0F, 0.0F});
+    RuntimeCtx::camera_.update();
+
     button_play_.setup(&button_play_texture_, 100, 30, rinvid::Vector2f{225.0F, 120.0F});
     auto button_play_regions = button_play_.get_animation().split_animation_frames(120, 40, 3, 1);
 
