@@ -55,7 +55,7 @@ void Level_2::draw_level(double delta_time)
     player_.draw(delta_time);
     floor_.draw();
     box_.draw();
-    portal_.draw();
+    portal_.draw(delta_time);
     RuntimeCtx::com_box()->draw();
 }
 

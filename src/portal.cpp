@@ -11,16 +11,27 @@
 #include "src/runtime_ctx.h"
 
 #include <cstdint>
+#include <vector>
 
 using namespace rinvid;
 
 constexpr int32_t PORTAL_WIDTH = 150;
 constexpr int32_t PORTAL_HEIGHT = 153;
+constexpr std::uint32_t PORTAL_FRAME_COUNT = 17U;
+constexpr double PORTAL_ACTIVE_FRAMERATE = 24.0;
 
 Portal::Portal(Vector2f position, LevelFactory level_factory)
     : tex_{"resources/gfx/portal_small.png"}, level_factory_{level_factory}
 {
     setup(&tex_, PORTAL_WIDTH, PORTAL_HEIGHT, position);
+
+    auto portal_frames = get_animation().split_animation_frames(PORTAL_WIDTH, PORTAL_HEIGHT,
+                                                                PORTAL_FRAME_COUNT, 1U);
+    std::vector<Rect> active_frames{portal_frames.begin() + 1, portal_frames.end()};
+    get_animation().add_animation("active", Animation{PORTAL_ACTIVE_FRAMERATE, active_frames,
+                                                      AnimationMode::Looping});
+    get_animation().play("active");
+
     gravity_scale_ = 0.0F;
     movable_ = false;
 }

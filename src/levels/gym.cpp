@@ -90,7 +90,7 @@ void GymScreen::draw_level(double delta_time)
 {
     background_sprite_.draw();
     player_.draw(delta_time);
-    portal_.draw();
+    portal_.draw(delta_time);
     plat_.draw();
     RuntimeCtx::com_box()->draw();
 }
