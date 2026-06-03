@@ -19,7 +19,9 @@ inline constexpr char LVL_1_PLAYER_1[] =
 inline constexpr char LVL_1_OP_1[] =
     "You are awake. This is enough for now. It is crucial that you move forward.";
 
-inline constexpr char LVL_2_OP_1[] = "Level 2";
+inline constexpr char LVL_2_PLAYER_1[] = "Someone is speaking to me.\nNot out loud.\nNot exactly.";
+inline constexpr char LVL_2_OP_1[] = "Do not panic.\nI can guide you out.\nFollow the path.";
+
 inline constexpr char LVL_3_OP_1[] = "Level 3";
 inline constexpr char LVL_4_OP_1[] = "Level 4";
 inline constexpr char LVL_5_OP_1[] = "Level 5";

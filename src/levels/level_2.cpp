@@ -16,28 +16,40 @@
 
 void Level_2::create_level()
 {
-    player_.setup(&player_texture_, 52, 100, Vector2f{100.0F, 100.0F}, Vector2f{0.0F, 0.0F});
+    player_.setup(&player_texture_, 52, 100, Vector2f{100.0F, 500.0F}, Vector2f{0.0F, 0.0F});
 
     floor_.set_movable(NOT);
     floor_.set_gravity_scale(0.0F);
 
+    plat_1_.set_movable(NOT);
+    plat_1_.set_gravity_scale(0.0F);
+
+    plat_2_.set_movable(NOT);
+    plat_2_.set_gravity_scale(0.0F);
+
+    wall_.set_movable(NOT);
+    wall_.set_gravity_scale(0.0F);
+
     RuntimeCtx::com_box()->set_text("");
-    camera_.set_borders({-2000.0F, -2000.0F}, {2000.0F, 2000.0F});
+    camera_.set_borders({0.0F, 0.0F}, {1100.0F, 200.0F});
 }
 
 void Level_2::update_level(double delta_time)
 {
     player_.update(delta_time);
     floor_.update(delta_time);
-    box_.update(delta_time);
-    level_name_trigger_.update(delta_time);
+    plat_1_.update(delta_time);
+    plat_2_.update(delta_time);
+    wall_.update(delta_time);
+    player_trig_1_.update(delta_time);
+    op_trig_1_.update(delta_time);
 
     rinvid::World::collide(player_, floor_, Player::separate_collision_boxes);
-    rinvid::World::collide(player_, box_, Player::separate_collision_boxes);
-    rinvid::World::collide(box_, floor_);
-    rinvid::World::collide(player_, box_, Player::separate_collision_boxes);
-    rinvid::World::collide(box_, floor_);
-    rinvid::World::collide(player_, level_name_trigger_, TextTrigger::activate_on_collision);
+    rinvid::World::collide(player_, plat_1_, Player::separate_collision_boxes);
+    rinvid::World::collide(player_, plat_2_, Player::separate_collision_boxes);
+    rinvid::World::collide(player_, wall_, Player::separate_collision_boxes);
+    rinvid::World::collide(player_, player_trig_1_, TextTrigger::reactivate_on_collision);
+    rinvid::World::collide(player_, op_trig_1_, TextTrigger::reactivate_on_collision);
     rinvid::World::collide(player_, portal_, Portal::player_entered);
 
     auto camera_pos = camera_.get_pos();
@@ -54,7 +66,9 @@ void Level_2::draw_level(double delta_time)
 {
     player_.draw(delta_time);
     floor_.draw();
-    box_.draw();
+    plat_1_.draw();
+    plat_2_.draw();
+    wall_.draw();
     portal_.draw(delta_time);
     RuntimeCtx::com_box()->draw();
 }

@@ -43,11 +43,15 @@ class Level_2 : public PlayableLevel
 
     Texture player_texture_{"resources/gfx/man_animated.png"};
     Player player_{};
-    Platform floor_{{0.0F, 700.0F}, 1600.0F, 100.0F};
-    Box box_{Vector2f{300.0F, 200.0F}};
-    TextTrigger level_name_trigger_{GameText::LVL_2_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
-                                    TextRole::Operator};
-    Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_3};
+    Platform floor_{{0.0F, 700.0F}, 900.0F, 100.0F};
+    Platform plat_1_{{800.0F, 500.0F}, 600.0F, 50.0F};
+    Platform plat_2_{{1300.0F, 300.0F}, 600.0F, 50.0F};
+    Platform wall_{{-100.0F, 0.0F}, 100.0F, 900.0F};
+    TextTrigger player_trig_1_{GameText::LVL_2_PLAYER_1, Vector2f{300.0F, 300.0F}, 50, 500,
+                               TextRole::Player};
+    TextTrigger op_trig_1_{GameText::LVL_2_OP_1, Vector2f{650.0F, 300.0F}, 50, 500,
+                           TextRole::Operator};
+    Portal portal_{Vector2f{1700.0F, 150.0F}, Levels::level_3};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 
