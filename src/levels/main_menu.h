@@ -10,10 +10,13 @@
 #ifndef SRC_LEVELS_MAIN_MENU_H
 #define SRC_LEVELS_MAIN_MENU_H
 
+#include <cstdint>
+
 #include <rinvid/core/sprite.h>
 #include <rinvid/core/texture.h>
-#include <rinvid/gui/button.h>
 #include <rinvid/system/screen.h>
+
+#include "src/menu_button.h"
 
 using namespace rinvid;
 
@@ -29,12 +32,18 @@ class MainMenu : public Screen
 
   private:
     void update(double delta_time) override;
+    void layout();
 
     Texture background_texture_{"resources/gfx/main_menu.png"};
     Sprite background_sprite_{&background_texture_, 800, 600, Vector2f{0.0F, 0.0F},
                               Vector2f{0.0F, 0.0F}};
-    Texture button_play_texture_{"resources/gfx/gui/btn_play.png"};
-    rinvid::gui::Button button_play_{};
+    MenuButton continue_button_{"Continue"};
+    MenuButton play_button_{"Play"};
+    MenuButton pick_level_button_{"Pick Level"};
+    MenuButton credits_button_{"Credits"};
+    MenuButton exit_button_{"Exit"};
+    std::int32_t laid_out_width_{0};
+    std::int32_t laid_out_height_{0};
 };
 
 #endif // SRC_LEVELS_MAIN_MENU_H

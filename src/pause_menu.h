@@ -12,11 +12,11 @@
 
 #include <cstdint>
 #include <memory>
-#include <string>
 
 #include <rinvid/core/rectangle_shape.h>
 #include <rinvid/gui/label.h>
-#include <rinvid/util/rect.h>
+
+#include "src/menu_button.h"
 
 enum class PauseAction
 {
@@ -25,28 +25,6 @@ enum class PauseAction
     Restart,
     MainMenu,
     Quit
-};
-
-class PauseMenuButton final
-{
-  public:
-    explicit PauseMenuButton(std::string text);
-
-    void set_bounds(rinvid::Rect bounds);
-    bool update();
-    void draw();
-
-  private:
-    bool contains(rinvid::Vector2f point) const;
-    void update_colors();
-
-    rinvid::Rect bounds_{};
-    std::unique_ptr<rinvid::RectangleShape> border_{};
-    std::unique_ptr<rinvid::RectangleShape> body_{};
-    rinvid::gui::Label label_;
-    bool hovered_{false};
-    bool pressed_inside_{false};
-    bool mouse_was_down_{false};
 };
 
 class PauseMenu final
@@ -72,10 +50,10 @@ class PauseMenu final
     std::unique_ptr<rinvid::RectangleShape> overlay_{};
     std::unique_ptr<rinvid::RectangleShape> panel_{};
     rinvid::gui::Label title_;
-    PauseMenuButton resume_button_;
-    PauseMenuButton restart_button_;
-    PauseMenuButton main_menu_button_;
-    PauseMenuButton quit_button_;
+    MenuButton resume_button_;
+    MenuButton restart_button_;
+    MenuButton main_menu_button_;
+    MenuButton quit_button_;
 };
 
 #endif // SRC_PAUSE_MENU_H

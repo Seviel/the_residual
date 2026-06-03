@@ -10,13 +10,11 @@
 #include "src/pause_menu.h"
 
 #include <algorithm>
-#include <utility>
 
 #include <glm/mat4x4.hpp>
 
 #include <rinvid/core/render_context.h>
 #include <rinvid/system/keyboard.h>
-#include <rinvid/system/mouse.h>
 #include <rinvid/util/color.h>
 #include <rinvid/util/vector2.h>
 
@@ -27,21 +25,13 @@ namespace
 {
 
 constexpr const char* FONT_PATH{"resources/ttf/aquifer.ttf"};
-constexpr std::int32_t BUTTON_WIDTH{260};
-constexpr std::int32_t BUTTON_HEIGHT{48};
 constexpr std::int32_t BUTTON_GAP{14};
 constexpr std::int32_t PANEL_WIDTH{360};
 constexpr std::int32_t PANEL_HEIGHT{360};
 
 const Color TITLE_COLOR{0x5DD3B6FF};
-const Color BUTTON_TEXT_COLOR{0xEAF8F5FF};
-const Color BUTTON_TEXT_PRESSED_COLOR{0x071319FF};
 const Color OVERLAY_COLOR{0x000000A8};
 const Color PANEL_COLOR{0x081015F2};
-const Color BUTTON_BORDER_COLOR{0x5DD3B6FF};
-const Color BUTTON_IDLE_COLOR{0x132F3BFF};
-const Color BUTTON_HOVER_COLOR{0x1E5365FF};
-const Color BUTTON_PRESSED_COLOR{0x5DD3B6FF};
 
 Vector2f center_from_bounds(const Rect bounds)
 {
@@ -51,110 +41,13 @@ Vector2f center_from_bounds(const Rect bounds)
 
 } // namespace
 
-PauseMenuButton::PauseMenuButton(std::string text)
-    : label_{std::move(text), FONT_PATH, {0.0F, 0.0F}, BUTTON_TEXT_COLOR, 24,
-             static_cast<float>(BUTTON_WIDTH), gui::LabelAlignment::Center}
-{
-}
-
-void PauseMenuButton::set_bounds(Rect bounds)
-{
-    bounds_ = bounds;
-    border_ = std::make_unique<RectangleShape>(center_from_bounds(bounds_), bounds_.width,
-                                               bounds_.height);
-
-    Rect body_bounds{{bounds_.position.x + 2.0F, bounds_.position.y + 2.0F}, bounds_.width - 4,
-                     bounds_.height - 4};
-    body_ = std::make_unique<RectangleShape>(center_from_bounds(body_bounds), body_bounds.width,
-                                             body_bounds.height);
-
-    label_.set_bounds_width(static_cast<float>(bounds_.width));
-    label_.set_position({bounds_.position.x,
-                         bounds_.position.y +
-                             ((static_cast<float>(bounds_.height) +
-                               static_cast<float>(label_.get_size())) /
-                              2.0F)});
-    update_colors();
-}
-
-bool PauseMenuButton::update()
-{
-    const bool mouse_down{Mouse::is_button_pressed(Mouse::Left)};
-    hovered_ = contains(Mouse::get_mouse_pos());
-    bool activated{false};
-
-    if (mouse_down)
-    {
-        if (!mouse_was_down_)
-        {
-            pressed_inside_ = hovered_;
-        }
-    }
-    else
-    {
-        activated       = mouse_was_down_ && pressed_inside_ && hovered_;
-        pressed_inside_ = false;
-    }
-
-    mouse_was_down_ = mouse_down;
-    update_colors();
-
-    return activated;
-}
-
-void PauseMenuButton::draw()
-{
-    if (border_ != nullptr)
-    {
-        border_->draw();
-    }
-
-    if (body_ != nullptr)
-    {
-        body_->draw();
-    }
-
-    label_.draw();
-}
-
-bool PauseMenuButton::contains(Vector2f point) const
-{
-    return point.x >= bounds_.position.x &&
-           point.x <= bounds_.position.x + static_cast<float>(bounds_.width) &&
-           point.y >= bounds_.position.y &&
-           point.y <= bounds_.position.y + static_cast<float>(bounds_.height);
-}
-
-void PauseMenuButton::update_colors()
-{
-    if (border_ != nullptr)
-    {
-        border_->set_color(BUTTON_BORDER_COLOR);
-    }
-
-    const bool is_pressed{hovered_ && pressed_inside_ &&
-                          Mouse::is_button_pressed(Mouse::Left)};
-    if (body_ != nullptr)
-    {
-        if (is_pressed)
-        {
-            body_->set_color(BUTTON_PRESSED_COLOR);
-        }
-        else if (hovered_)
-        {
-            body_->set_color(BUTTON_HOVER_COLOR);
-        }
-        else
-        {
-            body_->set_color(BUTTON_IDLE_COLOR);
-        }
-    }
-
-    label_.set_color(is_pressed ? BUTTON_TEXT_PRESSED_COLOR : BUTTON_TEXT_COLOR);
-}
-
 PauseMenu::PauseMenu()
-    : title_{"Paused", FONT_PATH, {0.0F, 0.0F}, TITLE_COLOR, 42, static_cast<float>(PANEL_WIDTH),
+    : title_{"Paused",
+             FONT_PATH,
+             {0.0F, 0.0F},
+             TITLE_COLOR,
+             42,
+             static_cast<float>(PANEL_WIDTH),
              gui::LabelAlignment::Center},
       resume_button_{"Resume"}, restart_button_{"Restart Level"}, main_menu_button_{"Main Menu"},
       quit_button_{"Quit Game"}
@@ -255,7 +148,7 @@ void PauseMenu::layout()
         return;
     }
 
-    laid_out_width_  = screen_width;
+    laid_out_width_ = screen_width;
     laid_out_height_ = screen_height;
 
     overlay_ = std::make_unique<RectangleShape>(
@@ -278,16 +171,20 @@ void PauseMenu::layout()
     title_.set_position({panel_position.x, panel_position.y + 72.0F});
 
     const float button_x{panel_position.x +
-                         ((static_cast<float>(panel_width) - BUTTON_WIDTH) / 2.0F)};
+                         ((static_cast<float>(panel_width) - MenuButton::DEFAULT_WIDTH) / 2.0F)};
     float button_y{panel_position.y + 114.0F};
 
-    resume_button_.set_bounds({{button_x, button_y}, BUTTON_WIDTH, BUTTON_HEIGHT});
-    button_y += BUTTON_HEIGHT + BUTTON_GAP;
-    restart_button_.set_bounds({{button_x, button_y}, BUTTON_WIDTH, BUTTON_HEIGHT});
-    button_y += BUTTON_HEIGHT + BUTTON_GAP;
-    main_menu_button_.set_bounds({{button_x, button_y}, BUTTON_WIDTH, BUTTON_HEIGHT});
-    button_y += BUTTON_HEIGHT + BUTTON_GAP;
-    quit_button_.set_bounds({{button_x, button_y}, BUTTON_WIDTH, BUTTON_HEIGHT});
+    resume_button_.set_bounds(
+        {{button_x, button_y}, MenuButton::DEFAULT_WIDTH, MenuButton::DEFAULT_HEIGHT});
+    button_y += MenuButton::DEFAULT_HEIGHT + BUTTON_GAP;
+    restart_button_.set_bounds(
+        {{button_x, button_y}, MenuButton::DEFAULT_WIDTH, MenuButton::DEFAULT_HEIGHT});
+    button_y += MenuButton::DEFAULT_HEIGHT + BUTTON_GAP;
+    main_menu_button_.set_bounds(
+        {{button_x, button_y}, MenuButton::DEFAULT_WIDTH, MenuButton::DEFAULT_HEIGHT});
+    button_y += MenuButton::DEFAULT_HEIGHT + BUTTON_GAP;
+    quit_button_.set_bounds(
+        {{button_x, button_y}, MenuButton::DEFAULT_WIDTH, MenuButton::DEFAULT_HEIGHT});
 }
 
 bool PauseMenu::pause_key_was_pressed()
@@ -297,7 +194,7 @@ bool PauseMenu::pause_key_was_pressed()
     const bool pressed{(escape_down && !escape_was_down_) || (p_down && !p_was_down_)};
 
     escape_was_down_ = escape_down;
-    p_was_down_      = p_down;
+    p_was_down_ = p_down;
 
     return pressed;
 }
