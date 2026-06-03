@@ -14,6 +14,7 @@
 #include <rinvid/core/texture.h>
 
 #include "src/box.h"
+#include "src/game_text.h"
 #include "src/levels/levels.h"
 #include "src/levels/playable_level.h"
 #include "src/platform.h"
@@ -44,7 +45,7 @@ class Level_5 : public PlayableLevel
     Player player_{};
     Platform floor_{{0.0F, 700.0F}, 1600.0F, 100.0F};
     Box box_{Vector2f{300.0F, 200.0F}};
-    TextTrigger level_name_trigger_{"Level 5", Vector2f{75.0F, 75.0F}, 200, 200};
+    TextTrigger level_name_trigger_{GameText::LVL_5_OP_1, Vector2f{75.0F, 75.0F}, 200, 200};
     Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::gym};
     Camera& camera_ = RuntimeCtx::camera_;
 };

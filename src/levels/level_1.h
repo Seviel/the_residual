@@ -15,6 +15,7 @@
 #include <rinvid/core/texture.h>
 
 #include "src/box.h"
+#include "src/game_text.h"
 #include "src/levels/levels.h"
 #include "src/levels/playable_level.h"
 #include "src/platform.h"
@@ -57,13 +58,8 @@ class Level_1 : public PlayableLevel
     Platform floor_{{-100.0F, 700.0F}, 1700.0F, 100.0F};
     Platform wall_{{-200.0F, 0.0F}, 100.0F, 900.0F};
     Box box_{Vector2f{300.0F, 500.0F}};
-    TextTrigger player_trig_1_{
-        "Where am I? I don't remember lying down. I don't remember waking up. I don't remember "
-        "anything.",
-        Vector2f{300.0F, 300.0F}, 50, 500};
-    TextTrigger op_trig_1_{
-        "You are awake. This is enough for now. It is crucial that you move forward.",
-        Vector2f{650.0F, 300.0F}, 50, 500};
+    TextTrigger player_trig_1_{GameText::LVL_1_PLAYER_1, Vector2f{300.0F, 300.0F}, 50, 500};
+    TextTrigger op_trig_1_{GameText::LVL_1_OP_1, Vector2f{650.0F, 300.0F}, 50, 500};
     Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_2};
     Camera& camera_ = RuntimeCtx::camera_;
 };

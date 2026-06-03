@@ -18,6 +18,7 @@
 #include <rinvid/platformers/object.h>
 
 #include "src/com_box.h"
+#include "src/game_text.h"
 #include "src/levels/levels.h"
 #include "src/levels/playable_level.h"
 #include "src/platform.h"
@@ -58,8 +59,8 @@ class GymScreen : public PlayableLevel
     Object platform_1_{};
     Platform plat_{{325.0F, 200.0F}, 100.0F, 40.0F, YES};
     std::vector<Object*> platforms_{};
-    TextTrigger trigger_1_{"Nice jump!", Vector2f{50.0F, 200.0F}};
-    TextTrigger trigger_2_{"Single trigger", Vector2f{700.0F, 500.0F}};
+    TextTrigger trigger_1_{GameText::GYM_NICE_JUMP, Vector2f{50.0F, 200.0F}};
+    TextTrigger trigger_2_{GameText::GYM_SINGLE_TRIGGER, Vector2f{700.0F, 500.0F}};
     Portal portal_{Vector2f{635.0F, 175.0F}, Levels::level_1};
     Camera& camera_ = RuntimeCtx::camera_;
 };
