@@ -15,6 +15,8 @@
 #include <rinvid/core/sprite.h>
 #include <rinvid/core/text.h>
 
+#include "src/text_role.h"
+
 using namespace rinvid;
 
 class ComBox final : public rinvid::Sprite
@@ -30,7 +32,7 @@ class ComBox final : public rinvid::Sprite
     virtual void update(double delta_time);
     virtual void draw() override;
 
-    void set_text(std::string text);
+    void set_text(std::string text, TextRole role = TextRole::Player);
 
   private:
     Texture tex_;

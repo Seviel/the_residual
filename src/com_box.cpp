@@ -10,7 +10,13 @@
 #include "src/com_box.h"
 #include "src/runtime_ctx.h"
 
+#include <cctype>
+#include <string>
+
 using namespace rinvid;
+
+namespace
+{
 
 constexpr int32_t BOX_WIDTH = 724;
 constexpr int32_t BOX_HEIGHT = 124;
@@ -23,9 +29,29 @@ constexpr float TEXT_Y_OFFSET = 60.0F;
 
 constexpr float TEXT_MAX_WIDTH = 675.0F;
 
+const Color PLAYER_TEXT_COLOR{0x5DD3B6FF};
+const Color OPERATOR_TEXT_COLOR{0xFF3A3AFF};
+
+std::string format_operator_text(const std::string& text)
+{
+    std::string formatted_text{"["};
+    formatted_text.reserve(text.size() + 2U);
+
+    for (const char character : text)
+    {
+        formatted_text.push_back(
+            static_cast<char>(std::toupper(static_cast<unsigned char>(character))));
+    }
+
+    formatted_text.push_back(']');
+    return formatted_text;
+}
+
+} // namespace
+
 ComBox::ComBox()
     : tex_{"resources/gfx/text_box.png"},
-      text_{"", "resources/ttf/aquifer.ttf", Vector2f{0.0F, 0.0F}, Color{0x5DD3B6FF}, 24},
+      text_{"", "resources/ttf/aquifer.ttf", Vector2f{0.0F, 0.0F}, PLAYER_TEXT_COLOR, 24},
       content_{}
 {
     text_.set_max_width(TEXT_MAX_WIDTH);
@@ -48,8 +74,9 @@ void ComBox::draw()
     text_.draw();
 }
 
-void ComBox::set_text(std::string text)
+void ComBox::set_text(std::string text, TextRole role)
 {
-    content_ = text;
+    content_ = role == TextRole::Operator ? format_operator_text(text) : text;
+    text_.set_color(role == TextRole::Operator ? OPERATOR_TEXT_COLOR : PLAYER_TEXT_COLOR);
     text_.set_text(content_);
 }

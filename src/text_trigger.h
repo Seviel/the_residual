@@ -16,6 +16,8 @@
 #include <rinvid/util/rect.h>
 #include <rinvid/util/vector2.h>
 
+#include "src/text_role.h"
+
 using namespace rinvid;
 
 class TextTrigger : public rinvid::Object
@@ -23,7 +25,7 @@ class TextTrigger : public rinvid::Object
 
   public:
     TextTrigger(std::string text, Vector2f position, std::int32_t width = 50,
-                std::int32_t height = 200);
+                std::int32_t height = 200, TextRole role = TextRole::Player);
 
     void update(double delta_time) override;
 
@@ -38,6 +40,7 @@ class TextTrigger : public rinvid::Object
 
   private:
     std::string text_;
+    TextRole role_;
     rinvid::Rect rect;
 };
 

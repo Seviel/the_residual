@@ -59,7 +59,8 @@ class Level_1 : public PlayableLevel
     Platform wall_{{-200.0F, 0.0F}, 100.0F, 900.0F};
     Box box_{Vector2f{300.0F, 500.0F}};
     TextTrigger player_trig_1_{GameText::LVL_1_PLAYER_1, Vector2f{300.0F, 300.0F}, 50, 500};
-    TextTrigger op_trig_1_{GameText::LVL_1_OP_1, Vector2f{650.0F, 300.0F}, 50, 500};
+    TextTrigger op_trig_1_{GameText::LVL_1_OP_1, Vector2f{650.0F, 300.0F}, 50, 500,
+                           TextRole::Operator};
     Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_2};
     Camera& camera_ = RuntimeCtx::camera_;
 };

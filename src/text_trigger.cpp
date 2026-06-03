@@ -13,8 +13,8 @@
 using namespace rinvid;
 
 TextTrigger::TextTrigger(std::string text, Vector2f position, std::int32_t width,
-                         std::int32_t height)
-    : text_{text}, rect{position, width, height}
+                         std::int32_t height, TextRole role)
+    : text_{text}, role_{role}, rect{position, width, height}
 {
     reset(position);
     resize(width, height);
@@ -31,7 +31,7 @@ void TextTrigger::activate()
 {
     if (active_)
     {
-        RuntimeCtx::com_box()->set_text(text_);
+        RuntimeCtx::com_box()->set_text(text_, role_);
         kill();
     }
 }
@@ -40,7 +40,7 @@ void TextTrigger::reactivate()
 {
     if (active_)
     {
-        RuntimeCtx::com_box()->set_text(text_);
+        RuntimeCtx::com_box()->set_text(text_, role_);
     }
 }
 
