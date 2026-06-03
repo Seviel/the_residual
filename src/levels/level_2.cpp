@@ -52,23 +52,19 @@ void Level_2::update_level(double delta_time)
     rinvid::World::collide(player_, op_trig_1_, TextTrigger::reactivate_on_collision);
     rinvid::World::collide(player_, portal_, Portal::player_entered);
 
-    auto camera_pos = camera_.get_pos();
-    RuntimeCtx::com_box()->update(delta_time);
-
-    camera_.update();
-    camera_pos = player_.get_position();
+    auto camera_pos = player_.get_position();
     camera_pos.x -= get_render_context().get_width() / 2.0F;
     camera_pos.y -= get_render_context().get_height() / 2.0F;
     camera_.set_position(camera_pos);
+    camera_.update();
+
+    RuntimeCtx::com_box()->update(delta_time);
 }
 
 void Level_2::draw_level(double delta_time)
 {
+    background_sprite_.draw();
     player_.draw(delta_time);
-    floor_.draw();
-    plat_1_.draw();
-    plat_2_.draw();
-    wall_.draw();
     portal_.draw(delta_time);
     RuntimeCtx::com_box()->draw();
 }
