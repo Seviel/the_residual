@@ -57,7 +57,13 @@ class Level_1 : public PlayableLevel
     Platform floor_{{-100.0F, 700.0F}, 1700.0F, 100.0F};
     Platform wall_{{-200.0F, 0.0F}, 100.0F, 900.0F};
     Box box_{Vector2f{300.0F, 500.0F}};
-    TextTrigger level_name_trigger_{"Level 1", Vector2f{75.0F, 75.0F}, 200, 200};
+    TextTrigger player_trig_1_{
+        "Where am I? I don't remember lying down. I don't remember waking up. I don't remember "
+        "anything.",
+        Vector2f{300.0F, 300.0F}, 50, 500};
+    TextTrigger op_trig_1_{
+        "You are awake. This is enough for now. It is crucial that you move forward.",
+        Vector2f{650.0F, 300.0F}, 50, 500};
     Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_2};
     Camera& camera_ = RuntimeCtx::camera_;
 };

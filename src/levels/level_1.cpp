@@ -52,14 +52,16 @@ void Level_1::update_level(double delta_time)
     floor_.update(delta_time);
     wall_.update(delta_time);
     box_.update(delta_time);
-    level_name_trigger_.update(delta_time);
+    player_trig_1_.update(delta_time);
+    op_trig_1_.update(delta_time);
 
     rinvid::World::collide(player_, floor_, Player::separate_collision_boxes);
     rinvid::World::collide(player_, wall_, Player::separate_collision_boxes);
     rinvid::World::collide(player_, box_, Player::separate_collision_boxes);
     rinvid::World::collide(box_, floor_);
     rinvid::World::collide(box_, wall_);
-    rinvid::World::collide(player_, level_name_trigger_, TextTrigger::activate_on_collision);
+    rinvid::World::collide(player_, player_trig_1_, TextTrigger::reactivate_on_collision);
+    rinvid::World::collide(player_, op_trig_1_, TextTrigger::reactivate_on_collision);
     rinvid::World::collide(player_, portal_, Portal::player_entered);
 
     auto camera_pos = player_.get_position();
