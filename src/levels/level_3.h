@@ -11,6 +11,7 @@
 #define SRC_LEVELS_LEVEL_3_H
 
 #include <rinvid/core/camera.h>
+#include <rinvid/core/sprite.h>
 #include <rinvid/core/texture.h>
 
 #include "src/box.h"
@@ -41,13 +42,32 @@ class Level_3 : public PlayableLevel
     void draw_level(double delta_time) override;
     std::unique_ptr<rinvid::Screen> restart_level() const override;
 
+    Texture background_texture_{"resources/gfx/level_3.png"};
+    Sprite background_sprite_{&background_texture_, 1350, 1300, Vector2f{0.0F, 0.0F},
+                              Vector2f{0.0F, 0.0F}};
+
     Texture player_texture_{"resources/gfx/man_animated.png"};
     Player player_{};
-    Platform floor_{{0.0F, 700.0F}, 1600.0F, 100.0F};
-    Box box_{Vector2f{300.0F, 200.0F}};
-    TextTrigger level_name_trigger_{GameText::LVL_3_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
-                                    TextRole::Operator};
-    Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_4};
+    Platform plat_1_{{0.0F, 300.0F}, 500.0F, 50.0F};
+
+    Platform plat_2_{{400.0F, 500.0F}, 400.0F, 50.0F};
+    Platform plat_3_{{900.0F, 500.0F}, 250.0F, 50.0F};
+    Platform plat_4_{{1250.0F, 500.0F}, 100.0F, 50.0F};
+
+    Platform plat_5_{{1025.0F, 700.0F}, 250.0F, 50.0F};
+
+    Platform plat_6_{{800.0F, 900.0F}, 250.0F, 50.0F};
+
+    Platform plat_7_{{0.0F, 1100.0F}, 600.0F, 50.0F};
+
+    Platform wall_1_{{-100.0F, 0.0F}, 100.0F, 1100.0F};
+    Platform wall_2_{{1350.0F, 0.0F}, 100.0F, 1100.0F};
+
+    TextTrigger player_trig_1_{GameText::LVL_3_PLAYER_1, Vector2f{200.0F, 0.0F}, 50, 300,
+                               TextRole::Player};
+    TextTrigger op_trig_1_{GameText::LVL_3_OP_1, Vector2f{600.0F, 0.0F}, 50, 500,
+                           TextRole::Operator};
+    Portal portal_{Vector2f{50.0F, 947.0F}, Levels::level_4};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 

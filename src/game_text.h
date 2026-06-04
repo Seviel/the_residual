@@ -22,7 +22,10 @@ inline constexpr char LVL_1_OP_1[] =
 inline constexpr char LVL_2_PLAYER_1[] = "Someone is speaking to me.\nNot out loud.\nNot exactly.";
 inline constexpr char LVL_2_OP_1[] = "Do not panic.\nI can guide you out.\nFollow the path.";
 
-inline constexpr char LVL_3_OP_1[] = "Level 3";
+inline constexpr char LVL_3_PLAYER_1[] = "My name...\nWhy can't I remember my name?";
+inline constexpr char LVL_3_OP_1[] =
+    "Memory will come back to you in due time.\nDo not force it.\nJust keep moving.";
+
 inline constexpr char LVL_4_OP_1[] = "Level 4";
 inline constexpr char LVL_5_OP_1[] = "Level 5";
 
