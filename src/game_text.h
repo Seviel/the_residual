@@ -14,10 +14,10 @@ namespace GameText
 {
 
 inline constexpr char LVL_1_PLAYER_1[] =
-    "Where am I? I don't remember lying down. I don't remember waking up. I don't remember "
+    "Where am I?\nI don't remember lying down. I don't remember waking up. I don't remember "
     "anything.";
 inline constexpr char LVL_1_OP_1[] =
-    "You are awake. This is enough for now. It is crucial that you move forward.";
+    "You are awake.\nThis is enough for now.\nIt is crucial that you move forward.";
 
 inline constexpr char LVL_2_PLAYER_1[] = "Someone is speaking to me.\nNot out loud.\nNot exactly.";
 inline constexpr char LVL_2_OP_1[] = "Do not panic.\nI can guide you out.\nFollow the path.";
