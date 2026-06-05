@@ -60,8 +60,8 @@ class Level_3 : public PlayableLevel
 
     Platform plat_7_{{0.0F, 1100.0F}, 600.0F, 50.0F};
 
-    Platform wall_1_{{-100.0F, 0.0F}, 100.0F, 1100.0F};
-    Platform wall_2_{{1350.0F, 0.0F}, 100.0F, 1100.0F};
+    Platform wall_1_{{-50.0F, 0.0F}, 100.0F, 1100.0F};
+    Platform wall_2_{{1300.0F, 0.0F}, 100.0F, 1100.0F};
 
     TextTrigger player_trig_1_{GameText::LVL_3_PLAYER_1, Vector2f{200.0F, 0.0F}, 50, 300,
                                TextRole::Player};
