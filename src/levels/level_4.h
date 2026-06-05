@@ -43,11 +43,27 @@ class Level_4 : public PlayableLevel
 
     Texture player_texture_{"resources/gfx/man_animated.png"};
     Player player_{};
-    Platform floor_{{0.0F, 700.0F}, 1600.0F, 100.0F};
-    Box box_{Vector2f{300.0F, 200.0F}};
-    TextTrigger level_name_trigger_{GameText::LVL_4_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
-                                    TextRole::Operator};
-    Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_5};
+
+    Platform plat_1_{{0.0F, 1000.0F}, 1600.0F, 100.0F};
+    Platform plat_2_{{800.0F, 800.0F}, 800.0F, 50.0F};
+    Platform plat_3_{{400.0F, 600.0F}, 300.0F, 50.0F};
+    Platform plat_4_{{900.0F, 600.0F}, 300.0F, 50.0F};
+    Platform plat_5_{{0.0F, 400.0F}, 400.0F, 50.0F};
+    Platform plat_6_{{1100.0F, 400.0F}, 400.0F, 50.0F};
+    Platform plat_7_{{1300.0F, 200.0F}, 300.0F, 50.0F};
+
+    Platform wall_1_{{-100.0F, 0.0F}, 100.0F, 1100.0F};
+    Platform wall_2_{{1600.0F, 0.0F}, 100.0F, 1100.0F};
+
+    TextTrigger op_trig_1_{GameText::LVL_4_OP_1, Vector2f{650.0F, 400.0F}, 20, 200,
+                           TextRole::Operator};
+    TextTrigger op_trig_2_{GameText::LVL_4_OP_2, Vector2f{200.0F, 200.0F}, 20, 200,
+                           TextRole::Operator};
+    TextTrigger player_trig_1_{GameText::LVL_4_PLAYER_1, Vector2f{400.0F, 400.0F}, 20, 200,
+                               TextRole::Player};
+    TextTrigger player_trig_2_{GameText::LVL_4_PLAYER_2, Vector2f{1150.0F, 200.0F}, 20, 200,
+                               TextRole::Player};
+    Portal portal_{Vector2f{1400.0F, 47.0F}, Levels::level_5};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 
