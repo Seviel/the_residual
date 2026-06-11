@@ -31,7 +31,8 @@ inline constexpr char LVL_4_OP_1[] = "Not that way.";
 inline constexpr char LVL_4_PLAYER_2[] = "What is this place?\nWhere am I going?";
 inline constexpr char LVL_4_OP_2[] = "It's the wrong way.\nGo back.";
 
-inline constexpr char LVL_5_OP_1[] = "Level 5";
+inline constexpr char LVL_5_OP_1[] = "Op placeholder text.";
+inline constexpr char LVL_5_PLAYER_1[] = "Player placeholder text.";
 
 inline constexpr char GYM_NICE_JUMP[] = "Nice jump!";
 inline constexpr char GYM_SINGLE_TRIGGER[] = "Single trigger";
