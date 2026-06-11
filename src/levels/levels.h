@@ -29,6 +29,13 @@ class Levels final
     static std::unique_ptr<rinvid::Screen> level_3();
     static std::unique_ptr<rinvid::Screen> level_4();
     static std::unique_ptr<rinvid::Screen> level_5();
+    static std::unique_ptr<rinvid::Screen> level_6();
+    static std::unique_ptr<rinvid::Screen> level_7();
+    static std::unique_ptr<rinvid::Screen> level_8();
+    static std::unique_ptr<rinvid::Screen> level_9();
+    static std::unique_ptr<rinvid::Screen> level_10();
+    static std::unique_ptr<rinvid::Screen> level_11();
+    static std::unique_ptr<rinvid::Screen> level_12();
 };
 
 #endif // SRC_LEVELS_LEVELS_H

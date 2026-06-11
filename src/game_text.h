@@ -34,6 +34,27 @@ inline constexpr char LVL_4_OP_2[] = "It's the wrong way.\nGo back.";
 inline constexpr char LVL_5_OP_1[] = "Op placeholder text.";
 inline constexpr char LVL_5_PLAYER_1[] = "Player placeholder text.";
 
+inline constexpr char LVL_6_OP_1[] = "Level 6 op placeholder text.";
+inline constexpr char LVL_6_PLAYER_1[] = "Level 6 player placeholder text.";
+
+inline constexpr char LVL_7_OP_1[] = "Level 7 op placeholder text.";
+inline constexpr char LVL_7_PLAYER_1[] = "Level 7 player placeholder text.";
+
+inline constexpr char LVL_8_OP_1[] = "Level 8 op placeholder text.";
+inline constexpr char LVL_8_PLAYER_1[] = "Level 8 player placeholder text.";
+
+inline constexpr char LVL_9_OP_1[] = "Level 9 op placeholder text.";
+inline constexpr char LVL_9_PLAYER_1[] = "Level 9 player placeholder text.";
+
+inline constexpr char LVL_10_OP_1[] = "Level 10 op placeholder text.";
+inline constexpr char LVL_10_PLAYER_1[] = "Level 10 player placeholder text.";
+
+inline constexpr char LVL_11_OP_1[] = "Level 11 op placeholder text.";
+inline constexpr char LVL_11_PLAYER_1[] = "Level 11 player placeholder text.";
+
+inline constexpr char LVL_12_OP_1[] = "Level 12 op placeholder text.";
+inline constexpr char LVL_12_PLAYER_1[] = "Level 12 player placeholder text.";
+
 inline constexpr char GYM_NICE_JUMP[] = "Nice jump!";
 inline constexpr char GYM_SINGLE_TRIGGER[] = "Single trigger";
 

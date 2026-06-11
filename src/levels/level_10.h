@@ -7,8 +7,8 @@
  * repository for more details.
  **********************************************************************/
 
-#ifndef SRC_LEVELS_LEVEL_5_H
-#define SRC_LEVELS_LEVEL_5_H
+#ifndef SRC_LEVELS_LEVEL_10_H
+#define SRC_LEVELS_LEVEL_10_H
 
 #include <rinvid/core/camera.h>
 #include <rinvid/core/texture.h>
@@ -25,13 +25,13 @@
 
 using namespace rinvid;
 
-class Level_5 : public PlayableLevel
+class Level_10 : public PlayableLevel
 {
   public:
-    Level_5()
+    Level_10()
     {
     }
-    virtual ~Level_5()
+    virtual ~Level_10()
     {
     }
 
@@ -49,13 +49,13 @@ class Level_5 : public PlayableLevel
     Platform wall_2_{{1600.0F, 0.0F}, 100.0F, 800.0F};
     std::vector<Object*> platforms_{&plat_1_, &wall_1_, &wall_2_};
 
-    TextTrigger op_trig_1_{GameText::LVL_5_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    TextTrigger op_trig_1_{GameText::LVL_10_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
                            TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_5_PLAYER_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    TextTrigger player_trig_1_{GameText::LVL_10_PLAYER_1, Vector2f{75.0F, 75.0F}, 200, 200,
                                TextRole::Player};
 
-    Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_6};
+    Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_11};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 
-#endif // SRC_LEVELS_LEVEL_5_H
+#endif // SRC_LEVELS_LEVEL_10_H
