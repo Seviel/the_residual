@@ -31,10 +31,14 @@ void Level_5::update_level(double delta_time)
     }
     player_trig_1_.update(delta_time);
     op_trig_1_.update(delta_time);
+    player_trig_2_.update(delta_time);
+    op_trig_2_.update(delta_time);
 
     rinvid::World::collide(player_, platforms_, Player::separate_collision_boxes);
-    rinvid::World::collide(player_, player_trig_1_, TextTrigger::reactivate_on_collision);
-    rinvid::World::collide(player_, op_trig_1_, TextTrigger::reactivate_on_collision);
+    rinvid::World::collide(player_, player_trig_1_, TextTrigger::activate_on_collision);
+    rinvid::World::collide(player_, op_trig_1_, TextTrigger::activate_on_collision);
+    rinvid::World::collide(player_, player_trig_2_, TextTrigger::activate_on_collision);
+    rinvid::World::collide(player_, op_trig_2_, TextTrigger::activate_on_collision);
     rinvid::World::collide(player_, portal_, Portal::player_entered);
 
     auto camera_pos = player_.get_position();

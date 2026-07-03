@@ -78,9 +78,13 @@ class Level_5 : public PlayableLevel
                                     &plat_11_, &plat_12_, &plat_13_, &plat_14_, &plat_15_,
                                     &plat_16_, &wall_1_,  &wall_2_};
 
-    TextTrigger op_trig_1_{GameText::LVL_5_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    TextTrigger op_trig_1_{GameText::LVL_5_OP_1, Vector2f{1200.0F, 1400.0F}, 50, 200,
                            TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_5_PLAYER_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    TextTrigger player_trig_1_{GameText::LVL_5_PLAYER_1, Vector2f{200.0F, 1400.0F}, 50, 200,
+                               TextRole::Player};
+    TextTrigger op_trig_2_{GameText::LVL_5_OP_2, Vector2f{800.0F, 300.0F}, 50, 200,
+                           TextRole::Operator};
+    TextTrigger player_trig_2_{GameText::LVL_5_PLAYER_2, Vector2f{300.0F, 300.0F}, 50, 200,
                                TextRole::Player};
 
     Portal portal_{Vector2f{1350.0F, 347.0F}, Levels::level_6};

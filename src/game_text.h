@@ -31,8 +31,11 @@ inline constexpr char LVL_4_OP_1[] = "Not that way.";
 inline constexpr char LVL_4_PLAYER_2[] = "What is this place?\nWhere am I going?";
 inline constexpr char LVL_4_OP_2[] = "It's the wrong way.\nGo back.";
 
-inline constexpr char LVL_5_OP_1[] = "Op placeholder text.";
-inline constexpr char LVL_5_PLAYER_1[] = "Player placeholder text.";
+inline constexpr char LVL_5_OP_1[] = "The environment is unstable, but safe for now.";
+inline constexpr char LVL_5_PLAYER_1[] =
+    "This place feels unfinished.\nLike somebody built it from a dream.";
+inline constexpr char LVL_5_OP_2[] = "Familiarity is not real, ignore it!";
+inline constexpr char LVL_5_PLAYER_2[] = "Some parts feel empty.\nOther parts feel familiar.";
 
 inline constexpr char LVL_6_OP_1[] = "Level 6 op placeholder text.";
 inline constexpr char LVL_6_PLAYER_1[] = "Level 6 player placeholder text.";
