@@ -11,6 +11,7 @@
 #define SRC_LEVELS_LEVEL_5_H
 
 #include <rinvid/core/camera.h>
+#include <rinvid/core/sprite.h>
 #include <rinvid/core/texture.h>
 
 #include "src/box.h"
@@ -40,6 +41,10 @@ class Level_5 : public PlayableLevel
     void update_level(double delta_time) override;
     void draw_level(double delta_time) override;
     std::unique_ptr<rinvid::Screen> restart_level() const override;
+
+    Texture background_texture_{"resources/gfx/level_5.png"};
+    Sprite background_sprite_{&background_texture_, 1800, 1600, Vector2f{-100.0F, 0.0F},
+                              Vector2f{0.0F, 0.0F}};
 
     Texture player_texture_{"resources/gfx/man_animated.png"};
     Player player_{};
