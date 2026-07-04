@@ -11,6 +11,7 @@
 #define SRC_LEVELS_LEVEL_6_H
 
 #include <rinvid/core/camera.h>
+#include <rinvid/core/sprite.h>
 #include <rinvid/core/texture.h>
 
 #include "src/box.h"
@@ -39,7 +40,15 @@ class Level_6 : public PlayableLevel
     void create_level() override;
     void update_level(double delta_time) override;
     void draw_level(double delta_time) override;
+    void draw_parallax_background();
     std::unique_ptr<rinvid::Screen> restart_level() const override;
+
+    Texture background_far_texture_{"resources/gfx/level_6_far.png"};
+    Sprite background_far_sprite_{&background_far_texture_, 1800, 1300, Vector2f{-100.0F, 0.0F},
+                                  Vector2f{0.0F, 0.0F}};
+    Texture background_foreground_texture_{"resources/gfx/level_6_foreground.png"};
+    Sprite background_foreground_sprite_{&background_foreground_texture_, 1800, 1300,
+                                         Vector2f{-100.0F, 0.0F}, Vector2f{0.0F, 0.0F}};
 
     Texture player_texture_{"resources/gfx/man_animated.png"};
     Player player_{};
