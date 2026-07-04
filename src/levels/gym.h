@@ -63,7 +63,7 @@ class GymScreen : public PlayableLevel
                            TextRole::Operator};
     TextTrigger trigger_2_{GameText::GYM_SINGLE_TRIGGER, Vector2f{700.0F, 500.0F}, 50, 200,
                            TextRole::Operator};
-    Portal portal_{Vector2f{635.0F, 175.0F}, Levels::level_5};
+    Portal portal_{Vector2f{635.0F, 175.0F}, Levels::level_6};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 

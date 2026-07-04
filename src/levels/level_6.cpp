@@ -16,10 +16,10 @@
 
 void Level_6::create_level()
 {
-    player_.setup(&player_texture_, 52, 100, Vector2f{100.0F, 100.0F}, Vector2f{0.0F, 0.0F});
+    player_.setup(&player_texture_, 52, 100, Vector2f{1400.0F, 1000.0F}, Vector2f{0.0F, 0.0F});
 
     RuntimeCtx::com_box()->set_text("");
-    camera_.set_borders({-2000.0F, -2000.0F}, {2000.0F, 2000.0F});
+    camera_.set_borders({-100.0F, 0.0F}, {900.0F, 700.0F});
 }
 
 void Level_6::update_level(double delta_time)
@@ -50,8 +50,23 @@ void Level_6::draw_level(double delta_time)
 {
     player_.draw(delta_time);
     plat_1_.draw();
+    plat_2_.draw();
+    plat_3_.draw();
+    plat_4_.draw();
+    plat_5_.draw();
+    plat_6_.draw();
+    plat_7_.draw();
+    plat_8_.draw();
+    plat_9_.draw();
+    plat_10_.draw();
+    plat_11_.draw();
+    plat_12_.draw();
+    plat_13_.draw();
+    plat_14_.draw();
     wall_1_.draw();
     wall_2_.draw();
+    wall_3_.draw();
+    wall_4_.draw();
     portal_.draw(delta_time);
     RuntimeCtx::com_box()->draw();
 }
