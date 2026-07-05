@@ -19,7 +19,6 @@
 #include "src/levels/levels.h"
 #include "src/levels/playable_level.h"
 #include "src/platform.h"
-#include "src/player.h"
 #include "src/portal.h"
 #include "src/runtime_ctx.h"
 #include "src/text_trigger.h"
@@ -46,8 +45,6 @@ class Level_5 : public PlayableLevel
     Sprite background_sprite_{&background_texture_, 1800, 1600, Vector2f{-100.0F, 0.0F},
                               Vector2f{0.0F, 0.0F}};
 
-    Texture player_texture_{"resources/gfx/man_animated.png"};
-    Player player_{};
 
     Platform plat_1_{{0.0F, 1500.0F}, 600.0F, 100.0F};
     Platform plat_2_{{800.0F, 1500.0F}, 100.0F, 100.0F};

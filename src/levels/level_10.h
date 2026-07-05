@@ -18,7 +18,6 @@
 #include "src/levels/levels.h"
 #include "src/levels/playable_level.h"
 #include "src/platform.h"
-#include "src/player.h"
 #include "src/portal.h"
 #include "src/runtime_ctx.h"
 #include "src/text_trigger.h"
@@ -41,8 +40,6 @@ class Level_10 : public PlayableLevel
     void draw_level(double delta_time) override;
     std::unique_ptr<rinvid::Screen> restart_level() const override;
 
-    Texture player_texture_{"resources/gfx/man_animated.png"};
-    Player player_{};
 
     Platform plat_1_{{0.0F, 700.0F}, 1600.0F, 100.0F};
     Platform wall_1_{{-100.0F, 0.0F}, 100.0F, 800.0F};

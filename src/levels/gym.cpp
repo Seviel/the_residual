@@ -15,8 +15,6 @@
 void GymScreen::create_level()
 {
     player_.setup(&player_texture_, 52, 100, Vector2f{100.0F, 100.0F}, Vector2f{0.0F, 0.0F});
-    register_player(player_);
-
     floor_1_.reset({0.0F, 534.0F});
     floor_1_.resize(221, 100);
     floor_1_.set_movable(NOT);

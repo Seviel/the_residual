@@ -19,7 +19,6 @@
 #include "src/levels/levels.h"
 #include "src/levels/playable_level.h"
 #include "src/platform.h"
-#include "src/player.h"
 #include "src/portal.h"
 #include "src/runtime_ctx.h"
 #include "src/text_trigger.h"
@@ -53,8 +52,6 @@ class Level_1 : public PlayableLevel
     Sprite background_foreground_sprite_{&background_foreground_texture_, 1800, 900,
                                          Vector2f{-100.0F, 0.0F}, Vector2f{0.0F, 0.0F}};
 
-    Texture player_texture_{"resources/gfx/man_animated.png"};
-    Player player_{};
     Platform floor_{{-100.0F, 700.0F}, 1700.0F, 100.0F};
     Platform wall_{{-200.0F, 0.0F}, 100.0F, 900.0F};
     Box box_{Vector2f{300.0F, 500.0F}};

@@ -22,7 +22,6 @@
 #include "src/levels/levels.h"
 #include "src/levels/playable_level.h"
 #include "src/platform.h"
-#include "src/player.h"
 #include "src/portal.h"
 #include "src/runtime_ctx.h"
 #include "src/text_trigger.h"
@@ -49,8 +48,6 @@ class GymScreen : public PlayableLevel
     Sprite background_sprite_{&background_texture_, 800, 600, Vector2f{0.0F, 0.0F},
                               Vector2f{0.0F, 0.0F}};
 
-    Texture player_texture_{"resources/gfx/man_animated.png"};
-    Player player_{};
     Object floor_1_{};
     Object floor_2_{};
     Object floor_3_{};

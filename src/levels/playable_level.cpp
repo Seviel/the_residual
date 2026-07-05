@@ -53,7 +53,6 @@ PlayableLevel::PlayableLevel()
 
 void PlayableLevel::create()
 {
-    registered_player_ = nullptr;
     death_sequence_active_ = false;
     death_fade_elapsed_ = 0.0;
     death_enter_was_down_ = false;
@@ -68,7 +67,6 @@ void PlayableLevel::create()
 void PlayableLevel::destroy()
 {
     destroy_level();
-    registered_player_ = nullptr;
 }
 
 void PlayableLevel::destroy_level()
@@ -93,7 +91,7 @@ void PlayableLevel::update(double delta_time)
             kill_player_if_below_camera();
         }
 
-        if (registered_player_ != nullptr && registered_player_->is_dead())
+        if (player_.is_dead())
         {
             start_death_sequence();
         }
@@ -144,11 +142,6 @@ void PlayableLevel::handle_pause_action(PauseAction action)
         default:
             break;
     }
-}
-
-void PlayableLevel::register_player(Player& player)
-{
-    registered_player_ = &player;
 }
 
 void PlayableLevel::start_death_sequence()
@@ -244,21 +237,20 @@ bool PlayableLevel::death_fade_finished() const
 
 void PlayableLevel::kill_player_if_below_camera()
 {
-    if (registered_player_ == nullptr || registered_player_->is_dead() ||
-        !registered_player_->has_fatal_fall_pending())
+    if (player_.is_dead() || !player_.has_fatal_fall_pending())
     {
         return;
     }
 
-    if (registered_player_is_below_camera())
+    if (player_is_below_camera())
     {
-        registered_player_->die();
+        player_.die();
     }
 }
 
-bool PlayableLevel::registered_player_is_below_camera()
+bool PlayableLevel::player_is_below_camera()
 {
-    const Rect player_bounds{registered_player_->bounding_rect()};
+    const Rect player_bounds{player_.bounding_rect()};
     const float camera_bottom{RuntimeCtx::camera_.get_pos().y +
                               static_cast<float>(get_render_context().get_height())};
 

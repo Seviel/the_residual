@@ -14,6 +14,7 @@
 #include <memory>
 
 #include <rinvid/core/rectangle_shape.h>
+#include <rinvid/core/texture.h>
 #include <rinvid/gui/label.h>
 #include <rinvid/system/screen.h>
 
@@ -36,7 +37,9 @@ class PlayableLevel : public rinvid::Screen
     virtual void update_level(double delta_time) = 0;
     virtual void draw_level(double delta_time) = 0;
     virtual std::unique_ptr<rinvid::Screen> restart_level() const = 0;
-    void register_player(Player& player);
+
+    rinvid::Texture player_texture_{"resources/gfx/man_animated.png"};
+    Player player_{};
 
   private:
     void update(double delta_time) final;
@@ -46,13 +49,12 @@ class PlayableLevel : public rinvid::Screen
     void draw_death_overlay();
     void layout_death_overlay();
     void kill_player_if_below_camera();
-    bool registered_player_is_below_camera();
+    bool player_is_below_camera();
     bool death_fade_finished() const;
     float death_fade_alpha() const;
     bool retry_action_was_pressed();
 
     PauseMenu pause_menu_{};
-    Player* registered_player_{nullptr};
     bool death_sequence_active_{false};
     double death_fade_elapsed_{0.0};
     bool death_enter_was_down_{false};
