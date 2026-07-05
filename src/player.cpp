@@ -58,9 +58,15 @@ Player::Player()
 
 void Player::update(double delta_time)
 {
+    if (dead_)
+    {
+        return;
+    }
+
     update_internal(delta_time);
     update_collision_boxes(delta_time);
     sync_from_collision_boxes();
+    update_fall_death_state();
 }
 
 void Player::update_collision_boxes(double delta_time)
@@ -175,6 +181,9 @@ void Player::set_position(const Vector2f vector)
     Sprite::set_position(vector);
     x_collision_box_.reset(Vector2f{vector.x, vector.y + 1.0F});
     y_collision_box_.reset(Vector2f{vector.x + 1.0F, vector.y});
+    is_tracking_fall_ = false;
+    fatal_fall_pending_ = false;
+    fall_start_y_ = vector.y;
 }
 
 void Player::reset(Vector2f position)
@@ -182,6 +191,13 @@ void Player::reset(Vector2f position)
     Object::reset(position);
     x_collision_box_.reset(Vector2f{position.x, position.y + 1.0F});
     y_collision_box_.reset(Vector2f{position.x + 1.0F, position.y});
+    set_movable(YES);
+    x_collision_box_.set_movable(YES);
+    y_collision_box_.set_movable(YES);
+    dead_ = false;
+    is_tracking_fall_ = false;
+    fatal_fall_pending_ = false;
+    fall_start_y_ = position.y;
 }
 
 void Player::move(const Vector2f move_vector)
@@ -205,6 +221,11 @@ bool Player::separate_moving_plat(Object& object_1, Object& object_2)
     }
 
     if (!player || !platform)
+    {
+        return false;
+    }
+
+    if (player->is_dead())
     {
         return false;
     }
@@ -237,6 +258,91 @@ bool Player::separate_collision_boxes(Object& object_1, Object& object_2)
     bool y_separated = World::collide(player->y_collision_box_, *other);
 
     player->sync_from_collision_boxes();
+    player->update_fall_death_state();
 
     return x_separated || y_separated;
+}
+
+bool Player::is_dead() const
+{
+    return dead_;
+}
+
+bool Player::has_fatal_fall_pending() const
+{
+    return fatal_fall_pending_;
+}
+
+void Player::die()
+{
+    if (dead_)
+    {
+        return;
+    }
+
+    dead_ = true;
+    stop_motion();
+    play_death_animation();
+}
+
+void Player::update_fall_death_state()
+{
+    if (dead_)
+    {
+        return;
+    }
+
+    if (is_tracking_fall_ && (position_.y - fall_start_y_) >= FALL_DEATH_HEIGHT)
+    {
+        fatal_fall_pending_ = true;
+    }
+
+    if (is_touching(DOWN))
+    {
+        if (fatal_fall_pending_)
+        {
+            die();
+            return;
+        }
+
+        is_tracking_fall_ = false;
+        fatal_fall_pending_ = false;
+        fall_start_y_ = position_.y;
+        return;
+    }
+
+    if (velocity_.y > 0.0F)
+    {
+        if (!is_tracking_fall_)
+        {
+            is_tracking_fall_ = true;
+            fall_start_y_ = position_.y;
+        }
+        return;
+    }
+
+    if (!fatal_fall_pending_)
+    {
+        is_tracking_fall_ = false;
+        fall_start_y_ = position_.y;
+    }
+}
+
+void Player::stop_motion()
+{
+    internal_velocity_ = {};
+    external_velocity_ = {};
+
+    set_velocity({});
+    x_collision_box_.set_velocity({});
+    y_collision_box_.set_velocity({});
+
+    set_movable(NOT);
+    x_collision_box_.set_movable(NOT);
+    y_collision_box_.set_movable(NOT);
+}
+
+void Player::play_death_animation()
+{
+    // Hook the eventual death animation here once its frames are available.
 }

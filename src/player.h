@@ -31,13 +31,23 @@ class Player : public rinvid::SpriteObject
     void reset(Vector2f position) override;
     void move(const Vector2f move_vector) override;
 
+    bool is_dead() const;
+    bool has_fatal_fall_pending() const;
+    void die();
+
     static bool separate_collision_boxes(Object& object_1, Object& object_2);
     static bool separate_moving_plat(Object& object_1, Object& object_2);
 
   private:
+    static constexpr float FALL_DEATH_HEIGHT{450.0F};
+
     void update_internal(double delta_time);
     void update_collision_boxes(double delta_time);
     void sync_from_collision_boxes();
+    void update_fall_death_state();
+    void stop_motion();
+    void play_death_animation();
+
     // Final velocity is internal_velocity_ + external_velocity_
     // Set for example by moving player with keys
     Vector2f internal_velocity_{};
@@ -45,6 +55,10 @@ class Player : public rinvid::SpriteObject
     Vector2f external_velocity_{};
     bool facing_right_{true};
     bool is_riding_{false};
+    bool dead_{false};
+    bool is_tracking_fall_{false};
+    bool fatal_fall_pending_{false};
+    float fall_start_y_{0.0F};
 
     Object x_collision_box_{};
     Object y_collision_box_{};

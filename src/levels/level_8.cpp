@@ -17,6 +17,7 @@
 void Level_8::create_level()
 {
     player_.setup(&player_texture_, 52, 100, Vector2f{100.0F, 100.0F}, Vector2f{0.0F, 0.0F});
+    register_player(player_);
 
     RuntimeCtx::com_box()->set_text("");
     camera_.set_borders({-2000.0F, -2000.0F}, {2000.0F, 2000.0F});
