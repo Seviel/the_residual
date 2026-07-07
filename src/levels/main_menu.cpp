@@ -16,6 +16,7 @@
 #include <rinvid/system/application.h>
 
 #include "src/levels/gym.h"
+#include "src/levels/level_picker.h"
 #include "src/runtime_ctx.h"
 
 namespace
@@ -33,7 +34,6 @@ void MainMenu::create()
     RuntimeCtx::camera_.update();
 
     continue_button_.set_enabled(false);
-    pick_level_button_.set_enabled(false);
     credits_button_.set_enabled(false);
 }
 
@@ -48,7 +48,7 @@ void MainMenu::update(double delta_time)
 
     const bool play_activated{play_button_.update()};
     continue_button_.update();
-    pick_level_button_.update();
+    const bool pick_level_activated{pick_level_button_.update()};
     credits_button_.update();
     const bool exit_activated{exit_button_.update()};
 
@@ -61,6 +61,10 @@ void MainMenu::update(double delta_time)
     if (play_activated)
     {
         this->get_application()->set_screen(std::make_unique<GymScreen>());
+    }
+    else if (pick_level_activated)
+    {
+        this->get_application()->set_screen(std::make_unique<LevelPicker>());
     }
     else if (exit_activated)
     {
