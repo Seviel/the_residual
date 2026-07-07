@@ -28,7 +28,6 @@ class Portal final : public rinvid::SpriteObject
     static bool player_entered(Object& object_1, Object& object_2);
 
   private:
-    Texture tex_;
     LevelFactory level_factory_;
 };
 

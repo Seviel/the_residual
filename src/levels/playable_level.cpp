@@ -20,7 +20,10 @@
 #include <rinvid/util/color.h>
 #include <rinvid/util/vector2.h>
 
+#include "src/com_box.h"
+#include "src/game_assets.h"
 #include "src/levels/main_menu.h"
+#include "src/portal.h"
 #include "src/runtime_ctx.h"
 
 using namespace rinvid;
@@ -71,6 +74,61 @@ void PlayableLevel::destroy()
 
 void PlayableLevel::destroy_level()
 {
+}
+
+void PlayableLevel::setup_player(Vector2f position)
+{
+    player_.setup(&RuntimeCtx::assets().player_texture(), 52, 100, position, {0.0F, 0.0F});
+}
+
+void PlayableLevel::clear_com_box()
+{
+    RuntimeCtx::com_box()->set_text("");
+}
+
+void PlayableLevel::update_com_box(double delta_time)
+{
+    RuntimeCtx::com_box()->update(delta_time);
+}
+
+void PlayableLevel::draw_com_box()
+{
+    RuntimeCtx::com_box()->draw();
+}
+
+void PlayableLevel::center_camera_on_player()
+{
+    auto camera_pos = player_.get_position();
+    camera_pos.x -= static_cast<float>(get_render_context().get_width()) / 2.0F;
+    camera_pos.y -= static_cast<float>(get_render_context().get_height()) / 2.0F;
+    RuntimeCtx::camera_.set_position(camera_pos);
+    RuntimeCtx::camera_.update();
+}
+
+void PlayableLevel::collide_player_with(Object& object)
+{
+    collide_player_with(object, Player::separate_collision_boxes);
+}
+
+void PlayableLevel::collide_player_with(Object& object, CollisionResolver resolve)
+{
+    World::collide(player_, object, resolve);
+}
+
+void PlayableLevel::collide_player_with(const std::vector<Object*>& group)
+{
+    collide_player_with(group, Player::separate_collision_boxes);
+}
+
+void PlayableLevel::collide_player_with(const std::vector<Object*>& group,
+                                        CollisionResolver resolve)
+{
+    World::collide(player_, group, resolve);
+}
+
+void PlayableLevel::collide_player_with_portal(Portal& portal)
+{
+    World::collide(player_, portal, Portal::player_entered);
 }
 
 void PlayableLevel::update(double delta_time)

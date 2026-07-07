@@ -7,13 +7,18 @@
  * repository for more details.
  **********************************************************************/
 
-#include "src/box.h"
-#include "src/game_assets.h"
-#include "src/runtime_ctx.h"
+#include "src/game_state.h"
 
-using namespace rinvid;
-
-Box::Box(Vector2f position)
+GameState::GameState() : assets_{}, com_box_{assets_.text_box_texture()}
 {
-    setup(&RuntimeCtx::assets().box_texture(), 75, 75, position);
+}
+
+GameAssets& GameState::assets()
+{
+    return assets_;
+}
+
+ComBox& GameState::com_box()
+{
+    return com_box_;
 }

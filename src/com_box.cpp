@@ -12,6 +12,7 @@
 
 #include <cctype>
 #include <string>
+#include <utility>
 
 using namespace rinvid;
 
@@ -49,13 +50,12 @@ std::string format_operator_text(const std::string& text)
 
 } // namespace
 
-ComBox::ComBox()
-    : tex_{"resources/gfx/text_box.png"},
-      text_{"", "resources/ttf/aquifer.ttf", Vector2f{0.0F, 0.0F}, PLAYER_TEXT_COLOR, 24},
-      content_{}
+ComBox::ComBox(Texture& texture)
+    : text_{"", "resources/ttf/aquifer.ttf", Vector2f{0.0F, 0.0F}, PLAYER_TEXT_COLOR, 24},
+      source_text_{}, content_{}
 {
     text_.set_max_width(TEXT_MAX_WIDTH);
-    setup(&tex_, BOX_WIDTH, BOX_HEIGHT, Vector2f{0.0F, 0.0F});
+    setup(&texture, BOX_WIDTH, BOX_HEIGHT, Vector2f{0.0F, 0.0F});
 }
 
 void ComBox::update(double delta_time)
@@ -76,7 +76,14 @@ void ComBox::draw()
 
 void ComBox::set_text(std::string text, TextRole role)
 {
-    content_ = role == TextRole::Operator ? format_operator_text(text) : text;
+    if (source_text_ == text && role_ == role)
+    {
+        return;
+    }
+
+    source_text_ = std::move(text);
+    role_ = role;
+    content_ = role == TextRole::Operator ? format_operator_text(source_text_) : source_text_;
     text_.set_color(role == TextRole::Operator ? OPERATOR_TEXT_COLOR : PLAYER_TEXT_COLOR);
     text_.set_text(content_);
 }

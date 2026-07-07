@@ -13,7 +13,6 @@
 #include <string>
 
 #include <rinvid/platformers/object.h>
-#include <rinvid/util/rect.h>
 #include <rinvid/util/vector2.h>
 
 #include "src/text_role.h"
@@ -41,7 +40,6 @@ class TextTrigger : public rinvid::Object
   private:
     std::string text_;
     TextRole role_;
-    rinvid::Rect rect;
 };
 
 #endif // SRC_TEXT_TRIGGER_H

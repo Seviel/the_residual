@@ -27,7 +27,7 @@ class ComBox final : public rinvid::Sprite
      * @brief Constructor.
      *
      *************************************************************************************************/
-    ComBox();
+    explicit ComBox(rinvid::Texture& texture);
 
     virtual void update(double delta_time);
     virtual void draw() override;
@@ -35,9 +35,10 @@ class ComBox final : public rinvid::Sprite
     void set_text(std::string text, TextRole role = TextRole::Player);
 
   private:
-    Texture tex_;
     Text text_;
+    std::string source_text_;
     std::string content_;
+    TextRole role_{TextRole::Player};
 };
 
 #endif // SRC_COM_BOX_H

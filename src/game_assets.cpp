@@ -7,13 +7,24 @@
  * repository for more details.
  **********************************************************************/
 
-#include "src/box.h"
 #include "src/game_assets.h"
-#include "src/runtime_ctx.h"
 
-using namespace rinvid;
-
-Box::Box(Vector2f position)
+rinvid::Texture& GameAssets::player_texture()
 {
-    setup(&RuntimeCtx::assets().box_texture(), 75, 75, position);
+    return player_texture_;
+}
+
+rinvid::Texture& GameAssets::box_texture()
+{
+    return box_texture_;
+}
+
+rinvid::Texture& GameAssets::portal_texture()
+{
+    return portal_texture_;
+}
+
+rinvid::Texture& GameAssets::text_box_texture()
+{
+    return text_box_texture_;
 }

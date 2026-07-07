@@ -12,15 +12,20 @@
 
 #include <cstdint>
 #include <memory>
+#include <vector>
 
 #include <rinvid/core/rectangle_shape.h>
-#include <rinvid/core/texture.h>
 #include <rinvid/gui/label.h>
+#include <rinvid/platformers/object.h>
+#include <rinvid/platformers/world.h>
 #include <rinvid/system/screen.h>
+#include <rinvid/util/vector2.h>
 
 #include "src/menu_button.h"
 #include "src/pause_menu.h"
 #include "src/player.h"
+
+class Portal;
 
 class PlayableLevel : public rinvid::Screen
 {
@@ -38,7 +43,18 @@ class PlayableLevel : public rinvid::Screen
     virtual void draw_level(double delta_time) = 0;
     virtual std::unique_ptr<rinvid::Screen> restart_level() const = 0;
 
-    rinvid::Texture player_texture_{"resources/gfx/man_animated.png"};
+    void setup_player(rinvid::Vector2f position);
+    void clear_com_box();
+    void update_com_box(double delta_time);
+    void draw_com_box();
+    void center_camera_on_player();
+    void collide_player_with(rinvid::Object& object);
+    void collide_player_with(rinvid::Object& object, rinvid::CollisionResolver resolve);
+    void collide_player_with(const std::vector<rinvid::Object*>& group);
+    void collide_player_with(const std::vector<rinvid::Object*>& group,
+                             rinvid::CollisionResolver resolve);
+    void collide_player_with_portal(Portal& portal);
+
     Player player_{};
 
   private:

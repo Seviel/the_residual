@@ -8,6 +8,7 @@
  **********************************************************************/
 
 #include "src/portal.h"
+#include "src/game_assets.h"
 #include "src/player.h"
 #include "src/runtime_ctx.h"
 
@@ -21,10 +22,9 @@ constexpr int32_t PORTAL_HEIGHT = 153;
 constexpr std::uint32_t PORTAL_FRAME_COUNT = 17U;
 constexpr double PORTAL_ACTIVE_FRAMERATE = 24.0;
 
-Portal::Portal(Vector2f position, LevelFactory level_factory)
-    : tex_{"resources/gfx/portal_small.png"}, level_factory_{level_factory}
+Portal::Portal(Vector2f position, LevelFactory level_factory) : level_factory_{level_factory}
 {
-    setup(&tex_, PORTAL_WIDTH, PORTAL_HEIGHT, position);
+    setup(&RuntimeCtx::assets().portal_texture(), PORTAL_WIDTH, PORTAL_HEIGHT, position);
 
     auto portal_frames =
         get_animation().split_animation_frames(PORTAL_WIDTH, PORTAL_HEIGHT, PORTAL_FRAME_COUNT, 1U);
@@ -53,7 +53,7 @@ bool Portal::player_entered(Object& object_1, Object& object_2)
         player = dynamic_cast<Player*>(&object_2);
     }
 
-    if (!portal || (player != nullptr && player->is_dead()))
+    if (!portal || player == nullptr || player->is_dead())
     {
         return false;
     }
