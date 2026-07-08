@@ -11,6 +11,7 @@
 #define SRC_LEVELS_LEVEL_7_H
 
 #include <rinvid/core/camera.h>
+#include <rinvid/core/sprite.h>
 #include <rinvid/core/texture.h>
 
 #include "src/box.h"
@@ -38,8 +39,18 @@ class Level_7 : public PlayableLevel
     void create_level() override;
     void update_level(double delta_time) override;
     void draw_level(double delta_time) override;
+    void draw_parallax_background();
     std::unique_ptr<rinvid::Screen> restart_level() const override;
 
+    Texture background_far_texture_{"resources/gfx/level_7_far.png"};
+    Sprite background_far_sprite_{&background_far_texture_, 2400, 600, Vector2f{0.0F, 0.0F},
+                                  Vector2f{0.0F, 0.0F}};
+    Texture background_mid_texture_{"resources/gfx/level_7_mid.png"};
+    Sprite background_mid_sprite_{&background_mid_texture_, 2400, 600, Vector2f{0.0F, 0.0F},
+                                  Vector2f{0.0F, 0.0F}};
+    Texture background_foreground_texture_{"resources/gfx/level_7_foreground.png"};
+    Sprite background_foreground_sprite_{&background_foreground_texture_, 2400, 600,
+                                         Vector2f{0.0F, 0.0F}, Vector2f{0.0F, 0.0F}};
 
     Platform plat_1_{{100.0F, 500.0F}, 440.0F, 100.0F};
     Platform plat_2_{{600.0F, 420.0F}, 220.0F, 50.0F};

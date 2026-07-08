@@ -14,6 +14,23 @@
 
 #include "src/runtime_ctx.h"
 
+namespace
+{
+
+constexpr float BACKGROUND_X{0.0F};
+constexpr float BACKGROUND_Y{0.0F};
+constexpr float FAR_PARALLAX_FACTOR{0.18F};
+constexpr float MID_PARALLAX_FACTOR{0.55F};
+constexpr float FOREGROUND_PARALLAX_FACTOR{1.00F};
+
+void draw_parallax_layer(Sprite& sprite, Vector2f camera_pos, float parallax_factor)
+{
+    sprite.set_position({BACKGROUND_X + camera_pos.x * (1.0F - parallax_factor), BACKGROUND_Y});
+    sprite.draw();
+}
+
+} // namespace
+
 void Level_7::create_level()
 {
     setup_player(Vector2f{140.0F, 300.0F});
@@ -42,18 +59,19 @@ void Level_7::update_level(double delta_time)
 
 void Level_7::draw_level(double delta_time)
 {
+    draw_parallax_background();
     player_.draw(delta_time);
-    plat_1_.draw();
-    plat_2_.draw();
-    plat_3_.draw();
-    plat_4_.draw();
-    plat_5_.draw();
-    plat_6_.draw();
-    plat_7_.draw();
-    wall_1_.draw();
-    wall_2_.draw();
     portal_.draw(delta_time);
     draw_com_box();
+}
+
+void Level_7::draw_parallax_background()
+{
+    const auto camera_pos = camera_.get_pos();
+
+    draw_parallax_layer(background_far_sprite_, camera_pos, FAR_PARALLAX_FACTOR);
+    draw_parallax_layer(background_mid_sprite_, camera_pos, MID_PARALLAX_FACTOR);
+    draw_parallax_layer(background_foreground_sprite_, camera_pos, FOREGROUND_PARALLAX_FACTOR);
 }
 
 std::unique_ptr<rinvid::Screen> Level_7::restart_level() const
