@@ -42,8 +42,10 @@ inline constexpr char LVL_6_OP_1[] =
 inline constexpr char LVL_6_PLAYER_1[] =
     "I heard someone laugh.\nA girl. For a second I thought I knew that laugh.\nThen it was gone.";
 
-inline constexpr char LVL_7_OP_1[] = "Level 7 op placeholder text.";
-inline constexpr char LVL_7_PLAYER_1[] = "Level 7 player placeholder text.";
+inline constexpr char LVL_7_OP_1[] =
+    "Your mind is playing tricks on you.\nIgnore it.\nFocus on the path.";
+inline constexpr char LVL_7_PLAYER_1[] =
+    "That laugh...\nI suddenly feel like I miss her.\nBut I can't remember who she is.";
 
 inline constexpr char LVL_8_OP_1[] = "Level 8 op placeholder text.";
 inline constexpr char LVL_8_PLAYER_1[] = "Level 8 player placeholder text.";
