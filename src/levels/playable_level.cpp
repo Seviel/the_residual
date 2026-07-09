@@ -135,19 +135,13 @@ void PlayableLevel::update(double delta_time)
 {
     get_render_context().clear_screen(0.0F, 0.0F, 0.0F, 1.0F);
 
-    PauseAction action{PauseAction::None};
-    bool paused{false};
+    const PauseAction action{pause_menu_.update(delta_time)};
+    const bool paused{pause_menu_.is_paused()};
 
-    if (!death_sequence_active_)
+    if (!paused && !death_sequence_active_)
     {
-        action = pause_menu_.update(delta_time);
-        paused = pause_menu_.is_paused();
-
-        if (!paused)
-        {
-            update_level(delta_time);
-            kill_player_if_below_camera();
-        }
+        update_level(delta_time);
+        kill_player_if_below_camera();
 
         if (player_.is_dead())
         {
@@ -156,7 +150,7 @@ void PlayableLevel::update(double delta_time)
     }
 
     bool should_restart_after_death{false};
-    if (death_sequence_active_)
+    if (!paused && death_sequence_active_)
     {
         update_death_sequence(delta_time);
         should_restart_after_death = retry_action_was_pressed();
@@ -164,18 +158,19 @@ void PlayableLevel::update(double delta_time)
 
     draw_level(paused ? 0.0 : delta_time);
 
+    if (death_sequence_active_)
+    {
+        draw_death_overlay();
+    }
+
     if (paused)
     {
         pause_menu_.draw();
     }
 
-    if (death_sequence_active_)
+    if (should_restart_after_death)
     {
-        draw_death_overlay();
-        if (should_restart_after_death)
-        {
-            get_application()->set_screen(restart_level());
-        }
+        get_application()->set_screen(restart_level());
         return;
     }
 
