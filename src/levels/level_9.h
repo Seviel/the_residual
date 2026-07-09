@@ -11,6 +11,7 @@
 #define SRC_LEVELS_LEVEL_9_H
 
 #include <rinvid/core/camera.h>
+#include <rinvid/core/sprite.h>
 #include <rinvid/core/texture.h>
 
 #include "src/box.h"
@@ -40,6 +41,9 @@ class Level_9 : public PlayableLevel
     void draw_level(double delta_time) override;
     std::unique_ptr<rinvid::Screen> restart_level() const override;
 
+    Texture background_texture_{"resources/gfx/level_9.png"};
+    Sprite background_sprite_{&background_texture_, 800, 2400, Vector2f{0.0F, 0.0F},
+                              Vector2f{0.0F, 0.0F}};
 
     Platform plat_2_{{430.0F, 320.0F}, 250.0F, 50.0F};
     Platform plat_3_{{120.0F, 500.0F}, 260.0F, 50.0F};
