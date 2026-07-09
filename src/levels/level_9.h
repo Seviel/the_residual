@@ -41,17 +41,31 @@ class Level_9 : public PlayableLevel
     std::unique_ptr<rinvid::Screen> restart_level() const override;
 
 
-    Platform plat_1_{{0.0F, 700.0F}, 1600.0F, 100.0F};
-    Platform wall_1_{{-100.0F, 0.0F}, 100.0F, 800.0F};
-    Platform wall_2_{{1600.0F, 0.0F}, 100.0F, 800.0F};
-    std::vector<Object*> platforms_{&plat_1_, &wall_1_, &wall_2_};
+    Platform plat_2_{{430.0F, 320.0F}, 250.0F, 50.0F};
+    Platform plat_3_{{120.0F, 500.0F}, 260.0F, 50.0F};
+    Platform plat_4_{{430.0F, 680.0F}, 250.0F, 50.0F};
+    Platform plat_5_{{120.0F, 860.0F}, 260.0F, 50.0F};
+    Platform plat_6_{{430.0F, 1040.0F}, 250.0F, 50.0F};
+    Platform plat_7_{{120.0F, 1220.0F}, 260.0F, 50.0F};
+    Platform plat_8_{{430.0F, 1400.0F}, 250.0F, 50.0F};
+    Platform plat_9_{{120.0F, 1580.0F}, 260.0F, 50.0F};
+    Platform plat_10_{{430.0F, 1760.0F}, 250.0F, 50.0F};
+    Platform plat_11_{{120.0F, 1940.0F}, 260.0F, 50.0F};
+    Platform plat_12_{{430.0F, 2120.0F}, 250.0F, 50.0F};
+    Platform floor_{{100.0F, 2300.0F}, 600.0F, 100.0F};
 
-    TextTrigger op_trig_1_{GameText::LVL_9_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    Platform wall_1_{{0.0F, 0.0F}, 100.0F, 2400.0F};
+    Platform wall_2_{{700.0F, 0.0F}, 100.0F, 2400.0F};
+    std::vector<Object*> platforms_{&plat_2_,  &plat_3_,  &plat_4_,  &plat_5_,  &plat_6_,
+                                    &plat_7_,  &plat_8_,  &plat_9_,  &plat_10_, &plat_11_,
+                                    &plat_12_, &floor_,   &wall_1_,  &wall_2_};
+
+    TextTrigger op_trig_1_{GameText::LVL_9_OP_1, Vector2f{430.0F, 840.0F}, 50, 200,
                            TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_9_PLAYER_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    TextTrigger player_trig_1_{GameText::LVL_9_PLAYER_1, Vector2f{300.0F, 1740.0F}, 50, 200,
                                TextRole::Player};
 
-    Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_10};
+    Portal portal_{Vector2f{520.0F, 167.0F}, Levels::level_10};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 
