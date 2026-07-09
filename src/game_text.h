@@ -47,10 +47,13 @@ inline constexpr char LVL_7_OP_1[] =
 inline constexpr char LVL_7_PLAYER_1[] =
     "That laugh...\nI suddenly feel like I miss her.\nBut I can't remember who she is.";
 
-inline constexpr char LVL_8_OP_1[] = "Level 8 op placeholder text.";
-inline constexpr char LVL_8_PLAYER_1[] = "Level 8 player placeholder text.";
-inline constexpr char LVL_8_OP_2[] = "Level 8 op placeholder text 2.";
-inline constexpr char LVL_8_PLAYER_2[] = "Level 8 player placeholder text 2.";
+inline constexpr char LVL_8_OP_1[] =
+    "Do not follow scene fragments.\nThey are misleading false memories.";
+inline constexpr char LVL_8_PLAYER_1[] =
+    "A train platform.\nIt was raining.\nShe was standing under the broken light.";
+inline constexpr char LVL_8_OP_2[] = "Do not let anything distract you from moving forward.";
+inline constexpr char LVL_8_PLAYER_2[] =
+    "She was leaving.\nOr waiting for me.\nI can't remember which.";
 
 inline constexpr char LVL_9_OP_1[] = "Level 9 op placeholder text.";
 inline constexpr char LVL_9_PLAYER_1[] = "Level 9 player placeholder text.";

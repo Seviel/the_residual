@@ -71,7 +71,7 @@ class Level_8 : public PlayableLevel
                                     &plat_7_, &plat_8_, &plat_9_, &plat_10_, &plat_11_, &wall_1_,
                                     &wall_2_, &wall_3_, &wall_4_, &wall_5_};
 
-    TextTrigger op_trig_1_{GameText::LVL_8_OP_1, Vector2f{1800.0F, 1160.0F}, 50, 200,
+    TextTrigger op_trig_1_{GameText::LVL_8_OP_1, Vector2f{1050.0F, 1480.0F}, 50, 200,
                            TextRole::Operator};
     TextTrigger player_trig_1_{GameText::LVL_8_PLAYER_1, Vector2f{300.0F, 1800.0F}, 50, 200,
                                TextRole::Player};
