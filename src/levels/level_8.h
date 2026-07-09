@@ -40,18 +40,38 @@ class Level_8 : public PlayableLevel
     void draw_level(double delta_time) override;
     std::unique_ptr<rinvid::Screen> restart_level() const override;
 
+    Platform plat_1_{{100.0F, 2000.0F}, 450.0F, 50.0F};
+    Platform plat_2_{{580.0F, 1850.0F}, 350.0F, 50.0F};
+    Platform plat_3_{{1030.0F, 1680.0F}, 310.0F, 50.0F};
+    Platform plat_4_{{1380.0F, 1530.0F}, 300.0F, 50.0F};
+    Platform plat_5_{{1780.0F, 1360.0F}, 330.0F, 50.0F};
+    Platform plat_6_{{2150.0F, 1200.0F}, 300.0F, 50.0F};
+    Platform plat_7_{{2550.0F, 1040.0F}, 330.0F, 50.0F};
+    Platform plat_8_{{2850.0F, 860.0F}, 300.0F, 50.0F};
+    Platform plat_9_{{3000.0F, 700.0F}, 300.0F, 50.0F};
+    Platform plat_10_{{2550.0F, 540.0F}, 300.0F, 50.0F};
+    Platform plat_11_{{3000.0F, 380.0F}, 300.0F, 50.0F};
 
-    Platform plat_1_{{0.0F, 700.0F}, 1600.0F, 100.0F};
-    Platform wall_1_{{-100.0F, 0.0F}, 100.0F, 800.0F};
-    Platform wall_2_{{1600.0F, 0.0F}, 100.0F, 800.0F};
-    std::vector<Object*> platforms_{&plat_1_, &wall_1_, &wall_2_};
+    Platform wall_1_{{0.0F, 0.0F}, 100.0F, 2200.0F};
+    Platform wall_2_{{3300.0F, 0.0F}, 100.0F, 2200.0F};
+    Platform wall_3_{{930.0F, 1680.0F}, 100.0F, 420.0F};
+    Platform wall_4_{{1680.0F, 1360.0F}, 100.0F, 740.0F};
+    Platform wall_5_{{2450.0F, 1040.0F}, 100.0F, 1060.0F};
 
-    TextTrigger op_trig_1_{GameText::LVL_8_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    std::vector<Object*> platforms_{&plat_1_, &plat_2_, &plat_3_, &plat_4_,  &plat_5_,  &plat_6_,
+                                    &plat_7_, &plat_8_, &plat_9_, &plat_10_, &plat_11_, &wall_1_,
+                                    &wall_2_, &wall_3_, &wall_4_, &wall_5_};
+
+    TextTrigger op_trig_1_{GameText::LVL_8_OP_1, Vector2f{1800.0F, 1160.0F}, 50, 200,
                            TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_8_PLAYER_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    TextTrigger player_trig_1_{GameText::LVL_8_PLAYER_1, Vector2f{300.0F, 1800.0F}, 50, 200,
+                               TextRole::Player};
+    TextTrigger op_trig_2_{GameText::LVL_8_OP_2, Vector2f{2800.0F, 340.0F}, 50, 200,
+                           TextRole::Operator};
+    TextTrigger player_trig_2_{GameText::LVL_8_PLAYER_2, Vector2f{2580.0F, 840.0F}, 50, 200,
                                TextRole::Player};
 
-    Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_9};
+    Portal portal_{Vector2f{3120.0F, 227.0F}, Levels::level_9};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 

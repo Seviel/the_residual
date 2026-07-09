@@ -49,6 +49,8 @@ inline constexpr char LVL_7_PLAYER_1[] =
 
 inline constexpr char LVL_8_OP_1[] = "Level 8 op placeholder text.";
 inline constexpr char LVL_8_PLAYER_1[] = "Level 8 player placeholder text.";
+inline constexpr char LVL_8_OP_2[] = "Level 8 op placeholder text 2.";
+inline constexpr char LVL_8_PLAYER_2[] = "Level 8 player placeholder text 2.";
 
 inline constexpr char LVL_9_OP_1[] = "Level 9 op placeholder text.";
 inline constexpr char LVL_9_PLAYER_1[] = "Level 9 player placeholder text.";
