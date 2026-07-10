@@ -28,12 +28,8 @@ void Level_9::update_level(double delta_time)
     {
         platform->update(delta_time);
     }
-    player_trig_1_.update(delta_time);
-    op_trig_1_.update(delta_time);
 
     collide_player_with(platforms_);
-    collide_player_with(player_trig_1_, TextTrigger::reactivate_on_collision);
-    collide_player_with(op_trig_1_, TextTrigger::reactivate_on_collision);
     collide_player_with_portal(portal_);
 
     center_camera_on_player();

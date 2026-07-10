@@ -60,14 +60,9 @@ class Level_9 : public PlayableLevel
 
     Platform wall_1_{{0.0F, 0.0F}, 100.0F, 2400.0F};
     Platform wall_2_{{700.0F, 0.0F}, 100.0F, 2400.0F};
-    std::vector<Object*> platforms_{&plat_2_,  &plat_3_,  &plat_4_,  &plat_5_,  &plat_6_,
-                                    &plat_7_,  &plat_8_,  &plat_9_,  &plat_10_, &plat_11_,
-                                    &plat_12_, &floor_,   &wall_1_,  &wall_2_};
-
-    TextTrigger op_trig_1_{GameText::LVL_9_OP_1, Vector2f{430.0F, 840.0F}, 50, 200,
-                           TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_9_PLAYER_1, Vector2f{300.0F, 1740.0F}, 50, 200,
-                               TextRole::Player};
+    std::vector<Object*> platforms_{&plat_2_,  &plat_3_, &plat_4_, &plat_5_,  &plat_6_,
+                                    &plat_7_,  &plat_8_, &plat_9_, &plat_10_, &plat_11_,
+                                    &plat_12_, &floor_,  &wall_1_, &wall_2_};
 
     Portal portal_{Vector2f{520.0F, 167.0F}, Levels::level_10};
     Camera& camera_ = RuntimeCtx::camera_;
