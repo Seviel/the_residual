@@ -7,8 +7,8 @@
  * repository for more details.
  **********************************************************************/
 
-#ifndef SRC_LEVELS_LEVEL_12_H
-#define SRC_LEVELS_LEVEL_12_H
+#ifndef SRC_LEVELS_LEVEL_20_H
+#define SRC_LEVELS_LEVEL_20_H
 
 #include <rinvid/core/camera.h>
 #include <rinvid/core/texture.h>
@@ -24,13 +24,13 @@
 
 using namespace rinvid;
 
-class Level_12 : public PlayableLevel
+class Level_20 : public PlayableLevel
 {
   public:
-    Level_12()
+    Level_20()
     {
     }
-    virtual ~Level_12()
+    virtual ~Level_20()
     {
     }
 
@@ -40,19 +40,18 @@ class Level_12 : public PlayableLevel
     void draw_level(double delta_time) override;
     std::unique_ptr<rinvid::Screen> restart_level() const override;
 
-
     Platform plat_1_{{0.0F, 700.0F}, 1600.0F, 100.0F};
     Platform wall_1_{{-100.0F, 0.0F}, 100.0F, 800.0F};
     Platform wall_2_{{1600.0F, 0.0F}, 100.0F, 800.0F};
     std::vector<Object*> platforms_{&plat_1_, &wall_1_, &wall_2_};
 
-    TextTrigger op_trig_1_{GameText::LVL_12_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    TextTrigger op_trig_1_{GameText::LVL_20_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
                            TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_12_PLAYER_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    TextTrigger player_trig_1_{GameText::LVL_20_PLAYER_1, Vector2f{75.0F, 75.0F}, 200, 200,
                                TextRole::Player};
 
-    Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_13};
+    Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_21};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 
-#endif // SRC_LEVELS_LEVEL_12_H
+#endif // SRC_LEVELS_LEVEL_20_H

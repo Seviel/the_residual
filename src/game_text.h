@@ -67,6 +67,42 @@ inline constexpr char LVL_11_PLAYER_1[] = "Level 11 player placeholder text.";
 inline constexpr char LVL_12_OP_1[] = "Level 12 op placeholder text.";
 inline constexpr char LVL_12_PLAYER_1[] = "Level 12 player placeholder text.";
 
+inline constexpr char LVL_13_OP_1[] = "Level 13 op placeholder text.";
+inline constexpr char LVL_13_PLAYER_1[] = "Level 13 player placeholder text.";
+
+inline constexpr char LVL_14_OP_1[] = "Level 14 op placeholder text.";
+inline constexpr char LVL_14_PLAYER_1[] = "Level 14 player placeholder text.";
+
+inline constexpr char LVL_15_OP_1[] = "Level 15 op placeholder text.";
+inline constexpr char LVL_15_PLAYER_1[] = "Level 15 player placeholder text.";
+
+inline constexpr char LVL_16_OP_1[] = "Level 16 op placeholder text.";
+inline constexpr char LVL_16_PLAYER_1[] = "Level 16 player placeholder text.";
+
+inline constexpr char LVL_17_OP_1[] = "Level 17 op placeholder text.";
+inline constexpr char LVL_17_PLAYER_1[] = "Level 17 player placeholder text.";
+
+inline constexpr char LVL_18_OP_1[] = "Level 18 op placeholder text.";
+inline constexpr char LVL_18_PLAYER_1[] = "Level 18 player placeholder text.";
+
+inline constexpr char LVL_19_OP_1[] = "Level 19 op placeholder text.";
+inline constexpr char LVL_19_PLAYER_1[] = "Level 19 player placeholder text.";
+
+inline constexpr char LVL_20_OP_1[] = "Level 20 op placeholder text.";
+inline constexpr char LVL_20_PLAYER_1[] = "Level 20 player placeholder text.";
+
+inline constexpr char LVL_21_OP_1[] = "Level 21 op placeholder text.";
+inline constexpr char LVL_21_PLAYER_1[] = "Level 21 player placeholder text.";
+
+inline constexpr char LVL_22_OP_1[] = "Level 22 op placeholder text.";
+inline constexpr char LVL_22_PLAYER_1[] = "Level 22 player placeholder text.";
+
+inline constexpr char LVL_23_OP_1[] = "Level 23 op placeholder text.";
+inline constexpr char LVL_23_PLAYER_1[] = "Level 23 player placeholder text.";
+
+inline constexpr char LVL_24_OP_1[] = "Level 24 op placeholder text.";
+inline constexpr char LVL_24_PLAYER_1[] = "Level 24 player placeholder text.";
+
 inline constexpr char GYM_NICE_JUMP[] = "Nice jump!";
 inline constexpr char GYM_SINGLE_TRIGGER[] = "Single trigger";
 
