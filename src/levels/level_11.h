@@ -80,9 +80,13 @@ class Level_11 : public PlayableLevel
                                     &plat_16_, &plat_17_, &floor_,   &wall_1_,  &wall_2_,
                                     &wall_3_,  &wall_4_,  &wall_5_};
 
-    TextTrigger op_trig_1_{GameText::LVL_11_OP_1, Vector2f{2300.0F, 880.0F}, 50, 200,
+    TextTrigger op_trig_1_{GameText::LVL_11_OP_1, Vector2f{1700.0F, 2040.0F}, 50, 200,
                            TextRole::Operator};
     TextTrigger player_trig_1_{GameText::LVL_11_PLAYER_1, Vector2f{900.0F, 2380.0F}, 50, 200,
+                               TextRole::Player};
+    TextTrigger op_trig_2_{GameText::LVL_11_OP_2, Vector2f{1650.0F, 560.0F}, 50, 200,
+                           TextRole::Operator};
+    TextTrigger player_trig_2_{GameText::LVL_11_PLAYER_2, Vector2f{2300.0F, 880.0F}, 50, 200,
                                TextRole::Player};
 
     Portal portal_{Vector2f{3400.0F, 97.0F}, Levels::level_12};

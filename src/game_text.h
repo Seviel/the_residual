@@ -55,14 +55,23 @@ inline constexpr char LVL_8_OP_2[] = "Do not let anything distract you from movi
 inline constexpr char LVL_8_PLAYER_2[] =
     "She was leaving.\nOr waiting for me.\nI can't remember which.";
 
-inline constexpr char LVL_9_OP_1[] = "Level 9 op placeholder text.";
-inline constexpr char LVL_9_PLAYER_1[] = "Level 9 player placeholder text.";
+inline constexpr char LVL_10_OP_1[] =
+    "I do not know much about your past, but in this place, memories might "
+    "not be real.\nDo not dwell on it.";
+inline constexpr char LVL_10_PLAYER_1[] =
+    "I remember a room full of people.\nEveryone was talking.\nI was just standing there, "
+    "pretending to belong.";
 
-inline constexpr char LVL_10_OP_1[] = "Level 10 op placeholder text.";
-inline constexpr char LVL_10_PLAYER_1[] = "Level 10 player placeholder text.";
-
-inline constexpr char LVL_11_OP_1[] = "Level 11 op placeholder text.";
-inline constexpr char LVL_11_PLAYER_1[] = "Level 11 player placeholder text.";
+inline constexpr char LVL_11_OP_1[] =
+    "That may have been true, but it may be fabricated memory.\nYou will know once you get out of "
+    "here.";
+inline constexpr char LVL_11_PLAYER_1[] =
+    "I remember my apartment. It was quiet. Too quiet.\nSometimes I would yell something to check "
+    "if my voice still works.";
+inline constexpr char LVL_11_OP_2[] =
+    "The exit is just several portals away.\nPlenty of time to regain you true memories after you "
+    "get out.";
+inline constexpr char LVL_11_PLAYER_2[] = "I think I was alone for a long time.";
 
 inline constexpr char LVL_12_OP_1[] = "Level 12 op placeholder text.";
 inline constexpr char LVL_12_PLAYER_1[] = "Level 12 player placeholder text.";
