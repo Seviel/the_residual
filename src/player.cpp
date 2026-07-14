@@ -26,7 +26,7 @@ Player::Player()
     auto air_right = get_animation().get_regions({7});
 
     rinvid::Animation idle_right_animation{0.0F, idle_right, rinvid::AnimationMode::Normal};
-    rinvid::Animation walking_right_animation{12.0F, walking_right, rinvid::AnimationMode::Looping};
+    rinvid::Animation walking_right_animation{8.0F, walking_right, rinvid::AnimationMode::Looping};
     rinvid::Animation air_right_animation{0.0F, air_right, rinvid::AnimationMode::Normal};
 
     get_animation().add_animation("idle_right", idle_right_animation);
@@ -38,7 +38,7 @@ Player::Player()
     auto air_left = get_animation().get_regions({8});
 
     rinvid::Animation idle_left_animation{0.0F, idle_left, rinvid::AnimationMode::Normal};
-    rinvid::Animation walking_left_animation{12.0F, walking_left, rinvid::AnimationMode::Looping};
+    rinvid::Animation walking_left_animation{8.0F, walking_left, rinvid::AnimationMode::Looping};
     rinvid::Animation air_left_animation{0.0F, air_left, rinvid::AnimationMode::Normal};
 
     get_animation().add_animation("idle_left", idle_left_animation);
