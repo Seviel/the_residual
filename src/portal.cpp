@@ -21,6 +21,7 @@ constexpr int32_t PORTAL_WIDTH = 150;
 constexpr int32_t PORTAL_HEIGHT = 153;
 constexpr std::uint32_t PORTAL_FRAME_COUNT = 17U;
 constexpr double PORTAL_ACTIVE_FRAMERATE = 16.0;
+constexpr float PORTAL_HITBOX_SCALE = 0.5F;
 
 Portal::Portal(Vector2f position, LevelFactory level_factory) : level_factory_{level_factory}
 {
@@ -35,6 +36,12 @@ Portal::Portal(Vector2f position, LevelFactory level_factory) : level_factory_{l
 
     gravity_scale_ = 0.0F;
     movable_ = false;
+}
+
+Rect Portal::bounding_rect()
+{
+    Rect hitbox = SpriteObject::bounding_rect();
+    return hitbox.scale(PORTAL_HITBOX_SCALE);
 }
 
 bool Portal::player_entered(Object& object_1, Object& object_2)

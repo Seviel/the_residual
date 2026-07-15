@@ -25,6 +25,8 @@ class Portal final : public rinvid::SpriteObject
 
     Portal(Vector2f position, LevelFactory level_factory);
 
+    Rect bounding_rect() override;
+
     static bool player_entered(Object& object_1, Object& object_2);
 
   private:
