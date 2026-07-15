@@ -34,7 +34,7 @@ inline constexpr char LVL_4_OP_2[] = "It's the wrong way.\nGo back.";
 inline constexpr char LVL_5_OP_1[] = "The environment is unstable, but safe for now.";
 inline constexpr char LVL_5_PLAYER_1[] =
     "This place feels unfinished.\nLike somebody built it from a dream.";
-inline constexpr char LVL_5_OP_2[] = "Familiarity is not real, ignore it!";
+inline constexpr char LVL_5_OP_2[] = "Familiarity is not memory, ignore it!";
 inline constexpr char LVL_5_PLAYER_2[] = "Some parts feel empty.\nOther parts feel familiar.";
 
 inline constexpr char LVL_6_OP_1[] =
@@ -47,8 +47,7 @@ inline constexpr char LVL_7_OP_1[] =
 inline constexpr char LVL_7_PLAYER_1[] =
     "That laugh...\nI suddenly feel like I miss her.\nBut I can't remember who she is.";
 
-inline constexpr char LVL_8_OP_1[] =
-    "Do not follow scene fragments.\nThey are misleading false memories.";
+inline constexpr char LVL_8_OP_1[] = "Do not follow scene fragments.\nThey are misleading.";
 inline constexpr char LVL_8_PLAYER_1[] =
     "A train platform.\nIt was raining.\nShe was standing under the broken light.";
 inline constexpr char LVL_8_OP_2[] = "Do not let anything distract you from moving forward.";
@@ -67,13 +66,13 @@ inline constexpr char LVL_11_OP_1[] =
     "here.";
 inline constexpr char LVL_11_PLAYER_1[] =
     "I remember my apartment. It was quiet. Too quiet.\nSometimes I would yell something to check "
-    "if my voice still works.";
+    "if my voice still worked.";
 inline constexpr char LVL_11_OP_2[] =
-    "The exit is just several portals away.\nPlenty of time to regain you true memories after you "
+    "The exit is just several portals away.\nPlenty of time to regain your true memories after you "
     "get out.";
 inline constexpr char LVL_11_PLAYER_2[] = "I think I was alone for a long time.";
 
-inline constexpr char LVL_12_OP_1[] = "It is dangerous to ponder about possibly false memories.";
+inline constexpr char LVL_12_OP_1[] = "Dwelling on possibly false memories is dangerous.";
 inline constexpr char LVL_12_PLAYER_1[] =
     "She noticed me.\nI remember that now.\nFinally I didn't feel invisible.";
 
