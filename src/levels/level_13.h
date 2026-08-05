@@ -11,6 +11,7 @@
 #define SRC_LEVELS_LEVEL_13_H
 
 #include <rinvid/core/camera.h>
+#include <rinvid/core/sprite.h>
 #include <rinvid/core/texture.h>
 
 #include "src/box.h"
@@ -39,6 +40,10 @@ class Level_13 : public PlayableLevel
     void update_level(double delta_time) override;
     void draw_level(double delta_time) override;
     std::unique_ptr<rinvid::Screen> restart_level() const override;
+
+    Texture background_texture_{"resources/gfx/level_13.png"};
+    Sprite background_sprite_{&background_texture_, 4096, 3600, Vector2f{0.0F, 0.0F},
+                              Vector2f{0.0F, 0.0F}};
 
     Platform plat_1_{{390.0F, 3330.0F}, 1430.0F, 50.0F};
     Platform plat_2_{{260.0F, 3150.0F}, 1300.0F, 50.0F};
