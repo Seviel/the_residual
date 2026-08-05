@@ -11,6 +11,8 @@
 #define SRC_LEVELS_LEVEL_14_H
 
 #include <rinvid/core/camera.h>
+#include <rinvid/core/sprite.h>
+#include <rinvid/core/texture.h>
 
 #include "src/box.h"
 #include "src/game_text.h"
@@ -37,6 +39,7 @@ class Level_14 : public PlayableLevel
     void create_level() override;
     void update_level(double delta_time) override;
     void draw_level(double delta_time) override;
+    void draw_parallax_background();
     std::unique_ptr<rinvid::Screen> restart_level() const override;
 
     Platform plat_1_{{100.0F, 300.0F}, 1350.0F, 50.0F};
@@ -88,6 +91,12 @@ class Level_14 : public PlayableLevel
                                TextRole::Player};
 
     Portal portal_{Vector2f{3330.0F, 3647.0F}, Levels::level_15};
+    Texture background_texture_{"resources/gfx/level_14_background.png"};
+    Sprite background_sprite_{&background_texture_, 2624, 2880, Vector2f{0.0F, 0.0F},
+                              Vector2f{0.0F, 0.0F}};
+    Texture foreground_texture_{"resources/gfx/level_14_foreground.png"};
+    Sprite foreground_sprite_{&foreground_texture_, 4096, 4096, Vector2f{0.0F, 0.0F},
+                              Vector2f{0.0F, 0.0F}};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 
