@@ -9,10 +9,28 @@
 
 #include "level_15.h"
 
+#include <cmath>
+
 #include <rinvid/core/render_context.h>
 #include <rinvid/platformers/world.h>
 
 #include "src/runtime_ctx.h"
+
+namespace
+{
+constexpr float BACKGROUND_X{0.0F};
+constexpr float BACKGROUND_Y{0.0F};
+constexpr float BACKGROUND_PARALLAX_X_FACTOR{0.55F};
+constexpr float BACKGROUND_PARALLAX_Y_FACTOR{0.65F};
+
+void draw_parallax_layer(Sprite& sprite, Vector2f camera_pos, float x_factor, float y_factor)
+{
+    sprite.set_position(
+        {BACKGROUND_X + std::round(camera_pos.x * (1.0F - x_factor)),
+         BACKGROUND_Y + std::round(camera_pos.y * (1.0F - y_factor))});
+    sprite.draw();
+}
+} // namespace
 
 void Level_15::create_level()
 {
@@ -42,46 +60,19 @@ void Level_15::update_level(double delta_time)
 
 void Level_15::draw_level(double delta_time)
 {
-    plat_1_.draw();
-    plat_2_.draw();
-    plat_3_.draw();
-    plat_4_.draw();
-    plat_5_.draw();
-    plat_6_.draw();
-    plat_7_.draw();
-    plat_8_.draw();
-    plat_9_.draw();
-    plat_10_.draw();
-    plat_11_.draw();
-    plat_12_.draw();
-    plat_13_.draw();
-    plat_14_.draw();
-    plat_15_.draw();
-    plat_16_.draw();
-    plat_17_.draw();
-    plat_18_.draw();
-    plat_19_.draw();
-    plat_20_.draw();
-    plat_21_.draw();
-    plat_22_.draw();
-    plat_23_.draw();
-    plat_24_.draw();
-    plat_25_.draw();
-    plat_26_.draw();
-    plat_27_.draw();
-    plat_28_.draw();
-    plat_29_.draw();
-    floor_.draw();
-    wall_1_.draw();
-    wall_2_.draw();
-    wall_3_.draw();
-    wall_4_top_.draw();
-    wall_4_bottom_.draw();
-    wall_5_.draw();
-    wall_6_.draw();
+    draw_parallax_background();
     player_.draw(delta_time);
     portal_.draw(delta_time);
     draw_com_box();
+}
+
+void Level_15::draw_parallax_background()
+{
+    const auto camera_pos = camera_.get_pos();
+    draw_parallax_layer(background_sprite_, camera_pos, BACKGROUND_PARALLAX_X_FACTOR,
+                        BACKGROUND_PARALLAX_Y_FACTOR);
+    foreground_sprite_.set_position({BACKGROUND_X, BACKGROUND_Y});
+    foreground_sprite_.draw();
 }
 
 std::unique_ptr<rinvid::Screen> Level_15::restart_level() const
