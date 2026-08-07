@@ -16,7 +16,7 @@
 
 void Level_13::create_level()
 {
-    setup_player(Vector2f{170.0F, 3300.0F});
+    setup_player(Vector2f{170.0F, 3100.0F});
     clear_com_box();
     camera_.set_borders({0.0F, 0.0F}, {3296.0F, 3000.0F});
 }
@@ -43,6 +43,7 @@ void Level_13::update_level(double delta_time)
 void Level_13::draw_level(double delta_time)
 {
     background_sprite_.draw();
+    foreground_sprite_.draw();
     player_.draw(delta_time);
     portal_.draw(delta_time);
     draw_com_box();

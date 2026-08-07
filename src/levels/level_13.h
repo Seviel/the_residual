@@ -44,6 +44,9 @@ class Level_13 : public PlayableLevel
     Texture background_texture_{"resources/gfx/level_13.png"};
     Sprite background_sprite_{&background_texture_, 4096, 3600, Vector2f{0.0F, 0.0F},
                               Vector2f{0.0F, 0.0F}};
+    Texture foreground_texture_{"resources/gfx/level_13_foreground.png"};
+    Sprite foreground_sprite_{&foreground_texture_, 4096, 3600, Vector2f{0.0F, 0.0F},
+                              Vector2f{0.0F, 0.0F}};
 
     Platform plat_1_{{390.0F, 3330.0F}, 1430.0F, 50.0F};
     Platform plat_2_{{260.0F, 3150.0F}, 1300.0F, 50.0F};
