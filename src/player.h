@@ -10,6 +10,8 @@
 #ifndef SRC_PLAYER_H
 #define SRC_PLAYER_H
 
+#include <cstdint>
+
 #include <rinvid/platformers/sprite_object.h>
 
 using namespace rinvid;
@@ -18,6 +20,9 @@ class Player : public rinvid::SpriteObject
 {
 
   public:
+    static constexpr std::int32_t FRAME_WIDTH{70};
+    static constexpr std::int32_t FRAME_HEIGHT{100};
+
     /**************************************************************************************************
      * @brief Default constructor.
      *

@@ -78,7 +78,8 @@ void PlayableLevel::destroy_level()
 
 void PlayableLevel::setup_player(Vector2f position)
 {
-    player_.setup(&RuntimeCtx::assets().player_texture(), 52, 100, position, {0.0F, 0.0F});
+    player_.setup(&RuntimeCtx::assets().player_texture(), Player::FRAME_WIDTH, Player::FRAME_HEIGHT,
+                  position, {0.0F, 0.0F});
 }
 
 void PlayableLevel::clear_com_box()

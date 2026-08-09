@@ -19,11 +19,12 @@ using namespace rinvid::system;
 
 Player::Player()
 {
-    get_animation().split_animation_frames(52, 100, 16, 1);
+    get_animation().split_animation_frames(FRAME_WIDTH, FRAME_HEIGHT, 26, 1);
 
-    auto idle_right = get_animation().get_regions({0});
-    auto walking_right = get_animation().get_regions({1, 2, 3, 4, 5, 6});
-    auto air_right = get_animation().get_regions({7});
+    // Frames 1 and 24 are reserved for future rising-air animations.
+    auto idle_right = get_animation().get_regions({13});
+    auto walking_right = get_animation().get_regions({14, 15, 16, 17, 18, 19, 20, 21, 22, 23});
+    auto air_right = get_animation().get_regions({25});
 
     rinvid::Animation idle_right_animation{0.0F, idle_right, rinvid::AnimationMode::Normal};
     rinvid::Animation walking_right_animation{8.0F, walking_right, rinvid::AnimationMode::Looping};
@@ -33,9 +34,9 @@ Player::Player()
     get_animation().add_animation("walking_right", walking_right_animation);
     get_animation().add_animation("air_right", air_right_animation);
 
-    auto idle_left = get_animation().get_regions({15});
-    auto walking_left = get_animation().get_regions({14, 13, 12, 11, 10, 9});
-    auto air_left = get_animation().get_regions({8});
+    auto idle_left = get_animation().get_regions({12});
+    auto walking_left = get_animation().get_regions({11, 10, 9, 8, 7, 6, 5, 4, 3, 2});
+    auto air_left = get_animation().get_regions({0});
 
     rinvid::Animation idle_left_animation{0.0F, idle_left, rinvid::AnimationMode::Normal};
     rinvid::Animation walking_left_animation{8.0F, walking_left, rinvid::AnimationMode::Looping};
@@ -48,11 +49,11 @@ Player::Player()
     get_animation().play("idle_right");
 
     x_collision_box_.set_allowed_collisions(WALL);
-    x_collision_box_.resize(52, 98);
+    x_collision_box_.resize(FRAME_WIDTH, FRAME_HEIGHT - 2);
     x_collision_box_.reset(position_);
 
     y_collision_box_.set_allowed_collisions(UP | DOWN);
-    y_collision_box_.resize(50, 100);
+    y_collision_box_.resize(FRAME_WIDTH - 2, FRAME_HEIGHT);
     y_collision_box_.reset(position_);
 }
 
