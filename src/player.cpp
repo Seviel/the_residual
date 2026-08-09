@@ -49,12 +49,12 @@ Player::Player()
     get_animation().play("idle_right");
 
     x_collision_box_.set_allowed_collisions(WALL);
-    x_collision_box_.resize(FRAME_WIDTH, FRAME_HEIGHT - 2);
-    x_collision_box_.reset(position_);
+    x_collision_box_.resize(X_COLLISION_BOX_WIDTH, FRAME_HEIGHT - 2);
 
     y_collision_box_.set_allowed_collisions(UP | DOWN);
-    y_collision_box_.resize(FRAME_WIDTH - 2, FRAME_HEIGHT);
-    y_collision_box_.reset(position_);
+    y_collision_box_.resize(Y_COLLISION_BOX_WIDTH, FRAME_HEIGHT);
+
+    reset_collision_boxes(position_);
 }
 
 void Player::update(double delta_time)
@@ -72,14 +72,14 @@ void Player::update(double delta_time)
 
 void Player::update_collision_boxes(double delta_time)
 {
-    x_collision_box_.reset({position_.x, position_.y + 1.0F});
+    reset_collision_boxes(position_);
+
     x_collision_box_.set_velocity({velocity_.x, 0.0F});
     x_collision_box_.set_acceleration({acceleration_.x, 0.0F});
     x_collision_box_.set_drag({drag_.x, 0.0F});
     x_collision_box_.set_max_velocity(max_velocity_);
     x_collision_box_.update(delta_time);
 
-    y_collision_box_.reset({position_.x + 1.0F, position_.y});
     y_collision_box_.set_velocity({0.0F, velocity_.y});
     y_collision_box_.set_acceleration({0.0F, acceleration_.y});
     y_collision_box_.set_drag({0.0F, drag_.y});
@@ -88,10 +88,17 @@ void Player::update_collision_boxes(double delta_time)
     y_collision_box_.update(delta_time);
 }
 
+void Player::reset_collision_boxes(Vector2f position)
+{
+    x_collision_box_.reset(
+        {position.x + X_COLLISION_BOX_X_OFFSET, position.y + 1.0F});
+    y_collision_box_.reset({position.x + Y_COLLISION_BOX_X_OFFSET, position.y});
+}
+
 void Player::sync_from_collision_boxes()
 {
     previous_position_ = position_;
-    position_.x = x_collision_box_.get_position().x;
+    position_.x = x_collision_box_.get_position().x - X_COLLISION_BOX_X_OFFSET;
     position_.y = y_collision_box_.get_position().y;
     velocity_.x = x_collision_box_.get_x_velocity();
     velocity_.y = y_collision_box_.get_y_velocity();
@@ -180,8 +187,7 @@ void Player::update_internal(double delta_time)
 void Player::set_position(const Vector2f vector)
 {
     Sprite::set_position(vector);
-    x_collision_box_.reset(Vector2f{vector.x, vector.y + 1.0F});
-    y_collision_box_.reset(Vector2f{vector.x + 1.0F, vector.y});
+    reset_collision_boxes(vector);
     is_tracking_fall_ = false;
     fatal_fall_pending_ = false;
     fall_start_y_ = vector.y;
@@ -190,8 +196,7 @@ void Player::set_position(const Vector2f vector)
 void Player::reset(Vector2f position)
 {
     Object::reset(position);
-    x_collision_box_.reset(Vector2f{position.x, position.y + 1.0F});
-    y_collision_box_.reset(Vector2f{position.x + 1.0F, position.y});
+    reset_collision_boxes(position);
     set_movable(YES);
     x_collision_box_.set_movable(YES);
     y_collision_box_.set_movable(YES);

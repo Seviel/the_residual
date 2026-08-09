@@ -72,7 +72,7 @@ class Level_14 : public PlayableLevel
     Platform wall_3_{{1550.0F, 150.0F}, 110.0F, 450.0F};
     Platform wall_4_{{2440.0F, 760.0F}, 110.0F, 520.0F};
     Platform wall_5_{{3380.0F, 1180.0F}, 110.0F, 520.0F};
-    Platform wall_6_{{1320.0F, 1600.0F}, 110.0F, 450.0F};
+    Platform wall_6_{{1300.0F, 1600.0F}, 110.0F, 450.0F};
     Platform wall_7_{{3000.0F, 2280.0F}, 110.0F, 330.0F};
     Platform wall_8_{{720.0F, 2780.0F}, 110.0F, 660.0F};
     Platform wall_9_{{2100.0F, 3310.0F}, 110.0F, 490.0F};
