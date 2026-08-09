@@ -21,29 +21,34 @@ Player::Player()
 {
     get_animation().split_animation_frames(FRAME_WIDTH, FRAME_HEIGHT, 26, 1);
 
-    // Frames 1 and 24 are reserved for future rising-air animations.
     auto idle_right = get_animation().get_regions({13});
     auto walking_right = get_animation().get_regions({14, 15, 16, 17, 18, 19, 20, 21, 22, 23});
+    auto rising_right = get_animation().get_regions({24});
     auto air_right = get_animation().get_regions({25});
 
     rinvid::Animation idle_right_animation{0.0F, idle_right, rinvid::AnimationMode::Normal};
     rinvid::Animation walking_right_animation{12.0F, walking_right, rinvid::AnimationMode::Looping};
+    rinvid::Animation rising_right_animation{0.0F, rising_right, rinvid::AnimationMode::Normal};
     rinvid::Animation air_right_animation{0.0F, air_right, rinvid::AnimationMode::Normal};
 
     get_animation().add_animation("idle_right", idle_right_animation);
     get_animation().add_animation("walking_right", walking_right_animation);
+    get_animation().add_animation("rising_right", rising_right_animation);
     get_animation().add_animation("air_right", air_right_animation);
 
     auto idle_left = get_animation().get_regions({12});
     auto walking_left = get_animation().get_regions({11, 10, 9, 8, 7, 6, 5, 4, 3, 2});
+    auto rising_left = get_animation().get_regions({1});
     auto air_left = get_animation().get_regions({0});
 
     rinvid::Animation idle_left_animation{0.0F, idle_left, rinvid::AnimationMode::Normal};
     rinvid::Animation walking_left_animation{12.0F, walking_left, rinvid::AnimationMode::Looping};
+    rinvid::Animation rising_left_animation{0.0F, rising_left, rinvid::AnimationMode::Normal};
     rinvid::Animation air_left_animation{0.0F, air_left, rinvid::AnimationMode::Normal};
 
     get_animation().add_animation("idle_left", idle_left_animation);
     get_animation().add_animation("walking_left", walking_left_animation);
+    get_animation().add_animation("rising_left", rising_left_animation);
     get_animation().add_animation("air_left", air_left_animation);
 
     get_animation().play("idle_right");
@@ -64,9 +69,12 @@ void Player::update(double delta_time)
         return;
     }
 
-    update_internal(delta_time);
+    const bool was_grounded{is_touching(DOWN)};
+    const bool start_jump{was_grounded && jump_input_is_pressed()};
+    update_movement_input(start_jump);
     update_collision_boxes(delta_time);
     sync_from_collision_boxes();
+    update_animation(start_jump || !was_grounded);
     update_fall_death_state();
 }
 
@@ -124,64 +132,67 @@ void Player::sync_from_collision_boxes()
     Sprite::set_position(position_);
 }
 
-void Player::update_internal(double delta_time)
+bool Player::jump_input_is_pressed() const
 {
-    (void)delta_time;
+    return Keyboard::is_key_pressed(system::Keyboard::Key::Up) ||
+           Keyboard::is_key_pressed(system::Keyboard::Key::W);
+}
 
+void Player::update_movement_input(bool start_jump)
+{
     internal_velocity_ = velocity_;
 
-    if (Keyboard::is_key_pressed(system::Keyboard::Key::Up) ||
-        Keyboard::is_key_pressed(system::Keyboard::Key::W))
+    if (start_jump)
     {
-        if (is_touching(DOWN))
-        {
-            internal_velocity_.y = -1000.0F;
-        }
+        internal_velocity_.y = JUMP_VELOCITY;
     }
     if (Keyboard::is_key_pressed(system::Keyboard::Key::Right) ||
         Keyboard::is_key_pressed(system::Keyboard::Key::D))
     {
         internal_velocity_.x = 600.0F;
-        get_animation().play("walking_right");
         facing_right_ = true;
     }
     else if (Keyboard::is_key_pressed(system::Keyboard::Key::Left) ||
              Keyboard::is_key_pressed(system::Keyboard::Key::A))
     {
         internal_velocity_.x = -600.0F;
-        get_animation().play("walking_left");
         facing_right_ = false;
     }
     else
     {
         internal_velocity_.x = 0.0F;
-        if (facing_right_)
-        {
-            get_animation().play("idle_right");
-        }
-        else
-        {
-            get_animation().play("idle_left");
-        }
     }
-    if (velocity_.y != 0.0F && !(touching_ & DOWN))
-    {
-        if (facing_right_)
-        {
-            get_animation().play("air_right");
-        }
-        else
-        {
-            get_animation().play("air_left");
-        }
-    }
-
     set_x_velocity(internal_velocity_.x + external_velocity_.x);
     set_y_velocity(internal_velocity_.y + external_velocity_.y);
 
     is_riding_ = false;
     external_velocity_.x = 0.0F;
     external_velocity_.y = 0.0F;
+}
+
+void Player::update_animation(bool airborne)
+{
+    if (airborne)
+    {
+        if (facing_right_)
+        {
+            get_animation().play(velocity_.y > 0.0F ? "air_right" : "rising_right");
+        }
+        else
+        {
+            get_animation().play(velocity_.y > 0.0F ? "air_left" : "rising_left");
+        }
+        return;
+    }
+
+    if (internal_velocity_.x != 0.0F)
+    {
+        get_animation().play(facing_right_ ? "walking_right" : "walking_left");
+    }
+    else
+    {
+        get_animation().play(facing_right_ ? "idle_right" : "idle_left");
+    }
 }
 
 void Player::set_position(const Vector2f vector)

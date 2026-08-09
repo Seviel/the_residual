@@ -45,6 +45,7 @@ class Player : public rinvid::SpriteObject
 
   private:
     static constexpr float FALL_DEATH_HEIGHT{450.0F};
+    static constexpr float JUMP_VELOCITY{-1000.0F};
     static constexpr std::int32_t X_COLLISION_BOX_WIDTH{40};
     static constexpr std::int32_t Y_COLLISION_BOX_WIDTH{38};
     static constexpr float X_COLLISION_BOX_X_OFFSET{
@@ -52,10 +53,12 @@ class Player : public rinvid::SpriteObject
     static constexpr float Y_COLLISION_BOX_X_OFFSET{
         static_cast<float>(FRAME_WIDTH - Y_COLLISION_BOX_WIDTH) / 2.0F};
 
-    void update_internal(double delta_time);
+    bool jump_input_is_pressed() const;
+    void update_movement_input(bool start_jump);
     void update_collision_boxes(double delta_time);
     void reset_collision_boxes(Vector2f position);
     void sync_from_collision_boxes();
+    void update_animation(bool airborne);
     void update_fall_death_state();
     void stop_motion();
     void play_death_animation();
