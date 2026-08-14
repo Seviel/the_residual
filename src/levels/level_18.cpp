@@ -16,9 +16,9 @@
 
 void Level_18::create_level()
 {
-    setup_player(Vector2f{100.0F, 100.0F});
+    setup_player(Vector2f{3500.0F, 200.0F});
     clear_com_box();
-    camera_.set_borders({-2000.0F, -2000.0F}, {2000.0F, 2000.0F});
+    camera_.set_borders({0.0F, 0.0F}, {3296.0F, 3496.0F});
 }
 
 void Level_18::update_level(double delta_time)
@@ -42,10 +42,36 @@ void Level_18::update_level(double delta_time)
 
 void Level_18::draw_level(double delta_time)
 {
-    player_.draw(delta_time);
     plat_1_.draw();
+    plat_2_.draw();
+    plat_3_.draw();
+    plat_4_.draw();
+    plat_5_.draw();
+    plat_6_.draw();
+    plat_7_.draw();
+    plat_8_.draw();
+    plat_9_.draw();
+    plat_10_.draw();
+    plat_11_.draw();
+    plat_12_.draw();
+    plat_13_.draw();
+    plat_14_.draw();
+    plat_15_.draw();
+    plat_16_.draw();
+    plat_17_.draw();
+    plat_18_.draw();
+    plat_19_.draw();
+    plat_20_.draw();
+    floor_.draw();
     wall_1_.draw();
     wall_2_.draw();
+    wall_3_.draw();
+    wall_4_.draw();
+    wall_5_.draw();
+    wall_6_.draw();
+    wall_7_.draw();
+    wall_8_.draw();
+    player_.draw(delta_time);
     portal_.draw(delta_time);
     draw_com_box();
 }
