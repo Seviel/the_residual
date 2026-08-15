@@ -40,17 +40,23 @@ class Level_23 : public PlayableLevel
     void draw_level(double delta_time) override;
     std::unique_ptr<rinvid::Screen> restart_level() const override;
 
-    Platform plat_1_{{0.0F, 700.0F}, 1600.0F, 100.0F};
-    Platform wall_1_{{-100.0F, 0.0F}, 100.0F, 800.0F};
-    Platform wall_2_{{1600.0F, 0.0F}, 100.0F, 800.0F};
-    std::vector<Object*> platforms_{&plat_1_, &wall_1_, &wall_2_};
+    Platform plat_1_{{100.0F, 260.0F}, 550.0F, 50.0F};
+    Platform plat_2_{{760.0F, 460.0F}, 520.0F, 50.0F};
+    Platform plat_3_{{120.0F, 750.0F}, 530.0F, 50.0F};
+    Platform plat_4_{{1320.0F, 760.0F}, 600.0F, 50.0F};
+    Platform plat_5_{{720.0F, 920.0F}, 540.0F, 50.0F};
 
-    TextTrigger op_trig_1_{GameText::LVL_23_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    Platform wall_1_{{0.0F, 0.0F}, 60.0F, 1024.0F};
+    Platform wall_2_{{1988.0F, 0.0F}, 60.0F, 1024.0F};
+    std::vector<Object*> platforms_{&plat_1_, &plat_2_, &plat_3_, &plat_4_, &plat_5_,
+                                    &wall_1_, &wall_2_};
+
+    TextTrigger op_trig_1_{GameText::LVL_23_OP_1, Vector2f{820.0F, 560.0F}, 50, 200,
                            TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_23_PLAYER_1, Vector2f{75.0F, 75.0F}, 200, 200,
+    TextTrigger player_trig_1_{GameText::LVL_23_PLAYER_1, Vector2f{320.0F, 60.0F}, 50, 200,
                                TextRole::Player};
 
-    Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::level_24};
+    Portal portal_{Vector2f{915.0F, 767.0F}, Levels::level_24};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 
