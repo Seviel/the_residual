@@ -19,13 +19,16 @@ namespace
 
 constexpr float BACKGROUND_X{0.0F};
 constexpr float BACKGROUND_Y{0.0F};
+constexpr float MID_BACKGROUND_Y_OFFSET{20.0F};
 constexpr float FAR_PARALLAX_FACTOR{0.18F};
 constexpr float MID_PARALLAX_FACTOR{0.55F};
 constexpr float FOREGROUND_PARALLAX_FACTOR{1.00F};
 
-void draw_parallax_layer(Sprite& sprite, Vector2f camera_pos, float parallax_factor)
+void draw_parallax_layer(Sprite& sprite, Vector2f camera_pos, float parallax_factor,
+                         float y_offset = 0.0F)
 {
-    sprite.set_position({BACKGROUND_X + camera_pos.x * (1.0F - parallax_factor), BACKGROUND_Y});
+    sprite.set_position(
+        {BACKGROUND_X + camera_pos.x * (1.0F - parallax_factor), BACKGROUND_Y + y_offset});
     sprite.draw();
 }
 
@@ -70,7 +73,8 @@ void Level_7::draw_parallax_background()
     const auto camera_pos = camera_.get_pos();
 
     draw_parallax_layer(background_far_sprite_, camera_pos, FAR_PARALLAX_FACTOR);
-    draw_parallax_layer(background_mid_sprite_, camera_pos, MID_PARALLAX_FACTOR);
+    draw_parallax_layer(background_mid_sprite_, camera_pos, MID_PARALLAX_FACTOR,
+                        MID_BACKGROUND_Y_OFFSET);
     draw_parallax_layer(background_foreground_sprite_, camera_pos, FOREGROUND_PARALLAX_FACTOR);
 }
 
