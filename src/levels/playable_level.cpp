@@ -33,7 +33,7 @@ namespace
 {
 
 constexpr const char* FONT_PATH{"resources/ttf/aquifer.ttf"};
-constexpr double DEATH_FADE_SECONDS{1.5};
+constexpr double DEATH_FADE_SECONDS{0.8};
 constexpr std::int32_t DEATH_MESSAGE_MAX_WIDTH{760};
 constexpr std::int32_t DEATH_MESSAGE_SIDE_PADDING{40};
 constexpr std::int32_t DEATH_BUTTON_GAP{54};

@@ -49,7 +49,6 @@ class Level_6 : public PlayableLevel
     Sprite background_foreground_sprite_{&background_foreground_texture_, 1800, 1300,
                                          Vector2f{-100.0F, 0.0F}, Vector2f{0.0F, 0.0F}};
 
-
     Platform plat_1_{{0.0F, 1200.0F}, 1600.0F, 100.0F};
 
     Platform plat_2_{{0.0F, 1000.0F}, 200.0F, 50.0F};
@@ -68,7 +67,7 @@ class Level_6 : public PlayableLevel
     Platform plat_12_{{850.0F, 400.0F}, 200.0F, 50.0F};
     Platform plat_13_{{1400.0F, 400.0F}, 200.0F, 50.0F};
 
-    Platform plat_14_{{0.0F, 400.0F}, 200.0F, 50.0F};
+    Platform plat_14_{{0.0F, 400.0F}, 180.0F, 50.0F};
 
     Platform wall_1_{{-100.0F, 0.0F}, 100.0F, 1300.0F};
     Platform wall_2_{{1600.0F, 0.0F}, 100.0F, 1300.0F};

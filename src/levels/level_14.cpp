@@ -25,16 +25,15 @@ constexpr float BACKGROUND_PARALLAX_Y_FACTOR{0.65F};
 
 void draw_parallax_layer(Sprite& sprite, Vector2f camera_pos, float x_factor, float y_factor)
 {
-    sprite.set_position(
-        {BACKGROUND_X + std::round(camera_pos.x * (1.0F - x_factor)),
-         BACKGROUND_Y + std::round(camera_pos.y * (1.0F - y_factor))});
+    sprite.set_position({BACKGROUND_X + std::round(camera_pos.x * (1.0F - x_factor)),
+                         BACKGROUND_Y + std::round(camera_pos.y * (1.0F - y_factor))});
     sprite.draw();
 }
 } // namespace
 
 void Level_14::create_level()
 {
-    setup_player(Vector2f{180.0F, 200.0F});
+    setup_player(Vector2f{180.0F, 0.0F});
     clear_com_box();
     camera_.set_borders({0.0F, 0.0F}, {3296.0F, 3496.0F});
 }
@@ -79,4 +78,3 @@ std::unique_ptr<rinvid::Screen> Level_14::restart_level() const
 {
     return Levels::level_14();
 }
-

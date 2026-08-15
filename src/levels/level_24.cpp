@@ -16,7 +16,7 @@
 
 void Level_24::create_level()
 {
-    setup_player(Vector2f{100.0F, 100.0F});
+    setup_player(Vector2f{100.0F, 500.0F});
     clear_com_box();
     camera_.set_borders({-2000.0F, -2000.0F}, {2000.0F, 2000.0F});
 }
