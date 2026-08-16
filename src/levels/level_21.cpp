@@ -42,12 +42,7 @@ void Level_21::update_level(double delta_time)
 
 void Level_21::draw_level(double delta_time)
 {
-    plat_1_.draw();
-    plat_2_.draw();
-    plat_3_.draw();
-    plat_4_.draw();
-    wall_1_.draw();
-    wall_2_.draw();
+    background_sprite_.draw();
     player_.draw(delta_time);
     portal_.draw(delta_time);
     draw_com_box();
