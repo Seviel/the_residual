@@ -16,9 +16,9 @@
 
 void Level_24::create_level()
 {
-    setup_player(Vector2f{100.0F, 500.0F});
+    setup_player(Vector2f{765.0F, 500.0F});
     clear_com_box();
-    camera_.set_borders({-2000.0F, -2000.0F}, {2000.0F, 2000.0F});
+    camera_.set_borders({-100.0F, 0.0F}, {900.0F, 200.0F});
 }
 
 void Level_24::update_level(double delta_time)
@@ -28,13 +28,10 @@ void Level_24::update_level(double delta_time)
     {
         platform->update(delta_time);
     }
-    player_trig_1_.update(delta_time);
-    op_trig_1_.update(delta_time);
 
     collide_player_with(platforms_);
-    collide_player_with(player_trig_1_, TextTrigger::reactivate_on_collision);
-    collide_player_with(op_trig_1_, TextTrigger::reactivate_on_collision);
-    collide_player_with_portal(portal_);
+    collide_player_with_portal(left_portal_);
+    collide_player_with_portal(right_portal_);
 
     center_camera_on_player();
     update_com_box(delta_time);
@@ -46,7 +43,8 @@ void Level_24::draw_level(double delta_time)
     plat_1_.draw();
     wall_1_.draw();
     wall_2_.draw();
-    portal_.draw(delta_time);
+    left_portal_.draw(delta_time);
+    right_portal_.draw(delta_time);
     draw_com_box();
 }
 

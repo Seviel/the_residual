@@ -14,13 +14,11 @@
 #include <rinvid/core/texture.h>
 
 #include "src/box.h"
-#include "src/game_text.h"
 #include "src/levels/levels.h"
 #include "src/levels/playable_level.h"
 #include "src/platform.h"
 #include "src/portal.h"
 #include "src/runtime_ctx.h"
-#include "src/text_trigger.h"
 
 using namespace rinvid;
 
@@ -45,12 +43,8 @@ class Level_24 : public PlayableLevel
     Platform wall_2_{{1600.0F, 0.0F}, 100.0F, 800.0F};
     std::vector<Object*> platforms_{&plat_1_, &wall_1_, &wall_2_};
 
-    TextTrigger op_trig_1_{GameText::LVL_24_OP_1, Vector2f{75.0F, 75.0F}, 200, 200,
-                           TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_24_PLAYER_1, Vector2f{75.0F, 75.0F}, 200, 200,
-                               TextRole::Player};
-
-    Portal portal_{Vector2f{1350.0F, 547.0F}, Levels::gym};
+    Portal left_portal_{Vector2f{0.0F, 547.0F}, Levels::gym};
+    Portal right_portal_{Vector2f{1450.0F, 547.0F}, Levels::gym};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 
