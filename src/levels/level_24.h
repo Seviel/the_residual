@@ -11,6 +11,7 @@
 #define SRC_LEVELS_LEVEL_24_H
 
 #include <rinvid/core/camera.h>
+#include <rinvid/core/sprite.h>
 #include <rinvid/core/texture.h>
 
 #include "src/box.h"
@@ -37,6 +38,10 @@ class Level_24 : public PlayableLevel
     void update_level(double delta_time) override;
     void draw_level(double delta_time) override;
     std::unique_ptr<rinvid::Screen> restart_level() const override;
+
+    Texture background_texture_{"resources/gfx/level_24.png"};
+    Sprite background_sprite_{&background_texture_, 1800, 800, Vector2f{-100.0F, 0.0F},
+                              Vector2f{0.0F, 0.0F}};
 
     Platform plat_1_{{0.0F, 700.0F}, 1600.0F, 100.0F};
     Platform wall_1_{{-100.0F, 0.0F}, 100.0F, 800.0F};
