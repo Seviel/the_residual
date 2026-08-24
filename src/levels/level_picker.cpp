@@ -27,8 +27,8 @@ namespace
 constexpr std::int32_t LEVEL_BUTTON_COLUMNS{6};
 constexpr std::int32_t LEVEL_BUTTON_ROWS{4};
 constexpr std::int32_t LEVEL_BUTTON_GAP{12};
-constexpr std::int32_t LEVEL_BUTTON_WIDTH{92};
-constexpr std::int32_t LEVEL_BUTTON_HEIGHT{48};
+constexpr std::int32_t LEVEL_BUTTON_WIDTH{LevelButton::IMAGE_WIDTH};
+constexpr std::int32_t LEVEL_BUTTON_HEIGHT{LevelButton::IMAGE_HEIGHT};
 constexpr std::int32_t BACK_BUTTON_TOP_GAP{28};
 constexpr std::int32_t OUTER_MARGIN{40};
 constexpr std::size_t IMPLEMENTED_LEVEL_COUNT{24};
@@ -42,19 +42,25 @@ const std::array<LevelFactory, IMPLEMENTED_LEVEL_COUNT> LEVEL_FACTORIES{
     Levels::level_16, Levels::level_17, Levels::level_18, Levels::level_19, Levels::level_20,
     Levels::level_21, Levels::level_22, Levels::level_23, Levels::level_24};
 
-std::array<MenuButton, 24> make_level_buttons()
+std::array<LevelButton, 24> make_level_buttons(Texture& disabled_texture)
 {
-    return {MenuButton{"1"},  MenuButton{"2"},  MenuButton{"3"},  MenuButton{"4"},
-            MenuButton{"5"},  MenuButton{"6"},  MenuButton{"7"},  MenuButton{"8"},
-            MenuButton{"9"},  MenuButton{"10"}, MenuButton{"11"}, MenuButton{"12"},
-            MenuButton{"13"}, MenuButton{"14"}, MenuButton{"15"}, MenuButton{"16"},
-            MenuButton{"17"}, MenuButton{"18"}, MenuButton{"19"}, MenuButton{"20"},
-            MenuButton{"21"}, MenuButton{"22"}, MenuButton{"23"}, MenuButton{"24"}};
+    return {LevelButton{1, disabled_texture},  LevelButton{2, disabled_texture},
+            LevelButton{3, disabled_texture},  LevelButton{4, disabled_texture},
+            LevelButton{5, disabled_texture},  LevelButton{6, disabled_texture},
+            LevelButton{7, disabled_texture},  LevelButton{8, disabled_texture},
+            LevelButton{9, disabled_texture},  LevelButton{10, disabled_texture},
+            LevelButton{11, disabled_texture}, LevelButton{12, disabled_texture},
+            LevelButton{13, disabled_texture}, LevelButton{14, disabled_texture},
+            LevelButton{15, disabled_texture}, LevelButton{16, disabled_texture},
+            LevelButton{17, disabled_texture}, LevelButton{18, disabled_texture},
+            LevelButton{19, disabled_texture}, LevelButton{20, disabled_texture},
+            LevelButton{21, disabled_texture}, LevelButton{22, disabled_texture},
+            LevelButton{23, disabled_texture}, LevelButton{24, disabled_texture}};
 }
 
 } // namespace
 
-LevelPicker::LevelPicker() : level_buttons_{make_level_buttons()}
+LevelPicker::LevelPicker() : level_buttons_{make_level_buttons(locked_level_texture_)}
 {
 }
 
@@ -92,7 +98,7 @@ void LevelPicker::update(double delta_time)
 
     const bool back_activated{back_button_.update()};
 
-    for (MenuButton& level_button : level_buttons_)
+    for (LevelButton& level_button : level_buttons_)
     {
         level_button.draw();
     }
