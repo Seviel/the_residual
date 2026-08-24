@@ -12,7 +12,6 @@
 #include <memory>
 
 #include "src/levels/end_game.h"
-#include "src/levels/gym.h"
 #include "src/levels/level_1.h"
 #include "src/levels/level_10.h"
 #include "src/levels/level_11.h"
@@ -41,11 +40,6 @@
 std::unique_ptr<rinvid::Screen> Levels::end_game()
 {
     return std::make_unique<EndGameScreen>();
-}
-
-std::unique_ptr<rinvid::Screen> Levels::gym()
-{
-    return std::make_unique<GymScreen>();
 }
 
 std::unique_ptr<rinvid::Screen> Levels::level_1()

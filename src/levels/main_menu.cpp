@@ -15,7 +15,7 @@
 #include <rinvid/core/render_context.h>
 #include <rinvid/system/application.h>
 
-#include "src/levels/gym.h"
+#include "src/levels/level_1.h"
 #include "src/levels/level_picker.h"
 #include "src/runtime_ctx.h"
 
@@ -60,7 +60,7 @@ void MainMenu::update(double delta_time)
 
     if (play_activated)
     {
-        this->get_application()->set_screen(std::make_unique<GymScreen>());
+        this->get_application()->set_screen(std::make_unique<Level_1>());
     }
     else if (pick_level_activated)
     {

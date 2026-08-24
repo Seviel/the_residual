@@ -112,9 +112,6 @@ inline constexpr char LVL_23_PLAYER_1[] = "Level 23 player placeholder text.";
 inline constexpr char LVL_24_OP_1[] = "Level 24 op placeholder text.";
 inline constexpr char LVL_24_PLAYER_1[] = "Level 24 player placeholder text.";
 
-inline constexpr char GYM_NICE_JUMP[] = "Nice jump!";
-inline constexpr char GYM_SINGLE_TRIGGER[] = "Single trigger";
-
 } // namespace GameText
 
 #endif // SRC_GAME_TEXT_H
