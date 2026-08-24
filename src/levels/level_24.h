@@ -48,8 +48,8 @@ class Level_24 : public PlayableLevel
     Platform wall_2_{{1600.0F, 0.0F}, 100.0F, 800.0F};
     std::vector<Object*> platforms_{&plat_1_, &wall_1_, &wall_2_};
 
-    Portal left_portal_{Vector2f{0.0F, 547.0F}, Levels::gym};
-    Portal right_portal_{Vector2f{1450.0F, 547.0F}, Levels::gym};
+    Portal left_portal_{Vector2f{0.0F, 547.0F}, Levels::end_game};
+    Portal right_portal_{Vector2f{1450.0F, 547.0F}, Levels::end_game};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 

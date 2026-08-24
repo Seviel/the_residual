@@ -23,6 +23,7 @@ class Levels final
     {
     }
 
+    static std::unique_ptr<rinvid::Screen> end_game();
     static std::unique_ptr<rinvid::Screen> gym();
     static std::unique_ptr<rinvid::Screen> level_1();
     static std::unique_ptr<rinvid::Screen> level_2();
