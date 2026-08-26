@@ -24,11 +24,11 @@
 namespace
 {
 
-constexpr std::int32_t LEVEL_BUTTON_COLUMNS{6};
-constexpr std::int32_t LEVEL_BUTTON_ROWS{4};
+constexpr std::int32_t LEVEL_BUTTON_MAX_COLUMNS{6};
 constexpr std::int32_t LEVEL_BUTTON_GAP{12};
-constexpr std::int32_t LEVEL_BUTTON_WIDTH{LevelButton::IMAGE_WIDTH};
-constexpr std::int32_t LEVEL_BUTTON_HEIGHT{LevelButton::IMAGE_HEIGHT};
+constexpr std::int32_t LEVEL_BUTTON_WIDTH{92};
+constexpr std::int32_t LEVEL_BUTTON_HEIGHT{48};
+constexpr std::uint32_t LEVEL_BUTTON_STATE_COUNT{4U};
 constexpr std::int32_t BACK_BUTTON_TOP_GAP{28};
 constexpr std::int32_t OUTER_MARGIN{40};
 constexpr std::size_t IMPLEMENTED_LEVEL_COUNT{24};
@@ -42,26 +42,17 @@ const std::array<LevelFactory, IMPLEMENTED_LEVEL_COUNT> LEVEL_FACTORIES{
     Levels::level_16, Levels::level_17, Levels::level_18, Levels::level_19, Levels::level_20,
     Levels::level_21, Levels::level_22, Levels::level_23, Levels::level_24};
 
-std::array<LevelButton, 24> make_level_buttons(Texture& disabled_texture)
-{
-    return {LevelButton{1, disabled_texture},  LevelButton{2, disabled_texture},
-            LevelButton{3, disabled_texture},  LevelButton{4, disabled_texture},
-            LevelButton{5, disabled_texture},  LevelButton{6, disabled_texture},
-            LevelButton{7, disabled_texture},  LevelButton{8, disabled_texture},
-            LevelButton{9, disabled_texture},  LevelButton{10, disabled_texture},
-            LevelButton{11, disabled_texture}, LevelButton{12, disabled_texture},
-            LevelButton{13, disabled_texture}, LevelButton{14, disabled_texture},
-            LevelButton{15, disabled_texture}, LevelButton{16, disabled_texture},
-            LevelButton{17, disabled_texture}, LevelButton{18, disabled_texture},
-            LevelButton{19, disabled_texture}, LevelButton{20, disabled_texture},
-            LevelButton{21, disabled_texture}, LevelButton{22, disabled_texture},
-            LevelButton{23, disabled_texture}, LevelButton{24, disabled_texture}};
-}
-
 } // namespace
 
-LevelPicker::LevelPicker() : level_buttons_{make_level_buttons(locked_level_texture_)}
+LevelPicker::LevelPicker()
 {
+    for (std::size_t level_index{0}; level_index < level_buttons_.size(); ++level_index)
+    {
+        const float atlas_y{static_cast<float>(level_index * LEVEL_BUTTON_HEIGHT)};
+        level_buttons_[level_index].setup_from_atlas(
+            &level_button_atlas_texture_, LEVEL_BUTTON_WIDTH, LEVEL_BUTTON_HEIGHT,
+            Vector2f{0.0F, 0.0F}, LEVEL_BUTTON_STATE_COUNT, Vector2f{0.0F, atlas_y});
+    }
 }
 
 void LevelPicker::create()
@@ -90,7 +81,8 @@ void LevelPicker::update(double delta_time)
 
     for (std::size_t level_index{0}; level_index < level_buttons_.size(); ++level_index)
     {
-        if (level_buttons_[level_index].update() && level_index < LEVEL_FACTORIES.size())
+        level_buttons_[level_index].update();
+        if (level_buttons_[level_index].was_activated() && level_index < LEVEL_FACTORIES.size())
         {
             this->get_application()->set_screen(LEVEL_FACTORIES[level_index]());
         }
@@ -98,7 +90,7 @@ void LevelPicker::update(double delta_time)
 
     const bool back_activated{back_button_.update()};
 
-    for (LevelButton& level_button : level_buttons_)
+    for (rinvid::gui::Button& level_button : level_buttons_)
     {
         level_button.draw();
     }
@@ -127,13 +119,25 @@ void LevelPicker::layout()
     laid_out_height_ = screen_height;
 
     const std::int32_t available_width{std::max(0, screen_width - OUTER_MARGIN)};
-    const std::int32_t grid_gap_width{(LEVEL_BUTTON_COLUMNS - 1) * LEVEL_BUTTON_GAP};
-    const std::int32_t fitted_button_width{(available_width - grid_gap_width) /
-                                           LEVEL_BUTTON_COLUMNS};
-    const std::int32_t button_width{std::min(LEVEL_BUTTON_WIDTH, std::max(0, fitted_button_width))};
-    const std::int32_t grid_width{(LEVEL_BUTTON_COLUMNS * button_width) + grid_gap_width};
-    const std::int32_t grid_height{(LEVEL_BUTTON_ROWS * LEVEL_BUTTON_HEIGHT) +
-                                   ((LEVEL_BUTTON_ROWS - 1) * LEVEL_BUTTON_GAP)};
+    const std::int32_t available_grid_height{
+        std::max(0, screen_height - OUTER_MARGIN - BACK_BUTTON_TOP_GAP -
+                        MenuButton::DEFAULT_HEIGHT)};
+    const std::int32_t fitted_column_count{
+        (available_width + LEVEL_BUTTON_GAP) / (LEVEL_BUTTON_WIDTH + LEVEL_BUTTON_GAP)};
+    const std::int32_t button_count{static_cast<std::int32_t>(level_buttons_.size())};
+    const std::int32_t fitted_row_count{
+        std::max(1, (available_grid_height + LEVEL_BUTTON_GAP) /
+                        (LEVEL_BUTTON_HEIGHT + LEVEL_BUTTON_GAP))};
+    const std::int32_t minimum_column_count{
+        (button_count + fitted_row_count - 1) / fitted_row_count};
+    const std::int32_t column_count{std::min(
+        LEVEL_BUTTON_MAX_COLUMNS,
+        std::max(1, std::max(fitted_column_count, minimum_column_count)))};
+    const std::int32_t row_count{(button_count + column_count - 1) / column_count};
+    const std::int32_t grid_gap_width{(column_count - 1) * LEVEL_BUTTON_GAP};
+    const std::int32_t grid_width{(column_count * LEVEL_BUTTON_WIDTH) + grid_gap_width};
+    const std::int32_t grid_height{(row_count * LEVEL_BUTTON_HEIGHT) +
+                                   ((row_count - 1) * LEVEL_BUTTON_GAP)};
     const std::int32_t total_height{grid_height + BACK_BUTTON_TOP_GAP + MenuButton::DEFAULT_HEIGHT};
 
     const float grid_x{(static_cast<float>(screen_width) - static_cast<float>(grid_width)) / 2.0F};
@@ -142,15 +146,14 @@ void LevelPicker::layout()
 
     for (std::int32_t index{0}; index < static_cast<std::int32_t>(level_buttons_.size()); ++index)
     {
-        const std::int32_t row{index / LEVEL_BUTTON_COLUMNS};
-        const std::int32_t column{index % LEVEL_BUTTON_COLUMNS};
-        const std::int32_t button_step_x{button_width + LEVEL_BUTTON_GAP};
+        const std::int32_t row{index / column_count};
+        const std::int32_t column{index % column_count};
+        const std::int32_t button_step_x{LEVEL_BUTTON_WIDTH + LEVEL_BUTTON_GAP};
         const std::int32_t button_step_y{LEVEL_BUTTON_HEIGHT + LEVEL_BUTTON_GAP};
         const float button_x{grid_x + static_cast<float>(column * button_step_x)};
         const float button_y{grid_y + static_cast<float>(row * button_step_y)};
 
-        level_buttons_[static_cast<std::size_t>(index)].set_bounds(
-            {{button_x, button_y}, button_width, LEVEL_BUTTON_HEIGHT});
+        level_buttons_[static_cast<std::size_t>(index)].set_position({button_x, button_y});
     }
 
     const std::int32_t back_button_width{std::min(MenuButton::DEFAULT_WIDTH, available_width)};
