@@ -10,19 +10,21 @@
 #include "src/levels/level_picker.h"
 
 #include <algorithm>
-#include <array>
 #include <cstddef>
 #include <memory>
 
 #include <rinvid/core/render_context.h>
 #include <rinvid/system/application.h>
 
-#include "src/levels/levels.h"
+#include "src/game_state.h"
 #include "src/levels/main_menu.h"
 #include "src/runtime_ctx.h"
 
 namespace
 {
+
+static_assert(PlayerProgress::LEVEL_COUNT == Levels::LEVEL_COUNT,
+              "Progress storage and level registry counts must match");
 
 constexpr std::int32_t LEVEL_BUTTON_MAX_COLUMNS{6};
 constexpr std::int32_t LEVEL_BUTTON_GAP{12};
@@ -31,16 +33,6 @@ constexpr std::int32_t LEVEL_BUTTON_HEIGHT{48};
 constexpr std::uint32_t LEVEL_BUTTON_STATE_COUNT{4U};
 constexpr std::int32_t BACK_BUTTON_TOP_GAP{28};
 constexpr std::int32_t OUTER_MARGIN{40};
-constexpr std::size_t IMPLEMENTED_LEVEL_COUNT{24};
-
-using LevelFactory = std::unique_ptr<rinvid::Screen> (*)();
-
-const std::array<LevelFactory, IMPLEMENTED_LEVEL_COUNT> LEVEL_FACTORIES{
-    Levels::level_1,  Levels::level_2,  Levels::level_3,  Levels::level_4,  Levels::level_5,
-    Levels::level_6,  Levels::level_7,  Levels::level_8,  Levels::level_9,  Levels::level_10,
-    Levels::level_11, Levels::level_12, Levels::level_13, Levels::level_14, Levels::level_15,
-    Levels::level_16, Levels::level_17, Levels::level_18, Levels::level_19, Levels::level_20,
-    Levels::level_21, Levels::level_22, Levels::level_23, Levels::level_24};
 
 } // namespace
 
@@ -61,9 +53,8 @@ void LevelPicker::create()
     RuntimeCtx::camera_.set_position({0.0F, 0.0F});
     RuntimeCtx::camera_.update();
 
-    // Development behavior: every implemented level is selectable. Later this should come from
-    // the player's highest reached level.
-    const std::size_t selectable_level_count{IMPLEMENTED_LEVEL_COUNT};
+    const std::size_t selectable_level_count{
+        std::max<std::size_t>(1U, RuntimeCtx::game_state().player_progress().farthest_level())};
     for (std::size_t level_index{0}; level_index < level_buttons_.size(); ++level_index)
     {
         level_buttons_[level_index].set_enabled(level_index < selectable_level_count);
@@ -82,9 +73,9 @@ void LevelPicker::update(double delta_time)
     for (std::size_t level_index{0}; level_index < level_buttons_.size(); ++level_index)
     {
         level_buttons_[level_index].update();
-        if (level_buttons_[level_index].was_activated() && level_index < LEVEL_FACTORIES.size())
+        if (level_buttons_[level_index].was_activated())
         {
-            this->get_application()->set_screen(LEVEL_FACTORIES[level_index]());
+            this->get_application()->set_screen(Levels::from_number(level_index + 1U));
         }
     }
 

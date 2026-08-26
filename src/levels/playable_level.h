@@ -30,7 +30,7 @@ class Portal;
 class PlayableLevel : public rinvid::Screen
 {
   public:
-    PlayableLevel();
+    explicit PlayableLevel(std::uint32_t level_number);
     virtual ~PlayableLevel() = default;
 
     void create() final;
@@ -70,6 +70,7 @@ class PlayableLevel : public rinvid::Screen
     float death_fade_alpha() const;
     bool retry_action_was_pressed();
 
+    std::uint32_t level_number_;
     PauseMenu pause_menu_{};
     bool death_sequence_active_{false};
     double death_fade_elapsed_{0.0};

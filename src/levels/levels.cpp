@@ -9,6 +9,8 @@
 
 #include "src/levels/levels.h"
 
+#include <array>
+#include <cstddef>
 #include <memory>
 
 #include "src/levels/end_game.h"
@@ -36,6 +38,30 @@
 #include "src/levels/level_7.h"
 #include "src/levels/level_8.h"
 #include "src/levels/level_9.h"
+
+namespace
+{
+
+using LevelFactory = std::unique_ptr<rinvid::Screen> (*)();
+
+const std::array<LevelFactory, Levels::LEVEL_COUNT> LEVEL_FACTORIES{
+    Levels::level_1,  Levels::level_2,  Levels::level_3,  Levels::level_4,  Levels::level_5,
+    Levels::level_6,  Levels::level_7,  Levels::level_8,  Levels::level_9,  Levels::level_10,
+    Levels::level_11, Levels::level_12, Levels::level_13, Levels::level_14, Levels::level_15,
+    Levels::level_16, Levels::level_17, Levels::level_18, Levels::level_19, Levels::level_20,
+    Levels::level_21, Levels::level_22, Levels::level_23, Levels::level_24};
+
+} // namespace
+
+std::unique_ptr<rinvid::Screen> Levels::from_number(std::size_t level_number)
+{
+    if (level_number == 0U || level_number > LEVEL_FACTORIES.size())
+    {
+        return nullptr;
+    }
+
+    return LEVEL_FACTORIES[level_number - 1U]();
+}
 
 std::unique_ptr<rinvid::Screen> Levels::end_game()
 {

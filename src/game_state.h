@@ -12,6 +12,7 @@
 
 #include "src/com_box.h"
 #include "src/game_assets.h"
+#include "src/player_progress.h"
 
 class GameState final
 {
@@ -20,8 +21,10 @@ class GameState final
 
     GameAssets& assets();
     ComBox& com_box();
+    PlayerProgress& player_progress();
 
   private:
+    PlayerProgress player_progress_;
     GameAssets assets_;
     ComBox com_box_;
 };

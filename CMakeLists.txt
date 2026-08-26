@@ -5,6 +5,8 @@ project("TheResidual")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+option(THE_RESIDUAL_BUILD_TESTS "Build The Residual tests" OFF)
+
 add_executable(${PROJECT_NAME} WIN32)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -19,6 +21,16 @@ add_subdirectory(Rinvid)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE rinvid)
 rinvid_copy_runtime_dependencies(${PROJECT_NAME})
+
+if(THE_RESIDUAL_BUILD_TESTS)
+  enable_testing()
+
+  add_executable(player_progress_test tests/player_progress_test.cpp src/player_progress.cpp)
+  target_include_directories(player_progress_test PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+  target_compile_options(player_progress_test PRIVATE -Wall -Wextra -Werror)
+
+  add_test(NAME player_progress_test COMMAND player_progress_test)
+endif()
 
 # Copy resources to build directory so the executable can find them
 set(EXAMPLE_RESOURCES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resources)

@@ -22,6 +22,7 @@
 
 #include "src/com_box.h"
 #include "src/game_assets.h"
+#include "src/game_state.h"
 #include "src/levels/main_menu.h"
 #include "src/portal.h"
 #include "src/runtime_ctx.h"
@@ -42,8 +43,9 @@ const Color DEATH_MESSAGE_COLOR{0xEAF8F5FF};
 
 } // namespace
 
-PlayableLevel::PlayableLevel()
-    : death_message_{"This is not how it ends for you",
+PlayableLevel::PlayableLevel(std::uint32_t level_number)
+    : level_number_{level_number},
+      death_message_{"This is not how it ends for you",
                      FONT_PATH,
                      {0.0F, 0.0F},
                      DEATH_MESSAGE_COLOR,
@@ -65,6 +67,7 @@ void PlayableLevel::create()
     death_overlay_ = nullptr;
 
     create_level();
+    RuntimeCtx::game_state().player_progress().reach(level_number_);
 }
 
 void PlayableLevel::destroy()

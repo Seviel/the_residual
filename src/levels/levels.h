@@ -10,6 +10,7 @@
 #ifndef SRC_LEVELS_LEVELS_H
 #define SRC_LEVELS_LEVELS_H
 
+#include <cstddef>
 #include <memory>
 
 #include <rinvid/system/screen.h>
@@ -19,10 +20,13 @@ using namespace rinvid;
 class Levels final
 {
   public:
+    static constexpr std::size_t LEVEL_COUNT{24};
+
     Levels()
     {
     }
 
+    static std::unique_ptr<rinvid::Screen> from_number(std::size_t level_number);
     static std::unique_ptr<rinvid::Screen> end_game();
     static std::unique_ptr<rinvid::Screen> level_1();
     static std::unique_ptr<rinvid::Screen> level_2();

@@ -10,13 +10,15 @@
 #include "main_menu.h"
 
 #include <algorithm>
+#include <cstddef>
 #include <memory>
 
 #include <rinvid/core/render_context.h>
 #include <rinvid/system/application.h>
 
-#include "src/levels/level_1.h"
+#include "src/game_state.h"
 #include "src/levels/level_picker.h"
+#include "src/levels/levels.h"
 #include "src/runtime_ctx.h"
 
 namespace
@@ -33,7 +35,9 @@ void MainMenu::create()
     RuntimeCtx::camera_.set_position({0.0F, 0.0F});
     RuntimeCtx::camera_.update();
 
-    continue_button_.set_enabled(false);
+    const std::size_t farthest_level{
+        RuntimeCtx::game_state().player_progress().farthest_level()};
+    continue_button_.set_enabled(farthest_level > 0U && farthest_level <= Levels::LEVEL_COUNT);
     credits_button_.set_enabled(false);
 }
 
@@ -46,8 +50,8 @@ void MainMenu::update(double delta_time)
 
     layout();
 
+    const bool continue_activated{continue_button_.update()};
     const bool play_activated{play_button_.update()};
-    continue_button_.update();
     const bool pick_level_activated{pick_level_button_.update()};
     credits_button_.update();
     const bool exit_activated{exit_button_.update()};
@@ -58,9 +62,15 @@ void MainMenu::update(double delta_time)
     credits_button_.draw();
     exit_button_.draw();
 
-    if (play_activated)
+    if (continue_activated)
     {
-        this->get_application()->set_screen(std::make_unique<Level_1>());
+        const std::size_t farthest_level{
+            RuntimeCtx::game_state().player_progress().farthest_level()};
+        this->get_application()->set_screen(Levels::from_number(farthest_level));
+    }
+    else if (play_activated)
+    {
+        this->get_application()->set_screen(Levels::from_number(1U));
     }
     else if (pick_level_activated)
     {

@@ -18,6 +18,7 @@
 #include <rinvid/gui/button.h>
 #include <rinvid/system/screen.h>
 
+#include "src/levels/levels.h"
 #include "src/menu_button.h"
 
 using namespace rinvid;
@@ -40,7 +41,7 @@ class LevelPicker : public Screen
     Sprite background_sprite_{&background_texture_, 800, 600, Vector2f{0.0F, 0.0F},
                               Vector2f{0.0F, 0.0F}};
     Texture level_button_atlas_texture_{"resources/gfx/level_picker/level_buttons.png"};
-    std::array<rinvid::gui::Button, 24> level_buttons_{};
+    std::array<rinvid::gui::Button, Levels::LEVEL_COUNT> level_buttons_{};
     MenuButton back_button_{"Back"};
     std::int32_t laid_out_width_{0};
     std::int32_t laid_out_height_{0};

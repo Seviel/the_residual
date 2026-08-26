@@ -9,7 +9,7 @@
 
 #include "src/game_state.h"
 
-GameState::GameState() : assets_{}, com_box_{assets_.text_box_texture()}
+GameState::GameState() : player_progress_{}, assets_{}, com_box_{assets_.text_box_texture()}
 {
 }
 
@@ -21,4 +21,9 @@ GameAssets& GameState::assets()
 ComBox& GameState::com_box()
 {
     return com_box_;
+}
+
+PlayerProgress& GameState::player_progress()
+{
+    return player_progress_;
 }

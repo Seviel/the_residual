@@ -28,7 +28,7 @@ using namespace rinvid;
 class Level_16 : public PlayableLevel
 {
   public:
-    Level_16()
+    Level_16() : PlayableLevel{16U}
     {
     }
     virtual ~Level_16()
