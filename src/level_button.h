@@ -38,8 +38,10 @@ class LevelButton final
     rinvid::Rect bounds_{};
     std::unique_ptr<rinvid::Texture> normal_texture_{};
     std::unique_ptr<rinvid::Texture> hover_texture_{};
+    std::unique_ptr<rinvid::Texture> clicked_texture_{};
     std::unique_ptr<rinvid::Sprite> normal_sprite_{};
     std::unique_ptr<rinvid::Sprite> hover_sprite_{};
+    std::unique_ptr<rinvid::Sprite> clicked_sprite_{};
     std::unique_ptr<rinvid::Sprite> disabled_sprite_{};
     bool enabled_{true};
     bool hovered_{false};

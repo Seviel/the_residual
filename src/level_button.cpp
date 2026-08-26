@@ -20,7 +20,7 @@ using namespace rinvid::system;
 namespace
 {
 
-std::string level_image_path(std::int32_t level_number, bool hovered)
+std::string level_image_path(std::int32_t level_number, const char* state_suffix)
 {
     std::string path{"resources/gfx/level_picker/level_"};
     if (level_number < 10)
@@ -28,29 +28,30 @@ std::string level_image_path(std::int32_t level_number, bool hovered)
         path += "0";
     }
     path += std::to_string(level_number);
-    if (hovered)
-    {
-        path += "_hover";
-    }
+    path += state_suffix;
     path += ".png";
     return path;
 }
 
-std::unique_ptr<Texture> load_level_texture(std::int32_t level_number, bool hovered)
+std::unique_ptr<Texture> load_level_texture(std::int32_t level_number,
+                                            const char* state_suffix)
 {
-    const std::string path{level_image_path(level_number, hovered)};
+    const std::string path{level_image_path(level_number, state_suffix)};
     return std::make_unique<Texture>(path.c_str());
 }
 
 } // namespace
 
 LevelButton::LevelButton(std::int32_t level_number, Texture& disabled_texture)
-    : normal_texture_{load_level_texture(level_number, false)},
-      hover_texture_{load_level_texture(level_number, true)},
+    : normal_texture_{load_level_texture(level_number, "")},
+      hover_texture_{load_level_texture(level_number, "_hover")},
+      clicked_texture_{load_level_texture(level_number, "_clicked")},
       normal_sprite_{std::make_unique<Sprite>(normal_texture_.get(), IMAGE_WIDTH, IMAGE_HEIGHT,
                                               Vector2f{0.0F, 0.0F})},
       hover_sprite_{std::make_unique<Sprite>(hover_texture_.get(), IMAGE_WIDTH, IMAGE_HEIGHT,
                                              Vector2f{0.0F, 0.0F})},
+      clicked_sprite_{std::make_unique<Sprite>(clicked_texture_.get(), IMAGE_WIDTH, IMAGE_HEIGHT,
+                                               Vector2f{0.0F, 0.0F})},
       disabled_sprite_{std::make_unique<Sprite>(&disabled_texture, IMAGE_WIDTH, IMAGE_HEIGHT,
                                                 Vector2f{0.0F, 0.0F})}
 {
@@ -61,6 +62,7 @@ void LevelButton::set_bounds(Rect bounds)
     bounds_ = bounds;
     layout_sprite(*normal_sprite_);
     layout_sprite(*hover_sprite_);
+    layout_sprite(*clicked_sprite_);
     layout_sprite(*disabled_sprite_);
 }
 
@@ -115,6 +117,10 @@ void LevelButton::draw()
     if (!enabled_)
     {
         disabled_sprite_->draw();
+    }
+    else if (hovered_ && pressed_inside_ && Mouse::is_button_pressed(Mouse::Left))
+    {
+        clicked_sprite_->draw();
     }
     else if (hovered_)
     {
