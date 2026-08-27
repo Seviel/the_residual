@@ -52,8 +52,9 @@ class Level_1 : public PlayableLevel
     Sprite background_foreground_sprite_{&background_foreground_texture_, 1800, 900,
                                          Vector2f{-100.0F, 0.0F}, Vector2f{0.0F, 0.0F}};
 
-    Platform floor_{{-100.0F, 700.0F}, 1700.0F, 100.0F};
+    Platform floor_{{-100.0F, 700.0F}, 1800.0F, 100.0F};
     Platform wall_{{-200.0F, 0.0F}, 100.0F, 900.0F};
+    Platform wall_2_{{1700.0F, 0.0F}, 100.0F, 900.0F};
     Box box_{Vector2f{300.0F, 500.0F}};
     TextTrigger player_trig_1_{GameText::LVL_1_PLAYER_1, Vector2f{300.0F, 300.0F}, 50, 500};
     TextTrigger op_trig_1_{GameText::LVL_1_OP_1, Vector2f{650.0F, 300.0F}, 50, 500,

@@ -40,6 +40,8 @@ void Level_1::create_level()
 
     wall_.set_movable(NOT);
     wall_.set_gravity_scale(0.0F);
+    wall_2_.set_movable(NOT);
+    wall_2_.set_gravity_scale(0.0F);
 
     clear_com_box();
     camera_.set_borders({-100.0F, 0.0F}, {900.0F, 150.0F});
@@ -50,15 +52,18 @@ void Level_1::update_level(double delta_time)
     player_.update(delta_time);
     floor_.update(delta_time);
     wall_.update(delta_time);
+    wall_2_.update(delta_time);
     box_.update(delta_time);
     player_trig_1_.update(delta_time);
     op_trig_1_.update(delta_time);
 
     collide_player_with(floor_);
     collide_player_with(wall_);
+    collide_player_with(wall_2_);
     collide_player_with(box_);
     rinvid::World::collide(box_, floor_);
     rinvid::World::collide(box_, wall_);
+    rinvid::World::collide(box_, wall_2_);
     collide_player_with(player_trig_1_, TextTrigger::reactivate_on_collision);
     collide_player_with(op_trig_1_, TextTrigger::reactivate_on_collision);
     collide_player_with_portal(portal_);
