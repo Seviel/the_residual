@@ -81,15 +81,14 @@ class Level_18 : public PlayableLevel
     Platform wall_8_{{1260.0F, 3400.0F}, 110.0F, 460.0F};
 
     std::vector<Object*> platforms_{
-        &plat_1_,  &plat_2_,  &plat_3_,  &plat_4_,  &plat_5_,  &plat_6_,
-        &plat_7_,  &plat_8_,  &plat_9_,  &plat_10_, &plat_11_, &plat_12_,
-        &plat_13_, &plat_14_, &plat_15_, &plat_16_, &plat_17_, &plat_18_,
-        &plat_19_, &plat_20_, &floor_,   &wall_1_,  &wall_2_,  &wall_3_,
+        &plat_1_,  &plat_2_,  &plat_3_,  &plat_4_,  &plat_5_,  &plat_6_,  &plat_7_,  &plat_8_,
+        &plat_9_,  &plat_10_, &plat_11_, &plat_12_, &plat_13_, &plat_14_, &plat_15_, &plat_16_,
+        &plat_17_, &plat_18_, &plat_19_, &plat_20_, &floor_,   &wall_1_,  &wall_2_,  &wall_3_,
         &wall_4_,  &wall_5_,  &wall_6_,  &wall_7_,  &wall_8_};
 
-    TextTrigger op_trig_1_{GameText::LVL_18_OP_1, Vector2f{2850.0F, 450.0F}, 50, 200,
+    TextTrigger op_trig_1_{GameText::LVL_18_OP_1, Vector2f{2100.0F, 800.0F}, 50, 200,
                            TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_18_PLAYER_1, Vector2f{3500.0F, 100.0F}, 50, 200,
+    TextTrigger player_trig_1_{GameText::LVL_18_PLAYER_1, Vector2f{3300.0F, 100.0F}, 50, 200,
                                TextRole::Player};
 
     Portal portal_{Vector2f{210.0F, 3648.0F}, Levels::level_19};

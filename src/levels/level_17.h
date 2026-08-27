@@ -91,15 +91,14 @@ class Level_17 : public PlayableLevel
     Platform wall_5_{{520.0F, 2370.0F}, 110.0F, 730.0F};
 
     std::vector<Object*> platforms_{
-        &plat_1_,  &plat_2_,  &plat_3_,  &plat_4_,  &plat_5_,  &plat_6_,  &plat_7_,
-        &plat_6_right_, &plat_8_,  &plat_9_,  &plat_10_, &plat_11_, &plat_12_, &plat_13_,
-        &plat_14_, &plat_14_right_,
-        &plat_15_, &plat_16_, &plat_17_, &plat_18_, &plat_19_, &plat_20_, &plat_21_,
-        &plat_22_, &plat_23_, &plat_24_, &plat_25_, &plat_26_, &plat_27_, &plat_28_,
-        &plat_29_, &plat_30_, &plat_31_, &floor_,   &wall_1_,  &wall_2_,  &wall_3_,
-        &wall_4_,  &wall_5_};
+        &plat_1_,       &plat_2_,        &plat_3_,  &plat_4_,  &plat_5_,  &plat_6_,  &plat_7_,
+        &plat_6_right_, &plat_8_,        &plat_9_,  &plat_10_, &plat_11_, &plat_12_, &plat_13_,
+        &plat_14_,      &plat_14_right_, &plat_15_, &plat_16_, &plat_17_, &plat_18_, &plat_19_,
+        &plat_20_,      &plat_21_,       &plat_22_, &plat_23_, &plat_24_, &plat_25_, &plat_26_,
+        &plat_27_,      &plat_28_,       &plat_29_, &plat_30_, &plat_31_, &floor_,   &wall_1_,
+        &wall_2_,       &wall_3_,        &wall_4_,  &wall_5_};
 
-    TextTrigger op_trig_1_{GameText::LVL_17_OP_1, Vector2f{2800.0F, 3530.0F}, 50, 200,
+    TextTrigger op_trig_1_{GameText::LVL_17_OP_1, Vector2f{2800.0F, 3230.0F}, 50, 200,
                            TextRole::Operator};
     TextTrigger player_trig_1_{GameText::LVL_17_PLAYER_1, Vector2f{3550.0F, 3700.0F}, 50, 200,
                                TextRole::Player};

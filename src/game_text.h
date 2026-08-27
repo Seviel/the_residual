@@ -76,23 +76,37 @@ inline constexpr char LVL_12_OP_1[] = "Dwelling on possibly false memories is da
 inline constexpr char LVL_12_PLAYER_1[] =
     "She noticed me.\nI remember that now.\nFinally I didn't feel invisible.";
 
-inline constexpr char LVL_13_OP_1[] = "Level 13 op placeholder text.";
-inline constexpr char LVL_13_PLAYER_1[] = "Level 13 player placeholder text.";
+inline constexpr char LVL_13_OP_1[] =
+    "I know that word means something.\nI also know this is not the time to explain it.";
+inline constexpr char LVL_13_PLAYER_1[] =
+    "I remember signing something.\nA grey room.\nThe word Dreamscape on the wall.";
 
-inline constexpr char LVL_14_OP_1[] = "Level 14 op placeholder text.";
-inline constexpr char LVL_14_PLAYER_1[] = "Level 14 player placeholder text.";
+inline constexpr char LVL_14_OP_1[] =
+    "Outcomes like this are rare.\nDreamscape was not built to harm people.\nRemember that when I "
+    "guide you out.";
+inline constexpr char LVL_14_PLAYER_1[] =
+    "Someone asked if I understood the risk.\nI said yes.\nI don't think I did.";
 
-inline constexpr char LVL_15_OP_1[] = "Level 15 op placeholder text.";
-inline constexpr char LVL_15_PLAYER_1[] = "Level 15 player placeholder text.";
+inline constexpr char LVL_15_OP_1[] =
+    "You are not the first person I tried to guide.\nBut you are the one still moving.";
+inline constexpr char LVL_15_PLAYER_1[] =
+    "You talk like you've done this before.\nLike I'm not the first.";
 
-inline constexpr char LVL_16_OP_1[] = "Level 16 op placeholder text.";
-inline constexpr char LVL_16_PLAYER_1[] = "Level 16 player placeholder text.";
+inline constexpr char LVL_16_OP_1[] =
+    "I wish you had not remembered that yet.\nBut wishing is not part of my job.";
+inline constexpr char LVL_16_PLAYER_1[] =
+    "I remember a chair.\nCold metal against my hands.\nSomeone told me to relax.";
 
-inline constexpr char LVL_17_OP_1[] = "Level 17 op placeholder text.";
-inline constexpr char LVL_17_PLAYER_1[] = "Level 17 player placeholder text.";
+inline constexpr char LVL_17_OP_1[] =
+    "People come here for many reasons.\nGrief. Loneliness. Regret.\nSometimes just to feel less "
+    "alone.";
+inline constexpr char LVL_17_PLAYER_1[] =
+    "I came here willingly.\nThat feels true.\nBut I don't know what I wanted.";
 
-inline constexpr char LVL_18_OP_1[] = "Level 18 op placeholder text.";
-inline constexpr char LVL_18_PLAYER_1[] = "Level 18 player placeholder text.";
+inline constexpr char LVL_18_OP_1[] =
+    "She exists in this place.\nThat is all I can safely tell you.";
+inline constexpr char LVL_18_PLAYER_1[] =
+    "That girl I remembered before...\nWho was she?\nIs she real?";
 
 inline constexpr char LVL_19_OP_1[] = "Level 19 op placeholder text.";
 inline constexpr char LVL_19_PLAYER_1[] = "Level 19 player placeholder text.";

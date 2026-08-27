@@ -81,18 +81,17 @@ class Level_15 : public PlayableLevel
     Platform wall_5_{{3520.0F, 2370.0F}, 110.0F, 730.0F};
     Platform wall_6_{{420.0F, 3220.0F}, 110.0F, 560.0F};
 
-    std::vector<Object*> platforms_{&plat_1_,  &plat_2_,  &plat_3_,  &plat_4_,  &plat_5_,
-                                    &plat_6_,  &plat_7_,  &plat_8_,  &plat_9_,  &plat_10_,
-                                    &plat_11_, &plat_12_, &plat_13_, &plat_14_, &plat_15_,
-                                    &plat_16_, &plat_17_, &plat_18_, &plat_19_, &plat_20_,
-                                    &plat_21_, &plat_22_, &plat_23_, &plat_24_, &plat_25_,
-                                    &plat_26_, &plat_27_, &plat_28_, &plat_29_, &floor_,
-                                    &wall_1_,  &wall_2_,  &wall_3_,  &wall_4_top_, &wall_4_bottom_,
-                                    &wall_5_,  &wall_6_};
+    std::vector<Object*> platforms_{
+        &plat_1_,  &plat_2_,  &plat_3_,  &plat_4_,  &plat_5_,  &plat_6_,     &plat_7_,
+        &plat_8_,  &plat_9_,  &plat_10_, &plat_11_, &plat_12_, &plat_13_,    &plat_14_,
+        &plat_15_, &plat_16_, &plat_17_, &plat_18_, &plat_19_, &plat_20_,    &plat_21_,
+        &plat_22_, &plat_23_, &plat_24_, &plat_25_, &plat_26_, &plat_27_,    &plat_28_,
+        &plat_29_, &floor_,   &wall_1_,  &wall_2_,  &wall_3_,  &wall_4_top_, &wall_4_bottom_,
+        &wall_5_,  &wall_6_};
 
     TextTrigger op_trig_1_{GameText::LVL_15_OP_1, Vector2f{1450.0F, 3530.0F}, 50, 200,
                            TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_15_PLAYER_1, Vector2f{1700.0F, 3700.0F}, 50, 200,
+    TextTrigger player_trig_1_{GameText::LVL_15_PLAYER_1, Vector2f{2200.0F, 3700.0F}, 50, 200,
                                TextRole::Player};
 
     Portal portal_{Vector2f{1850.0F, 1027.0F}, Levels::level_16};
@@ -106,4 +105,3 @@ class Level_15 : public PlayableLevel
 };
 
 #endif // SRC_LEVELS_LEVEL_15_H
-
