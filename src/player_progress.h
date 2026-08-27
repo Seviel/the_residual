@@ -22,7 +22,8 @@ class PlayerProgress final
     explicit PlayerProgress(std::filesystem::path save_path);
 
     std::uint32_t farthest_level() const noexcept;
-    void reach(std::uint32_t level) noexcept;
+    std::uint32_t last_visited_level() const noexcept;
+    void visit(std::uint32_t level) noexcept;
 
   private:
     static std::filesystem::path default_save_path();
@@ -32,6 +33,7 @@ class PlayerProgress final
 
     std::filesystem::path save_path_;
     std::uint32_t farthest_level_{0U};
+    std::uint32_t last_visited_level_{0U};
     bool save_pending_{false};
 };
 

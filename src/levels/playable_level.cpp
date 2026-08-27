@@ -67,7 +67,7 @@ void PlayableLevel::create()
     death_overlay_ = nullptr;
 
     create_level();
-    RuntimeCtx::game_state().player_progress().reach(level_number_);
+    RuntimeCtx::game_state().player_progress().visit(level_number_);
 }
 
 void PlayableLevel::destroy()

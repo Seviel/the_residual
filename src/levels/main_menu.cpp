@@ -35,9 +35,10 @@ void MainMenu::create()
     RuntimeCtx::camera_.set_position({0.0F, 0.0F});
     RuntimeCtx::camera_.update();
 
-    const std::size_t farthest_level{
-        RuntimeCtx::game_state().player_progress().farthest_level()};
-    continue_button_.set_enabled(farthest_level > 0U && farthest_level <= Levels::LEVEL_COUNT);
+    const std::size_t last_visited_level{
+        RuntimeCtx::game_state().player_progress().last_visited_level()};
+    continue_button_.set_enabled(last_visited_level > 0U &&
+                                 last_visited_level <= Levels::LEVEL_COUNT);
     credits_button_.set_enabled(false);
 }
 
@@ -64,9 +65,12 @@ void MainMenu::update(double delta_time)
 
     if (continue_activated)
     {
-        const std::size_t farthest_level{
-            RuntimeCtx::game_state().player_progress().farthest_level()};
-        this->get_application()->set_screen(Levels::from_number(farthest_level));
+        const std::size_t last_visited_level{
+            RuntimeCtx::game_state().player_progress().last_visited_level()};
+        if (last_visited_level > 0U && last_visited_level <= Levels::LEVEL_COUNT)
+        {
+            this->get_application()->set_screen(Levels::from_number(last_visited_level));
+        }
     }
     else if (play_activated)
     {

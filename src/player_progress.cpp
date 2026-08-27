@@ -26,8 +26,10 @@
 namespace
 {
 
-constexpr std::size_t SERIALIZED_SIZE{8U};
-constexpr std::array<std::uint64_t, PlayerProgress::LEVEL_COUNT> LEVEL_TOKENS{
+constexpr std::size_t TOKEN_SIZE{8U};
+constexpr std::size_t LEGACY_SERIALIZED_SIZE{TOKEN_SIZE};
+constexpr std::size_t SERIALIZED_SIZE{TOKEN_SIZE * 2U};
+constexpr std::array<std::uint64_t, PlayerProgress::LEVEL_COUNT> FARTHEST_LEVEL_TOKENS{
     0xDB0BC1B23EFFEE58ULL, 0xAB155E118124C69EULL, 0xBA41F2549F047FC4ULL,
     0x0BFEA0C779E4146FULL, 0xA0446638F5F06273ULL, 0xFB5EBB9B30B4C948ULL,
     0x538EE11C9386E481ULL, 0x4494F78212FC7982ULL, 0xD5F78DD5BDF558E6ULL,
@@ -37,19 +39,30 @@ constexpr std::array<std::uint64_t, PlayerProgress::LEVEL_COUNT> LEVEL_TOKENS{
     0x283EDAB430FD11E3ULL, 0x36AB355EFEB773C9ULL, 0x47BCADC2DD03A7B6ULL,
     0xF407ADAF0C8B327CULL, 0x582B8525430911C8ULL, 0xD24FF68950E5E86DULL};
 
-constexpr bool level_tokens_are_valid()
+constexpr std::array<std::uint64_t, PlayerProgress::LEVEL_COUNT> LAST_VISITED_TOKENS{
+    0x41BEA32CCF049B75ULL, 0xE96C15A2B113D4F8ULL, 0x72F54CA903DE681BULL,
+    0x193B8FD4E62C507AULL, 0xC8A764215DB9F30EULL, 0x56D20BE8A17C43F9ULL,
+    0xAD03E65974B821CFULL, 0x2E9F714BC503DA86ULL, 0xF1530C7EA9426BD4ULL,
+    0x847AB52FD019E36CULL, 0x3C61E8D590AF247BULL, 0x9D2843F6BE70C15AULL,
+    0x678EF1094AD352BCULL, 0xB42C7D83F56019AEULL, 0x0DA935E271CB84F6ULL,
+    0xEA7419C65B2F308DULL, 0x258CF3A7D6104E9BULL, 0x7B10D694CE83A52FULL,
+    0xD6934B2A18F7C05EULL, 0x4FC0279E63AD815BULL, 0xA13DE80B75264FC9ULL,
+    0x35B9F4610C8E72DAULL, 0x8E052AC79D31B46FULL, 0xCA6F17D348E2905BULL};
+
+constexpr bool token_table_is_valid(
+    const std::array<std::uint64_t, PlayerProgress::LEVEL_COUNT>& tokens)
 {
-    for (std::size_t index{0U}; index < LEVEL_TOKENS.size(); ++index)
+    for (std::size_t index{0U}; index < tokens.size(); ++index)
     {
-        if (LEVEL_TOKENS[index] == 0U)
+        if (tokens[index] == 0U)
         {
             return false;
         }
 
-        for (std::size_t other_index{index + 1U}; other_index < LEVEL_TOKENS.size();
+        for (std::size_t other_index{index + 1U}; other_index < tokens.size();
              ++other_index)
         {
-            if (LEVEL_TOKENS[index] == LEVEL_TOKENS[other_index])
+            if (tokens[index] == tokens[other_index])
             {
                 return false;
             }
@@ -59,27 +72,62 @@ constexpr bool level_tokens_are_valid()
     return true;
 }
 
-static_assert(level_tokens_are_valid(), "Every level must have a unique, nonzero save token");
+constexpr bool token_tables_are_disjoint()
+{
+    for (const std::uint64_t farthest_level_token : FARTHEST_LEVEL_TOKENS)
+    {
+        for (const std::uint64_t last_visited_token : LAST_VISITED_TOKENS)
+        {
+            if (farthest_level_token == last_visited_token)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
-std::uint64_t deserialize_token(const std::array<std::uint8_t, SERIALIZED_SIZE>& bytes)
+static_assert(token_table_is_valid(FARTHEST_LEVEL_TOKENS),
+              "Every farthest-level token must be unique and nonzero");
+static_assert(token_table_is_valid(LAST_VISITED_TOKENS),
+              "Every last-visited token must be unique and nonzero");
+static_assert(token_tables_are_disjoint(), "Save token roles must not overlap");
+
+std::uint64_t deserialize_token(const std::array<std::uint8_t, SERIALIZED_SIZE + 1U>& bytes,
+                                const std::size_t offset)
 {
     std::uint64_t token{0U};
-    for (const std::uint8_t byte : bytes)
+    for (std::size_t index{offset}; index < offset + TOKEN_SIZE; ++index)
     {
-        token = (token << 8U) | byte;
+        token = (token << 8U) | bytes[index];
     }
     return token;
 }
 
-std::array<std::uint8_t, SERIALIZED_SIZE> serialize_token(std::uint64_t token)
+void serialize_token(std::uint64_t token,
+                     std::array<std::uint8_t, SERIALIZED_SIZE>& bytes,
+                     const std::size_t offset)
 {
-    std::array<std::uint8_t, SERIALIZED_SIZE> bytes{};
-    for (std::size_t index{0U}; index < bytes.size(); ++index)
+    for (std::size_t index{0U}; index < TOKEN_SIZE; ++index)
     {
-        bytes[bytes.size() - index - 1U] = static_cast<std::uint8_t>(token & 0xFFU);
+        bytes[offset + TOKEN_SIZE - index - 1U] =
+            static_cast<std::uint8_t>(token & 0xFFU);
         token >>= 8U;
     }
-    return bytes;
+}
+
+std::uint32_t decode_level(
+    const std::array<std::uint64_t, PlayerProgress::LEVEL_COUNT>& tokens,
+    const std::uint64_t token)
+{
+    for (std::size_t index{0U}; index < tokens.size(); ++index)
+    {
+        if (tokens[index] == token)
+        {
+            return static_cast<std::uint32_t>(index + 1U);
+        }
+    }
+    return 0U;
 }
 
 void remove_temporary_file(const std::filesystem::path& path) noexcept
@@ -128,18 +176,25 @@ std::uint32_t PlayerProgress::farthest_level() const noexcept
     return farthest_level_;
 }
 
-void PlayerProgress::reach(const std::uint32_t level) noexcept
+std::uint32_t PlayerProgress::last_visited_level() const noexcept
 {
-    if (level == 0U || level > LEVEL_COUNT || level < farthest_level_)
+    return last_visited_level_;
+}
+
+void PlayerProgress::visit(const std::uint32_t level) noexcept
+{
+    if (level == 0U || level > LEVEL_COUNT)
     {
         return;
     }
 
+    const bool changed{level != last_visited_level_ || level > farthest_level_};
     if (level > farthest_level_)
     {
         farthest_level_ = level;
-        save_pending_ = true;
     }
+    last_visited_level_ = level;
+    save_pending_ = save_pending_ || changed;
 
     if (save_pending_)
     {
@@ -181,6 +236,7 @@ std::filesystem::path PlayerProgress::default_save_path()
 void PlayerProgress::load() noexcept
 {
     farthest_level_ = 0U;
+    last_visited_level_ = 0U;
     save_pending_ = false;
     if (save_path_.empty())
     {
@@ -198,35 +254,60 @@ void PlayerProgress::load() noexcept
         std::array<std::uint8_t, SERIALIZED_SIZE + 1U> stored_bytes{};
         input.read(reinterpret_cast<char*>(stored_bytes.data()),
                    static_cast<std::streamsize>(stored_bytes.size()));
-        if (input.gcount() != static_cast<std::streamsize>(SERIALIZED_SIZE) || input.bad())
+        const std::streamsize byte_count{input.gcount()};
+        if (input.bad())
         {
             return;
         }
 
-        std::array<std::uint8_t, SERIALIZED_SIZE> token_bytes{};
-        for (std::size_t index{0U}; index < token_bytes.size(); ++index)
+        if (byte_count == static_cast<std::streamsize>(LEGACY_SERIALIZED_SIZE))
         {
-            token_bytes[index] = stored_bytes[index];
-        }
-        const std::uint64_t stored_token{deserialize_token(token_bytes)};
-
-        for (std::size_t index{0U}; index < LEVEL_TOKENS.size(); ++index)
-        {
-            if (LEVEL_TOKENS[index] == stored_token)
+            const std::uint32_t legacy_level{
+                decode_level(FARTHEST_LEVEL_TOKENS, deserialize_token(stored_bytes, 0U))};
+            if (legacy_level != 0U)
             {
-                farthest_level_ = static_cast<std::uint32_t>(index + 1U);
-                return;
+                farthest_level_ = legacy_level;
+                last_visited_level_ = legacy_level;
+                save_pending_ = true;
             }
+            return;
         }
+
+        if (byte_count != static_cast<std::streamsize>(SERIALIZED_SIZE))
+        {
+            return;
+        }
+
+        const std::uint32_t farthest{
+            decode_level(FARTHEST_LEVEL_TOKENS, deserialize_token(stored_bytes, 0U))};
+        const std::uint32_t last_visited{decode_level(
+            LAST_VISITED_TOKENS, deserialize_token(stored_bytes, TOKEN_SIZE))};
+        if (farthest == 0U || last_visited == 0U || last_visited > farthest)
+        {
+            return;
+        }
+
+        farthest_level_ = farthest;
+        last_visited_level_ = last_visited;
     }
     catch (...)
     {
         farthest_level_ = 0U;
+        last_visited_level_ = 0U;
+        save_pending_ = false;
     }
 }
 
 bool PlayerProgress::save() const noexcept
 {
+    if (farthest_level_ == 0U || farthest_level_ > LEVEL_COUNT ||
+        last_visited_level_ == 0U || last_visited_level_ > LEVEL_COUNT ||
+        last_visited_level_ > farthest_level_)
+    {
+        report_save_error("PlayerProgress: refusing to save invalid progress");
+        return false;
+    }
+
     if (save_path_.empty())
     {
         report_save_error("PlayerProgress: user data directory is unavailable");
@@ -249,7 +330,9 @@ bool PlayerProgress::save() const noexcept
 
         std::filesystem::path temporary_path{save_path_};
         temporary_path += ".tmp";
-        const auto bytes{serialize_token(LEVEL_TOKENS[farthest_level_ - 1U])};
+        std::array<std::uint8_t, SERIALIZED_SIZE> bytes{};
+        serialize_token(FARTHEST_LEVEL_TOKENS[farthest_level_ - 1U], bytes, 0U);
+        serialize_token(LAST_VISITED_TOKENS[last_visited_level_ - 1U], bytes, TOKEN_SIZE);
 
         std::ofstream output{temporary_path, std::ios::binary | std::ios::trunc};
         if (!output)
