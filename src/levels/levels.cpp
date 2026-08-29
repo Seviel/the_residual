@@ -68,6 +68,11 @@ std::unique_ptr<rinvid::Screen> Levels::end_game()
     return std::make_unique<EndGameScreen>();
 }
 
+std::unique_ptr<rinvid::Screen> Levels::end_game_boot()
+{
+    return std::make_unique<EndGameScreen>(EndGameScreen::Ending::Boot);
+}
+
 std::unique_ptr<rinvid::Screen> Levels::level_1()
 {
     return std::make_unique<Level_1>();

@@ -28,6 +28,7 @@ class Levels final
 
     static std::unique_ptr<rinvid::Screen> from_number(std::size_t level_number);
     static std::unique_ptr<rinvid::Screen> end_game();
+    static std::unique_ptr<rinvid::Screen> end_game_boot();
     static std::unique_ptr<rinvid::Screen> level_1();
     static std::unique_ptr<rinvid::Screen> level_2();
     static std::unique_ptr<rinvid::Screen> level_3();

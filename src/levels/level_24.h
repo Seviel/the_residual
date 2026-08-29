@@ -58,7 +58,7 @@ class Level_24 : public PlayableLevel
                            TextRole::Operator};
 
     Portal left_portal_{Vector2f{0.0F, 547.0F}, Levels::end_game};
-    Portal right_portal_{Vector2f{1450.0F, 547.0F}, Levels::end_game};
+    Portal right_portal_{Vector2f{1450.0F, 547.0F}, Levels::end_game_boot};
     Camera& camera_ = RuntimeCtx::camera_;
 };
 

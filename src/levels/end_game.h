@@ -20,7 +20,13 @@
 class EndGameScreen final : public rinvid::Screen
 {
   public:
-    EndGameScreen();
+    enum class Ending
+    {
+        Continuation = 0,
+        Boot
+    };
+
+    explicit EndGameScreen(Ending ending = Ending::Continuation);
 
     void create() override;
     void destroy() override;
@@ -31,8 +37,10 @@ class EndGameScreen final : public rinvid::Screen
     void draw_message();
     void handle_pause_action(PauseAction action);
 
+    Ending ending_;
     PauseMenu pause_menu_{};
     rinvid::gui::Label message_;
+    rinvid::gui::Label secondary_message_;
     std::int32_t laid_out_width_{0};
     std::int32_t laid_out_height_{0};
 };
