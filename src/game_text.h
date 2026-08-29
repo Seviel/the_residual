@@ -108,23 +108,38 @@ inline constexpr char LVL_18_OP_1[] =
 inline constexpr char LVL_18_PLAYER_1[] =
     "That girl I remembered before...\nWho was she?\nIs she real?";
 
-inline constexpr char LVL_19_OP_1[] = "Level 19 op placeholder text.";
-inline constexpr char LVL_19_PLAYER_1[] = "Level 19 player placeholder text.";
+inline constexpr char LVL_19_OP_1[] =
+    "The simulation is becoming unstable.\nI cannot slow it down anymore.\nYou need to hurry.";
+inline constexpr char LVL_19_PLAYER_1[] =
+    "The world is breaking apart.\nThe walls, the sky.\nWhat is happening?";
 
-inline constexpr char LVL_20_OP_1[] = "Level 20 op placeholder text.";
-inline constexpr char LVL_20_PLAYER_1[] = "Level 20 player placeholder text.";
+inline constexpr char LVL_20_OP_1[] =
+    "You came to Dreamscape willingly.\nWe build simulated realities from memory, desire, and "
+    "emotional need.";
+inline constexpr char LVL_20_OP_2[] = "You paid us to create a world your mind could believe in.";
 
-inline constexpr char LVL_21_OP_1[] = "Level 21 op placeholder text.";
-inline constexpr char LVL_21_PLAYER_1[] = "Level 21 player placeholder text.";
+inline constexpr char LVL_21_OP_1[] =
+    "You were lonely. More than lonely.\nYou wanted a life where someone will see you, understand "
+    "you, and choose you.";
 
-inline constexpr char LVL_22_OP_1[] = "Level 22 op placeholder text.";
-inline constexpr char LVL_22_PLAYER_1[] = "Level 22 player placeholder text.";
+inline constexpr char LVL_22_OP_1[] =
+    "The girl was part of that world.\nBuilt from everything you wanted and everything you feared "
+    "losing.";
 
-inline constexpr char LVL_23_OP_1[] = "Level 23 op placeholder text.";
-inline constexpr char LVL_23_PLAYER_1[] = "Level 23 player placeholder text.";
+inline constexpr char LVL_22_OP_2[] = "When the experience was supposed to end, something failed.";
 
-inline constexpr char LVL_24_OP_1[] = "Level 24 op placeholder text.";
-inline constexpr char LVL_24_PLAYER_1[] = "Level 24 player placeholder text.";
+inline constexpr char LVL_23_OP_1[] =
+    "Your memory fragmented, and the simulation began stitching together unstable worlds from what "
+    "remained.";
+inline constexpr char LVL_23_OP_2[] = "Dreamscape sent me in to guide you out.";
+
+inline constexpr char LVL_24_OP_1[] =
+    "I've opened the exit portal, it's on the left. It will lead you out of simulation and you "
+    "will wake up.";
+
+inline constexpr char LVL_24_OP_2[] = "Proceed to enter the portal.";
+
+inline constexpr char LVL_24_OP_3[] = "Noooooooooooo!\nThis is the wrong portal!\nGo left!";
 
 } // namespace GameText
 

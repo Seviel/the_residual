@@ -54,10 +54,8 @@ class Level_21 : public PlayableLevel
     Platform wall_2_{{1740.0F, 0.0F}, 60.0F, 900.0F};
     std::vector<Object*> platforms_{&plat_1_, &plat_2_, &plat_3_, &plat_4_, &wall_1_, &wall_2_};
 
-    TextTrigger op_trig_1_{GameText::LVL_21_OP_1, Vector2f{780.0F, 220.0F}, 50, 200,
+    TextTrigger op_trig_1_{GameText::LVL_21_OP_1, Vector2f{300.0F, 20.0F}, 50, 200,
                            TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_21_PLAYER_1, Vector2f{300.0F, 20.0F}, 50, 200,
-                               TextRole::Player};
 
     Portal portal_{Vector2f{1220.0F, 627.0F}, Levels::level_22};
     Camera& camera_ = RuntimeCtx::camera_;

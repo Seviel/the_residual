@@ -52,13 +52,12 @@ class Level_22 : public PlayableLevel
 
     Platform wall_1_{{0.0F, 0.0F}, 60.0F, 900.0F};
     Platform wall_2_{{1988.0F, 0.0F}, 60.0F, 900.0F};
-    std::vector<Object*> platforms_{&plat_1_, &plat_2_, &plat_3_, &plat_4_, &wall_1_,
-                                    &wall_2_};
+    std::vector<Object*> platforms_{&plat_1_, &plat_2_, &plat_3_, &plat_4_, &wall_1_, &wall_2_};
 
-    TextTrigger op_trig_1_{GameText::LVL_22_OP_1, Vector2f{900.0F, 360.0F}, 50, 200,
+    TextTrigger op_trig_1_{GameText::LVL_22_OP_1, Vector2f{300.0F, 520.0F}, 50, 200,
                            TextRole::Operator};
-    TextTrigger player_trig_1_{GameText::LVL_22_PLAYER_1, Vector2f{300.0F, 520.0F}, 50, 200,
-                               TextRole::Player};
+    TextTrigger op_trig_2_{GameText::LVL_22_OP_2, Vector2f{1220.0F, 360.0F}, 50, 200,
+                           TextRole::Operator};
 
     Portal portal_{Vector2f{1550.0F, 607.0F}, Levels::level_23};
     Camera& camera_ = RuntimeCtx::camera_;
