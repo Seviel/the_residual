@@ -22,6 +22,23 @@ add_subdirectory(Rinvid)
 target_link_libraries(${PROJECT_NAME} PRIVATE rinvid)
 rinvid_copy_runtime_dependencies(${PROJECT_NAME})
 
+# Rinvid's MinGW runtime DLL list is scoped to its subdirectory, so it is not
+# visible when the helper above is called for this parent-project target.
+if(MINGW)
+  get_filename_component(MINGW_RUNTIME_DIR "${CMAKE_CXX_COMPILER}" DIRECTORY)
+  foreach(MINGW_RUNTIME_DLL IN ITEMS libgcc_s_seh-1.dll libstdc++-6.dll
+                                    libwinpthread-1.dll)
+    if(EXISTS "${MINGW_RUNTIME_DIR}/${MINGW_RUNTIME_DLL}")
+      add_custom_command(
+        TARGET ${PROJECT_NAME}
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                "${MINGW_RUNTIME_DIR}/${MINGW_RUNTIME_DLL}"
+                $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+    endif()
+  endforeach()
+endif()
+
 if(THE_RESIDUAL_BUILD_TESTS)
   enable_testing()
 
