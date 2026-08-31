@@ -12,8 +12,8 @@
 #include <rinvid/platformers/world.h>
 #include <rinvid/system/application.h>
 
-#include "src/game_state.h"
 #include "levels/intro.h"
+#include "src/game_state.h"
 #include "src/runtime_ctx.h"
 
 using namespace rinvid;
@@ -21,7 +21,7 @@ using namespace rinvid;
 int main()
 {
     World::set_gravity(2400.0F);
-    Application main_app{800, 600, "TR", false};
+    Application main_app{800, 600, "TR", WindowResizeMode::Fixed};
     GameState game_state{};
     RuntimeCtx::app_ = &main_app;
     RuntimeCtx::set_game_state(&game_state);
