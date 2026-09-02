@@ -30,10 +30,14 @@ void Level_13::update_level(double delta_time)
     }
     player_trig_1_.update(delta_time);
     op_trig_1_.update(delta_time);
+    stuck_trig_.update(delta_time);
+    glitch_trig_1_.update(delta_time);
 
     collide_player_with(platforms_);
     collide_player_with(player_trig_1_, TextTrigger::reactivate_on_collision);
     collide_player_with(op_trig_1_, TextTrigger::reactivate_on_collision);
+    collide_player_with(stuck_trig_, TextTrigger::reactivate_on_collision);
+    collide_player_with(glitch_trig_1_, TextTrigger::activate_on_collision);
     collide_player_with_portal(portal_);
 
     center_camera_on_player();

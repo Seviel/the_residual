@@ -32,6 +32,7 @@ constexpr float TEXT_MAX_WIDTH = 675.0F;
 
 const Color PLAYER_TEXT_COLOR{0x5DD3B6FF};
 const Color OPERATOR_TEXT_COLOR{0xFF3A3AFF};
+const Color SIMULATION_GLITCH_TEXT_COLOR{0x39FF14FF};
 
 std::string format_operator_text(const std::string& text)
 {
@@ -46,6 +47,25 @@ std::string format_operator_text(const std::string& text)
 
     formatted_text.push_back(']');
     return formatted_text;
+}
+
+std::string format_text(const std::string& text, TextRole role)
+{
+    return role == TextRole::Operator ? format_operator_text(text) : text;
+}
+
+Color text_color(TextRole role)
+{
+    switch (role)
+    {
+        case TextRole::Operator:
+            return OPERATOR_TEXT_COLOR;
+        case TextRole::SimulationGlitch:
+            return SIMULATION_GLITCH_TEXT_COLOR;
+        case TextRole::Player:
+        default:
+            return PLAYER_TEXT_COLOR;
+    }
 }
 
 } // namespace
@@ -83,7 +103,7 @@ void ComBox::set_text(std::string text, TextRole role)
 
     source_text_ = std::move(text);
     role_ = role;
-    content_ = role == TextRole::Operator ? format_operator_text(source_text_) : source_text_;
-    text_.set_color(role == TextRole::Operator ? OPERATOR_TEXT_COLOR : PLAYER_TEXT_COLOR);
+    content_ = format_text(source_text_, role_);
+    text_.set_color(text_color(role_));
     text_.set_text(content_);
 }

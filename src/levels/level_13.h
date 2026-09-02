@@ -79,6 +79,10 @@ class Level_13 : public PlayableLevel
                            TextRole::Operator};
     TextTrigger player_trig_1_{GameText::LVL_13_PLAYER_1, Vector2f{500.0F, 3130.0F}, 50, 200,
                                TextRole::Player};
+    TextTrigger stuck_trig_{GameText::LVL_13_OP_STUCK, Vector2f{2850.0F, 3300.0F}, 100, 200,
+                            TextRole::Operator};
+    TextTrigger glitch_trig_1_{GameText::LVL_13_GLITCH_1, Vector2f{350.0F, 2230.0F}, 100, 200,
+                               TextRole::SimulationGlitch};
 
     Portal portal_{Vector2f{3650.0F, 657.0F}, Levels::level_14};
     Camera& camera_ = RuntimeCtx::camera_;

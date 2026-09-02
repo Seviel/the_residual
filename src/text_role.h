@@ -13,7 +13,8 @@
 enum class TextRole
 {
     Player,
-    Operator
+    Operator,
+    SimulationGlitch
 };
 
 #endif // SRC_TEXT_ROLE_H

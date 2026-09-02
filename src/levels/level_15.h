@@ -93,6 +93,8 @@ class Level_15 : public PlayableLevel
                            TextRole::Operator};
     TextTrigger player_trig_1_{GameText::LVL_15_PLAYER_1, Vector2f{2200.0F, 3700.0F}, 50, 200,
                                TextRole::Player};
+    TextTrigger glitch_trig_1_{GameText::LVL_15_GLITCH_1, Vector2f{3250.0F, 3020.0F}, 100, 200,
+                               TextRole::SimulationGlitch};
 
     Portal portal_{Vector2f{1850.0F, 1027.0F}, Levels::level_16};
     Texture background_texture_{"resources/gfx/level_15_background.png"};

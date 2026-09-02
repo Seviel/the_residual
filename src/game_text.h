@@ -71,26 +71,33 @@ inline constexpr char LVL_11_OP_2[] =
     "The exit is just several portals away.\nPlenty of time to regain your true memories after you "
     "get out.";
 inline constexpr char LVL_11_PLAYER_2[] = "I think I was alone for a long time.";
+inline constexpr char LVL_11_GLITCH_1[] = "0xCEAB7F";
+inline constexpr char LVL_11_GLITCH_2[] = "ERR::BAD_MEMORYX";
 
 inline constexpr char LVL_12_OP_1[] = "Dwelling on possibly false memories is dangerous.";
 inline constexpr char LVL_12_PLAYER_1[] =
     "She noticed me.\nI remember that now.\nFinally I didn't feel invisible.";
+inline constexpr char LVL_12_GLITCH_1[] = "SIM_THREAD->DESYNC::(0x00C0EEFF)";
 
 inline constexpr char LVL_13_OP_1[] =
     "I know that word means something.\nI also know this is not the time to explain it.";
 inline constexpr char LVL_13_PLAYER_1[] =
     "I remember signing something.\nA grey room.\nThe word Dreamscape on the wall.";
+inline constexpr char LVL_13_OP_STUCK[] = "You are stuck. You must reboot this area.";
+inline constexpr char LVL_13_GLITCH_1[] = "PTR//ECHO:7F3A??";
 
 inline constexpr char LVL_14_OP_1[] =
     "Outcomes like this are rare.\nDreamscape was not built to harm people.\nRemember that when I "
     "guide you out.";
 inline constexpr char LVL_14_PLAYER_1[] =
     "Someone asked if I understood the risk.\nI said yes.\nI don't think I did.";
+inline constexpr char LVL_14_GLITCH_1[] = "WORLD_SEAM::CRC_FAIL@Q#I*^UQww@(";
 
 inline constexpr char LVL_15_OP_1[] =
     "You are not the first person I tried to guide.\nBut you are the one still moving.";
 inline constexpr char LVL_15_PLAYER_1[] =
     "You talk like you've done this before.\nLike I'm not the first.";
+inline constexpr char LVL_15_GLITCH_1[] = "VOID::7F";
 
 inline constexpr char LVL_16_OP_1[] =
     "I wish you had not remembered that yet.\nBut wishing is not part of my job.";
@@ -140,6 +147,13 @@ inline constexpr char LVL_24_OP_1[] =
 inline constexpr char LVL_24_OP_2[] = "Proceed to enter the portal.";
 
 inline constexpr char LVL_24_OP_3[] = "Noooooooooooo!\nThis is the wrong portal!\nGo left!";
+
+static_assert(sizeof(LVL_11_GLITCH_1) - 1U == 8U);
+static_assert(sizeof(LVL_11_GLITCH_2) - 1U == 16U);
+static_assert(sizeof(LVL_12_GLITCH_1) - 1U == 32U);
+static_assert(sizeof(LVL_13_GLITCH_1) - 1U == 16U);
+static_assert(sizeof(LVL_14_GLITCH_1) - 1U == 32U);
+static_assert(sizeof(LVL_15_GLITCH_1) - 1U == 8U);
 
 } // namespace GameText
 
