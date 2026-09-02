@@ -17,6 +17,7 @@
 #include <rinvid/system/application.h>
 
 #include "src/game_state.h"
+#include "src/levels/credits.h"
 #include "src/levels/level_picker.h"
 #include "src/levels/levels.h"
 #include "src/runtime_ctx.h"
@@ -39,7 +40,6 @@ void MainMenu::create()
         RuntimeCtx::game_state().player_progress().last_visited_level()};
     continue_button_.set_enabled(last_visited_level > 0U &&
                                  last_visited_level <= Levels::LEVEL_COUNT);
-    credits_button_.set_enabled(false);
 }
 
 void MainMenu::update(double delta_time)
@@ -54,7 +54,7 @@ void MainMenu::update(double delta_time)
     const bool continue_activated{continue_button_.update()};
     const bool play_activated{play_button_.update()};
     const bool pick_level_activated{pick_level_button_.update()};
-    credits_button_.update();
+    const bool credits_activated{credits_button_.update()};
     const bool exit_activated{exit_button_.update()};
 
     continue_button_.draw();
@@ -79,6 +79,10 @@ void MainMenu::update(double delta_time)
     else if (pick_level_activated)
     {
         this->get_application()->set_screen(std::make_unique<LevelPicker>());
+    }
+    else if (credits_activated)
+    {
+        this->get_application()->set_screen(std::make_unique<Credits>());
     }
     else if (exit_activated)
     {
