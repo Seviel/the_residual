@@ -45,7 +45,7 @@ inline constexpr char LVL_6_PLAYER_1[] =
 inline constexpr char LVL_7_OP_1[] =
     "Your mind is playing tricks on you.\nIgnore it.\nFocus on the path.";
 inline constexpr char LVL_7_PLAYER_1[] =
-    "That laugh...\nI suddenly miss her.\nBut I can't remember who she is.";
+    "That laugh...\nI suddenly feel like I miss her.\nBut I can't remember who she is.";
 
 inline constexpr char LVL_8_OP_1[] = "Do not follow scene fragments.\nThey are misleading.";
 inline constexpr char LVL_8_PLAYER_1[] =
@@ -62,7 +62,8 @@ inline constexpr char LVL_10_PLAYER_1[] =
     "pretending to belong.";
 
 inline constexpr char LVL_11_OP_1[] =
-    "That may have been true, but it may be a fabricated memory.\nYou will know once you get out of "
+    "That may have been true, but it may be a fabricated memory.\nYou will know once you get out "
+    "of "
     "here.";
 inline constexpr char LVL_11_PLAYER_1[] =
     "I remember my apartment. It was quiet. Too quiet.\nSometimes I would yell something to check "
