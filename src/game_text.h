@@ -34,18 +34,18 @@ inline constexpr char LVL_4_OP_2[] = "It's the wrong way.\nGo back.";
 inline constexpr char LVL_5_OP_1[] = "The environment is unstable, but safe for now.";
 inline constexpr char LVL_5_PLAYER_1[] =
     "This place feels unfinished.\nLike somebody built it from a dream.";
-inline constexpr char LVL_5_OP_2[] = "Familiarity is not memory, ignore it!";
+inline constexpr char LVL_5_OP_2[] = "Familiarity is not memory. Ignore it!";
 inline constexpr char LVL_5_PLAYER_2[] = "Some parts feel empty.\nOther parts feel familiar.";
 
 inline constexpr char LVL_6_OP_1[] =
-    "That was just auditory residue.\nIgnore it.\nDo not let it distract you, it's not real.";
+    "That was just auditory residue.\nIgnore it.\nDo not let it distract you. It is not real.";
 inline constexpr char LVL_6_PLAYER_1[] =
     "I heard someone laugh.\nA girl. For a second I thought I knew that laugh.\nThen it was gone.";
 
 inline constexpr char LVL_7_OP_1[] =
     "Your mind is playing tricks on you.\nIgnore it.\nFocus on the path.";
 inline constexpr char LVL_7_PLAYER_1[] =
-    "That laugh...\nI suddenly feel like I miss her.\nBut I can't remember who she is.";
+    "That laugh...\nI suddenly miss her.\nBut I can't remember who she is.";
 
 inline constexpr char LVL_8_OP_1[] = "Do not follow scene fragments.\nThey are misleading.";
 inline constexpr char LVL_8_PLAYER_1[] =
@@ -56,32 +56,32 @@ inline constexpr char LVL_8_PLAYER_2[] =
 
 inline constexpr char LVL_10_OP_1[] =
     "I do not know much about your past, but in this place, memories might "
-    "not be real.\nDo not dwell on it.";
+    "not be real.\nDo not dwell on them.";
 inline constexpr char LVL_10_PLAYER_1[] =
     "I remember a room full of people.\nEveryone was talking.\nI was just standing there, "
     "pretending to belong.";
 
 inline constexpr char LVL_11_OP_1[] =
-    "That may have been true, but it may be fabricated memory.\nYou will know once you get out of "
+    "That may have been true, but it may be a fabricated memory.\nYou will know once you get out of "
     "here.";
 inline constexpr char LVL_11_PLAYER_1[] =
     "I remember my apartment. It was quiet. Too quiet.\nSometimes I would yell something to check "
     "if my voice still worked.";
 inline constexpr char LVL_11_OP_2[] =
-    "The exit is just several portals away.\nPlenty of time to regain your true memories after you "
-    "get out.";
+    "The exit is only a few portals away.\nYou will have plenty of time to recover your true "
+    "memories once you get out.";
 inline constexpr char LVL_11_PLAYER_2[] = "I think I was alone for a long time.";
 inline constexpr char LVL_11_GLITCH_1[] = "0xCEAB7F";
 inline constexpr char LVL_11_GLITCH_2[] = "ERR::BAD_MEMORYX";
 
 inline constexpr char LVL_12_OP_1[] = "Dwelling on possibly false memories is dangerous.";
 inline constexpr char LVL_12_PLAYER_1[] =
-    "She appreciated me.\nShe was different than other superficial attention hungry girls. I "
+    "She appreciated me.\nShe was different from other superficial, attention-hungry girls. I "
     "remember that now.";
 inline constexpr char LVL_12_GLITCH_1[] = "SIM_THREAD->DESYNC::(0x00C0EEFF)";
 
 inline constexpr char LVL_13_OP_1[] =
-    "I know that word means something.\nI also know this is not the time to explain it.";
+    "That word is significant.\nThis is not the time to explain it.";
 inline constexpr char LVL_13_PLAYER_1[] =
     "I remember signing something.\nA grey room.\nThe word Dreamscape on the wall.";
 inline constexpr char LVL_13_OP_STUCK[] = "You are stuck. You must reboot this area.";
@@ -95,7 +95,7 @@ inline constexpr char LVL_14_PLAYER_1[] =
 inline constexpr char LVL_14_GLITCH_1[] = "WORLD_SEAM::CRC_FAIL@Q#I*^UQww@(";
 
 inline constexpr char LVL_15_OP_1[] =
-    "You are not the first person I tried to guide.\nBut you are the one still moving.";
+    "You are not the first person I have tried to guide.\nBut you are the only one still moving.";
 inline constexpr char LVL_15_PLAYER_1[] =
     "You talk like you've done this before.\nLike I'm not the first.";
 inline constexpr char LVL_15_GLITCH_1[] = "VOID::7F";
@@ -141,12 +141,12 @@ inline constexpr char LVL_23_OP_1[] =
 inline constexpr char LVL_23_OP_2[] = "Dreamscape sent me in to guide you out.";
 
 inline constexpr char LVL_24_OP_1[] =
-    "I've opened the exit portal, it's on the left. It will lead you out of simulation and you "
-    "will wake up.";
+    "I've opened the exit portal. It's on the left. It will lead you out of the simulation, and "
+    "you will wake up.";
 
-inline constexpr char LVL_24_OP_2[] = "Proceed to enter the portal.";
+inline constexpr char LVL_24_OP_2[] = "Proceed through the portal.";
 
-inline constexpr char LVL_24_OP_3[] = "Noooooooooooo!\nThis is the wrong portal!\nGo left!";
+inline constexpr char LVL_24_OP_3[] = "No!\nThis is the wrong portal!\nGo left!";
 
 static_assert(sizeof(LVL_11_GLITCH_1) - 1U == 8U);
 static_assert(sizeof(LVL_11_GLITCH_2) - 1U == 16U);
