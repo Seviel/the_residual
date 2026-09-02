@@ -76,7 +76,8 @@ inline constexpr char LVL_11_GLITCH_2[] = "ERR::BAD_MEMORYX";
 
 inline constexpr char LVL_12_OP_1[] = "Dwelling on possibly false memories is dangerous.";
 inline constexpr char LVL_12_PLAYER_1[] =
-    "She noticed me.\nI remember that now.\nFinally I didn't feel invisible.";
+    "She appreciated me.\nShe was different than other superficial attention hungry girls. I "
+    "remember that now.";
 inline constexpr char LVL_12_GLITCH_1[] = "SIM_THREAD->DESYNC::(0x00C0EEFF)";
 
 inline constexpr char LVL_13_OP_1[] =
@@ -126,8 +127,7 @@ inline constexpr char LVL_20_OP_1[] =
 inline constexpr char LVL_20_OP_2[] = "You paid us to create a world your mind could believe in.";
 
 inline constexpr char LVL_21_OP_1[] =
-    "You were lonely. More than lonely.\nYou wanted a life where someone will see you, understand "
-    "you, and choose you.";
+    "You were lonely. More than lonely.\nYou wanted a life where someone would understand you.";
 
 inline constexpr char LVL_22_OP_1[] =
     "The girl was part of that world.\nBuilt from everything you wanted and everything you feared "
